@@ -1,5 +1,6 @@
 'use client';
 import { signIn, signOut, useSession } from 'next-auth/react'
+import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react'
 
@@ -17,7 +18,9 @@ const Navbar = () => {
                     <p className='max-md:text-xs text-sm'>Welcome, {session.user?.name}</p>
                     <p className='max-md:hidden flex text-xs'>Signed as <span className=' text-cyan-400'>{session.user?.email}</span></p>
                  </div>
-                 <Link href={'/profile'} className=' px-3 py-1.5 rounded-full text-[#89dceb]  border border-[#89dceb] bg-[#89dceb2b] '>Profile</Link>
+                 <Link href={'/profile'} className=' rounded-full text-[#89dceb]  border border-[#89dceb] bg-[#89dceb2b] '>
+                 <Image src={session.user?.image  } alt='profile' width={30} height={30} className='rounded-full' /> 
+                 </Link>
                    <button className="max-md:text-xs border border-red-500 cursor-pointer rounded-4xl bg-red-400/10  p-2 max-md:px-3 px-5" onClick={() => signOut()}>Sign out</button>
               </div>
             ) : (
