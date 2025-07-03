@@ -31,8 +31,11 @@ model Transaction {
 
   type      String?
   bank      String?
-  date      DateTime?
+  date      DateTime? @default(now())
   amount    Int
+  send    String?
+  spendsOn String?
+  category  String?
 
   userId    String  
   user      User   @relation(fields: [userId], references: [id], onDelete: Cascade)

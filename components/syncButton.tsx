@@ -1,6 +1,7 @@
 "use client";
  
 import { syncBank } from "@/actions/syncBank";
+import Link from "next/link";
 import { useTransition, useState } from "react";
 
 export function SyncButton() {
@@ -8,8 +9,9 @@ export function SyncButton() {
   const [status, setStatus] = useState("");
 
   return (
-    <div className="my-4">
-      <button
+    <div className="my-4 w-full flex items-center justify-between">
+     <div>
+       <button
         onClick={() => {
           setStatus("Syncing please wait don't refresh page...");
           startTransition(async () => {
@@ -21,11 +23,13 @@ export function SyncButton() {
             }
           });
         }}
-        className="px-4 py-2 bg-blue-500 text-white rounded"
+        className="px-4 py-2 buttonbg   text-white rounded-full"
       >
         {isPending ? "Syncing..." : "Sync Bank Emails"}
       </button>
       <p className="mt-2 text-sm text-gray-600">{status}</p>
+     </div>
+     <div> <Link className="px-4 py-2 rounded-full buttonbg" href={'/create'}>Create Transactions</Link> </div>
     </div>
   );
 }

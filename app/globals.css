@@ -1,26 +1,63 @@
 @import "tailwindcss";
-
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+ 
+body { 
+  background-color: #181825;
+  color: #cdd6f4;
+  font-family:monospace;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.base{
+  background-color:#cba6f7;
+}
+.base2{
+  background-color:#585b70;
+}
+.basecolor{
+  color:#585b70;
+}
+.basecolor2{
+  color:#cdd6f4;
+}
+.accent{
+  background-color:#89dceb;
+}
+.card{
+  background-color: #1e1e2e;
+}
+.bordercolor{
+  border-color: #313244;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* .pulseShimmer{
+  backdrop-filter:  saturate(180%);
+  animation:   pulseShimmer 6.2s infinite linear; ;
+ }
+@keyframes pulseShimmer {
+  from {
+    background-position: -1000px;
+  }
+  to {
+    background-position: 1000px;
+  } } */
+  .pulseShimmer {
+  @apply backdrop-saturate-[180%] animate-[pulseShimmer_6.2s_infinite_linear];
+}
+@keyframes pulseShimmer {
+  from {
+    background-position: -1000px;
+  }
+  to {
+     background-position: 1000px;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+.buttonbg{
+  @apply bg-gradient-to-br   from-[#cba6f7] font-medium to-[#5154f2];
+  box-shadow: inset -12px -3px 20px 2px #00000021, 0 8px 10px -6px rgb(0 0 0 / 0.1) ;
 }
+ 

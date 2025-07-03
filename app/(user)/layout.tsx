@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { authOptions } from "@/lib/auth";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
+import BottomBar from "@/components/buttombar";
  
 export const metadata: Metadata = {
   title: "TransactionPage", 
@@ -18,14 +19,12 @@ export default async function   UserLayout({
     redirect("/login");
  }
     
-  return (
-    <html lang="en">
-      <body>
-        {/* <Navbar/> */}
+  return ( 
+    <main>
         <div className=" mt-[75px] ">
         {children}
         </div>
-      </body>
-    </html>
+        
+    </main>
   );
 }
