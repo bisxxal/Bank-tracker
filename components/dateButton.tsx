@@ -1,10 +1,11 @@
 import React from 'react'
 import DatePicker from 'react-datepicker';
 
-const DateButton = ({startDate , endDate , setEndDate , setStartDate}) => {
+const DateButton = ({startDate , endDate , setEndDate , setStartDate}:
+    {startDate:Date , endDate:Date , setEndDate:React.Dispatch<React.SetStateAction<Date>> , setStartDate:React.Dispatch<React.SetStateAction<Date>>}) => {
   return (
-    <div className="flex w-full center flex-warp gap-4 max-md:gap-1 px-4 max-md:px-0 pt-2">
-                   <div>
+    <div className="flex w-full center !justify-center flex-warp gap-4 max-md:gap-2 px-4 max-md:px-0 pt-2">
+                   <div className=' max-md:w-[120px]  '>
                        <label className="text-white text-sm mr-2">Start Date</label>
                        <DatePicker
                            selected={startDate}
@@ -18,7 +19,7 @@ const DateButton = ({startDate , endDate , setEndDate , setStartDate}) => {
                            placeholderText="Select start date"
                        />
                    </div>
-                   <div>
+                   <div className=' max-md:w-[120px] '>
                        <label className="text-white text-sm mr-2">End Date</label>
                        <DatePicker
                            selected={endDate}

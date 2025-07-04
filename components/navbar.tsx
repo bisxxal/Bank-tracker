@@ -8,8 +8,8 @@ const Navbar = () => {
      const { data: session } = useSession()
      
   return (
-    <div className='z-[100] w-full top-0 border-b border-white/20 left-0 fixed backdrop-blur-xl h-[60px] flex items-center justify-center '>
-        <div className=' w-full max-lg:px-1 px-4 flex items-center justify-between'>
+    <div className='z-[100] w-full top-0 border-b shadow-[#89dceb]/20 shadow-lg  bordercolor -white/20 left-0 fixed backdrop-blur-xl h-[60px] flex items-center justify-center '>
+        <div className=' w-full max-md:px-2 px-4 flex items-center justify-between'>
             <Link href={'/'} className='max-md:text-base text-2xl font-bold'>My Bank</Link>
             <div className=' flex items-center gap-4'>
             {session ? (
@@ -19,12 +19,12 @@ const Navbar = () => {
                     <p className='max-md:hidden flex text-xs'>Signed as <span className=' text-cyan-400'>{session.user?.email}</span></p>
                  </div>
                  <Link href={'/profile'} className=' rounded-full text-[#89dceb]  border border-[#89dceb] bg-[#89dceb2b] '>
-                 <Image src={session.user?.image  } alt='profile' width={30} height={30} className='rounded-full' /> 
+                 <Image src={session.user?.image!} alt='profile' width={30} height={30} className='rounded-full' /> 
                  </Link>
                    <button className="max-md:text-xs border border-red-500 cursor-pointer rounded-4xl bg-red-400/10  p-2 max-md:px-3 px-5" onClick={() => signOut()}>Sign out</button>
               </div>
             ) : (
-                <button className=" base cursor-pointer rounded-4xl p-2 px-5" onClick={() => signIn("google")}>Sign in </button>
+                <button className=" buttonbg cursor-pointer rounded-4xl p-2 px-5" onClick={() => signIn("google")}>Sign in </button>
             )}
             </div>
         </div>

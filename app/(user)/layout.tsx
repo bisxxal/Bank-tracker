@@ -23,7 +23,9 @@ export default async function   UserLayout({
     <main>
         <div className=" mt-[75px] ">
         {children}
+
         </div>
+          <BottomBar />
         
     </main>
   );

@@ -29,7 +29,7 @@ export function SyncButton() {
       </button>
       <p className="mt-2 text-sm text-gray-600">{status}</p>
      </div>
-     <div> <Link className="px-4 py-2 rounded-full buttonbg" href={'/create'}>Create Transactions</Link> </div>
+     <div> <Link className="px-4 py-2 flex rounded-full buttonbg" href={'/create'}>Create Transactions</Link> </div>
     </div>
   );
 }

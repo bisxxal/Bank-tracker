@@ -1,8 +1,17 @@
 import { google } from "googleapis";
+import { getServerSession } from "next-auth";
+import { authOptions } from "./auth";
 
-export async function getBankEmails(accessToken: string) {
+export async function getBankEmails() {
+   const session = await getServerSession(authOptions);
+  
+    if (!session || !session.accessToken) {
+      return new Response(JSON.stringify({ error: 'No access token in session' }), { status: 401 });
+    }
+  
+
   const auth = new google.auth.OAuth2();
-  auth.setCredentials({ access_token: accessToken });
+  auth.setCredentials({ access_token: session.accessToken });
   const gmail = google.gmail({ version: "v1", auth });
   const query = [
     'from:alerts@hdfcbank.net', 

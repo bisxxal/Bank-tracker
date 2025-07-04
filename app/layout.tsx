@@ -24,7 +24,6 @@ export default function RootLayout({
           <div className=" mt-[75px] ">
             {children}
           </div>
-          <BottomBar />
         </Providers>
       </body>
     </html>

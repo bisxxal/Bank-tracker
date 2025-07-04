@@ -11,51 +11,7 @@ import moment from 'moment';
 const TrackerPage = () => {
   const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
   const COLORS2 = ['#d0ed57', '#a4de6c', '#8dd1e1', '#ffc658', '#ff8042',];
-  const data2 = [
-    {
-      "name": "12/01/2023",
-      "credit": 4000,
-      "debit": 2400,
-      "amount": 2400
-    },
-    {
-      "name": "12/02/2023",
-      "credit": 3000,
-      "debit": 1398,
-      "amount": 2210
-    },
-    {
-      "name": "12/03/2023",
-      "credit": 2000,
-      "debit": 9800,
-      "amount": 2290
-    },
-    {
-      "name": "12/04/2023",
-      "credit": 2780,
-      "debit": 3908,
-      "amount": 2000
-    },
-    {
-      "name": "12/05/2023",
-      "credit": 1890,
-      "debit": 4800,
-      "amount": 2181
-    },
-    {
-      "name": "12/06/2023",
-      "credit": 2390,
-      "debit": 3800,
-      "amount": 2500
-    },
-    {
-      "name": "12/07/2023",
-      "credit": 3490,
-      "debit": 4300,
-      "amount": 2100
-    }
-  ]
-  // const [selectedYear, setSelectedYear] = useState(currentYear);
+    
   const today = new Date();
   const [startDate, setStartDate] = useState<Date>(startOfMonth(today));
   const [endDate, setEndDate] = useState<Date>(endOfMonth(today));
@@ -137,19 +93,20 @@ const TrackerPage = () => {
       <DateButton startDate={startDate} endDate={endDate} setStartDate={setStartDate} setEndDate={setEndDate} />
       <div>
         <div className='flex justify-evenly w-full flex-warp gap-3 items-center my-4'>
-          <div className='bg-green-600/10 border-green-500/80 border center text-white h-[150px] w-[300px] rounded-lg'>
-            Total Credit: ₹{totalCredit.toFixed(2)}
-            <ArrowDownLeft color='#00c951' size={30} />
+          <div className='flex flex-col items-center bg-green-600/10 border-green-500/80 border center text-white h-[150px] w-[300px] rounded-3xl'>
+          <h2 className=' center gap-2'>Total Credit: <ArrowDownLeft color='#00c951' size={30} /></h2>
+            <p className=' text-2xl font-bold'>₹{totalCredit.toFixed(2)}</p>
           </div>
-          <div className='bg-red-500/10 border border-red-500 center text-white h-[150px] w-[300px] rounded-lg'>
+          <div className='flex flex-col items-center bg-red-500/10 border border-red-500 center text-white h-[150px] w-[300px] rounded-3xl'>
+            <h2 className=' center gap-2'>
             <ArrowDownRight color='#fb2c36' size={30} />
-            Total Debit: ₹{totalDebit.toFixed(2)}
+            Total Debit:
+            </h2>
+             <span className=' text-2xl font-bold'>₹{totalDebit.toFixed(2)} </span> 
           </div>
         </div>
       </div>
-
-      {/* <ResponsiveContainer width="100%" height="50vh"> */}
-
+ 
       <div className='my-6  flex justify-evenly items-center flex-wrap gap-4'>
         <div className='flex flex-col   max-md:w-full bg-[#262538] border py-3 px-2 bordercolor rounded-3xl items-center justify-center'>
           <h1>Credit vs Debit</h1>
@@ -295,7 +252,7 @@ const TrackerPage = () => {
         </ResponsiveContainer>
          </div>
 
-
+    {/* 
         {
           data && data.map((item: any, index: number) => (
             <div key={index} className='bg-white/10 p-4 rounded-lg my-2'>
@@ -306,7 +263,7 @@ const TrackerPage = () => {
               <p className='text-sm text-gray-400'>Bank: {extractFromEmail(item?.bank)}</p>
             </div>
           ))
-        }
+        } */}
 
     </div>
   )

@@ -39,7 +39,8 @@ async function refreshAccessToken(token: any) {
     return {
       ...token,
       accessToken: credentials.access_token,
-      accessTokenExpires: Date.now() + (credentials.expiry_date ? credentials.expiry_date * 1000 : 3600 * 1000),
+accessTokenExpires: credentials.expiry_date ?? Date.now() + 3600 * 1000,
+
       refreshToken: credentials.refresh_token ?? token.refreshToken,
     };
   } catch (error) {
