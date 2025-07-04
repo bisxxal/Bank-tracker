@@ -32,7 +32,7 @@ const CreateTransaction = () => {
 
   return (
     <div className=' w-full min-h-screen flex flex-col justify-center items-center'>
-      <h1 className="text-2xl font-bold center mb-4">Update Transaction</h1>
+      <h1 className="text-2xl font-bold center mb-4">Create Transaction</h1>
 
       <form action={handelFormSubmit} className="space-y-4  w-[70%] border bordercolor max-md:w-[95%] mx-auto py-5 rounded-2xl flex px-4 flex-col">
 
@@ -121,7 +121,7 @@ const CreateTransaction = () => {
         <button
           type="submit"
           disabled={CreateMutation.isPending}
-          className=" disabled:opacity-[0.5] center  px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition duration-200"
+          className=" disabled:opacity-[0.5] center  px-4 py-2 buttonbg text-white rounded-full transition duration-200"
         >
           {CreateMutation.isPending ? <Loader className=' animate-spin ' /> : 'Create Transaction'}
         </button>

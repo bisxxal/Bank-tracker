@@ -28,16 +28,16 @@ const EditPage = () => {
     onSuccess: (data) => {
       console.log(data)
       if (data.status === 200) {
-        toast.success('Transaction created successfully');
+        toast.success('Transaction Updated successfully');
         queryClient.invalidateQueries({ queryKey: ['fetchTransaction'] });
       }
     },
 
-    onError: (error) => {
-      toast.error('Failed to create transaction');
+    onError: ( ) => {
+      toast.error('Failed to update transaction');
     },
   });
- const { data, isLoading, error } = useQuery({
+ const { data, isLoading,   } = useQuery({
     queryKey: ['fetchTransaction',],
     queryFn: async () => {
       const res = await getTransactionById(id)
@@ -145,9 +145,9 @@ const EditPage = () => {
         <button
           type="submit"
           disabled={CreateMutation.isPending}
-          className=" disabled:opacity-[0.5] center  px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition duration-200"
+          className=" disabled:opacity-[0.5] center  px-4 py-2 buttonbg text-white rounded-full  transition duration-200"
         >
-          {CreateMutation.isPending ? <Loader className=' animate-spin ' /> : 'Create Transaction'}
+          {CreateMutation.isPending ? <Loader className=' animate-spin ' /> : 'Update Transaction'}
         </button>
       </form>
     </div>

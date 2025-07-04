@@ -32,18 +32,7 @@ body {
 .bordercolor{
   border-color: #313244;
 }
-
-/* .pulseShimmer{
-  backdrop-filter:  saturate(180%);
-  animation:   pulseShimmer 6.2s infinite linear; ;
- }
-@keyframes pulseShimmer {
-  from {
-    background-position: -1000px;
-  }
-  to {
-    background-position: 1000px;
-  } } */
+ 
   .pulseShimmer {
   @apply backdrop-saturate-[180%] animate-[pulseShimmer_6.2s_infinite_linear];
 }
@@ -61,3 +50,43 @@ body {
   box-shadow: inset -12px -3px 20px 2px #00000021, 0 8px 10px -6px rgb(0 0 0 / 0.1) ;
 }
  
+.customclass {
+  background-color: #ffffff0c !important;
+  backdrop-filter: blur(10px) !important;
+  border-color: #313244 !important;
+  border-radius: 20px !important;
+  overflow: hidden !important ;
+  box-shadow: inset -12px -3px 20px 2px #00000021, 0 8px 10px -6px rgb(0 0 0 / 0.1) !important ;
+}
+.customclass2{
+  background-color: rgba(255, 255, 255, 0.071) !important;
+  backdrop-filter: blur(20px) !important;
+  border-radius: 20px !important;
+  overflow: hidden !important ;
+  box-shadow: inset -12px -3px 20px 2px #00000021, 0 8px 10px -6px rgb(0 0 0 / 0.1) !important ;
+}
+
+.react-datepicker__day--in-selecting-range, .react-datepicker__day--in-range{
+  background-color: #ffffff00 !important;
+  color: #ffffff !important;
+}
+.react-datepicker__day--in-selecting-range:hover, .react-datepicker__day--in-range:hover{
+  background-color: #cba6f7 !important;
+  color: #ffffff !important;
+}
+
+.react-datepicker__header {
+  background-color: #ffffff6f !important;
+  backdrop-filter: blur(20px) !important;
+  color: #cdd6f4 !important;
+  border-color: #313244 !important;
+  box-shadow: inset -12px -3px 20px 2px #00000021, 0 8px 10px -6px rgb(0 0 0 / 0.1) !important ;
+}
+.react-datepicker__current-month{ 
+  color: #ffffff !important;
+  /* background-color: transparent !important; */
+}
+
+.react-datepicker__day-name{
+  color: #eeeff1 !important;
+}

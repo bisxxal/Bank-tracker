@@ -4,7 +4,7 @@ import DatePicker from 'react-datepicker';
 const DateButton = ({startDate , endDate , setEndDate , setStartDate}:
     {startDate:Date , endDate:Date , setEndDate:React.Dispatch<React.SetStateAction<Date>> , setStartDate:React.Dispatch<React.SetStateAction<Date>>}) => {
   return (
-    <div className="flex w-full center !justify-center flex-warp gap-4 max-md:gap-2 px-4 max-md:px-0 pt-2">
+    <div className="flex w-full center !justify-center !z-[2] flex-warp gap-4 max-md:gap-2 px-4 max-md:px-0 pt-2">
                    <div className=' max-md:w-[120px]  '>
                        <label className="text-white text-sm mr-2">Start Date</label>
                        <DatePicker
@@ -13,9 +13,11 @@ const DateButton = ({startDate , endDate , setEndDate , setStartDate}:
                                if (date) setStartDate(date);
                            }}
                            selectsStart
+  calendarClassName=' customclass '
                            startDate={startDate}
                            endDate={endDate}
-                           className="border-2 bordercolor w-[150px] center max-md:w-[120px] rounded-xl px-2 py-1  card text-white"
+                            popperClassName="customclass2"
+                           className="border-2 !z-[2] bordercolor w-[150px] center max-md:w-[120px] rounded-xl px-2 py-1  card text-white"
                            placeholderText="Select start date"
                        />
                    </div>
@@ -26,10 +28,12 @@ const DateButton = ({startDate , endDate , setEndDate , setStartDate}:
                            onChange={(date: Date | null) => {
                                if (date) setEndDate(date);
                            }}
+                              calendarClassName='  customclass '
                            selectsEnd
                            startDate={startDate}
                            endDate={endDate}
                            minDate={startDate}
+                            popperClassName="customclass2"
                            className="border-2 bordercolor w-[150px] center max-md:w-[120px] rounded-xl px-2 py-1 card text-white"
                            placeholderText="Select end date"
                        />

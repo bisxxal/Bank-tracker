@@ -7,8 +7,8 @@ import { extractFromEmail } from "@/lib/utils";
 import { getServerSession } from "next-auth";
 
 export async function syncBankEmails(accessToken: string) {
-    const emails = await getBankEmails(accessToken);
     const session = await getServerSession(authOptions);
+    const emails = await getBankEmails(accessToken);
 
     if (!session || emails.length === 0) {
         return { message: "No emails to sync or user not authenticated." };
@@ -24,7 +24,7 @@ export async function syncBankEmails(accessToken: string) {
             const lowerBody = email.body.toLowerCase();
 
             const isCredit = /(credited|deposit(ed)?|received|added)/i.test(lowerBody);
-            const isDebit = /(debited|withdrawn|spent|deducted|paid|successful|purchase)/i.test(lowerBody);
+            const isDebit = /(debited|withdrawn|Debit|spent|deducted|paid|successful|purchase)/i.test(lowerBody);
 
             const amountRegex = /\b(rs\.?|₹|inr)\s?([\d,]+(\.\d{1,2})?)/i;
             const amountMatch = email.body.match(amountRegex);
@@ -47,8 +47,7 @@ export async function syncBankEmails(accessToken: string) {
             }
         }
     }
-
-    return { message: `Saved ${emails.length} emails (with deduplication).` };
+ 
 }
 
 export async function getTransactions() {
@@ -75,7 +74,7 @@ export async function getTransactions() {
 export async function getTransactionsBySelected(startDate: Date, endDate: Date) {
     const session = await getServerSession(authOptions);
     if (!session) {
-        throw new Error("User not authenticated");
+        return { status:400, message: "User not authenticated" };   
     }
 
     const transactions = await prisma.transaction.findMany({
@@ -109,7 +108,7 @@ export async function getTransactionsBySelected(startDate: Date, endDate: Date) 
 export async function deleteTransaction(id: string) {
     const session = await getServerSession(authOptions);
     if (!session) {
-        throw new Error("User not authenticated");
+        return { status:400, message: "User not authenticated" };   
     }
 
     const deletedTransaction = await prisma.transaction.delete({
@@ -118,18 +117,18 @@ export async function deleteTransaction(id: string) {
 
         },
     });
-
-    console.log(deletedTransaction)
-
-    return deletedTransaction;
+ 
+    if (!deletedTransaction) {
+        return { status: 500, message: "Failed to delete transaction" };
+    }
+    return { status: 200, message: "Transaction deleted successfully" };
 }   
 
 export async function createTransaction(formData: FormData) {
     const session = await getServerSession(authOptions);
     if (!session) {
-        return { status:400};   
+        return { status:400, message: "User not authenticated" };   
     }
-    console.log('hi')
     const amount = parseInt(formData.get('amount') as string);
     const type = formData.get('type') as string;
     const bank = formData.get('bank') as string;
