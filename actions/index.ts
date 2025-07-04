@@ -221,3 +221,57 @@ export async function updateTransaction(formData: FormData ,id:string) {
     }
     return { status: 200  };
 }
+
+export async function getBanks() {
+    const session = await getServerSession(authOptions);
+    if (!session) {
+        return { status:400, message: "User not authenticated" };   
+    } 
+   try {
+     const userWithBanks = await prisma.user.findUnique({
+         where: { id: session.user.id },
+         select: {
+             bank: {
+                 select: {
+                     id: true,
+                     name: true,
+                     mailId: true,
+                 },
+                 orderBy: { createdAt: "desc" },
+             },
+         },
+     });
+     return JSON.parse(JSON.stringify(userWithBanks?.bank || []));
+   } catch (error) {
+    
+   }
+
+}
+export async function AddBanks(fromData: FormData) {
+    const session = await getServerSession(authOptions);
+    if (!session) {
+        return { status:400, message: "User not authenticated" };   
+    }
+
+    const name = fromData.get('name') as string;
+    const email = fromData.get('email') as string;
+    if (!name || !email) {
+        return { status:400, message: "Name and email are required" };   
+    }
+    const banks = await prisma.bank.create({
+        data: {
+            name,
+            mailId: email,
+            user:{
+                connect: {
+                    id: session.user.id,
+                },
+            }
+        },
+    });
+
+    if (!banks) {
+        return { status: 500, message: "Failed to create bank" };
+    }
+    return { status: 200, message: "Bank created successfully" };
+}

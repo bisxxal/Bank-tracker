@@ -8,7 +8,7 @@ const Navbar = () => {
      const { data: session } = useSession()
      
   return (
-    <div className='z-[100] w-full top-0 border-b shadow-[#89dceb]/20 shadow-lg  bordercolor -white/20 left-0 fixed backdrop-blur-xl h-[60px] flex items-center justify-center '>
+    <div className='z-[100] w-full top-0 border-b bordercolor -white/20 left-0 fixed backdrop-blur-xl h-[60px] flex items-center justify-center '>
         <div className=' w-full max-md:px-2 px-4 flex items-center justify-between'>
             <Link href={'/'} className='max-md:text-base text-2xl font-bold'>My Bank</Link>
             <div className=' flex items-center gap-4'>

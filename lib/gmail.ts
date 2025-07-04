@@ -1,6 +1,7 @@
 import { google } from "googleapis";
 import { getServerSession } from "next-auth";
 import { authOptions } from "./auth";
+import { getBanks } from "@/actions";
 
 export async function getBankEmails() {
    const session = await getServerSession(authOptions);
@@ -8,19 +9,21 @@ export async function getBankEmails() {
     if (!session || !session.accessToken) {
       return new Response(JSON.stringify({ error: 'No access token in session' }), { status: 401 });
     }
-  
-
+   
   const auth = new google.auth.OAuth2();
   auth.setCredentials({ access_token: session.accessToken });
   const gmail = google.gmail({ version: "v1", auth });
-  const query = [
-    'from:alerts@hdfcbank.net', 
-    'from:no-reply@kotak.com',
-  ].join(' OR ');
+  // const query = [
+  //   'from:alerts@hdfcbank.net', 
+  //   'from:no-reply@kotak.com',
+  // ].join(' OR ');
+
+  const banks = await getBanks();
+  const bankEmails = banks.map((bank:{mailId:string}) => `from:${bank.mailId}`).join(' OR ');
 
   const res = await gmail.users.messages.list({
     userId: "me",
-    q: query,
+    q: bankEmails,
     maxResults: 500,
     
   });
@@ -52,5 +55,5 @@ export async function getBankEmails() {
     })
   );
 
-  return results;
+  return {  banks, results};
 }
