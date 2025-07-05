@@ -31,8 +31,8 @@ const CreateTransaction = () => {
   });
 
   return (
-    <div className=' w-full min-h-screen flex flex-col justify-center items-center'>
-      <h1 className="text-2xl font-bold center mb-4">Create Transaction</h1>
+    <div className=' w-full min-h-screen flex flex-col items-center'>
+      <h1 className="text-2xl font-bold center  my-4">Create Transaction</h1>
 
       <form action={handelFormSubmit} className="space-y-4  w-[70%] border bordercolor max-md:w-[95%] mx-auto py-5 rounded-2xl flex px-4 flex-col">
 
@@ -76,8 +76,11 @@ const CreateTransaction = () => {
             <option value="food">Food</option>
             <option value="transport">Transport</option>
             <option value="entertainment">Entertainment</option>
-            <option value="utilities">Utilities</option>
-            <option value="other">Other</option>
+            <option value="purchases">Purchases</option>
+            <option value="education">Education</option>
+            <option value="rent">Rent</option>
+            <option value="travels">Travels</option>
+            <option value="bills">Bills</option>
           </select>
         </div>
 
@@ -103,12 +106,14 @@ const CreateTransaction = () => {
 
 
 
-        <div>
+         <div className=' max-md:flex flex-col items-center justify-center'>
           <label className="block text-sm font-medium ">Date</label>
           <DatePicker
             required
             name='date'
             selected={selectedDate}
+            calendarClassName='  customclass '
+              popperClassName="customclass2"
             onChange={(date: Date | null) => {
               setSelectedDate(date);
               // You can handle additional logic here

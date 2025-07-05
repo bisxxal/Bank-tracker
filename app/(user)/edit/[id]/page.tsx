@@ -17,10 +17,7 @@ const EditPage = () => {
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const handelFormSubmit = (fromData: FormData) => {
     CreateMutation.mutate(fromData);
-  }
-
-
-  
+  } 
   const CreateMutation = useMutation({
     mutationFn: async (fromData: FormData) => {
       return await updateTransaction(fromData , id);
@@ -38,7 +35,7 @@ const EditPage = () => {
     },
   });
  const { data, isLoading,   } = useQuery({
-    queryKey: ['fetchTransaction',],
+    queryKey: ['fetchTransaction',id],
     queryFn: async () => {
       const res = await getTransactionById(id)
       return res
@@ -49,8 +46,8 @@ const EditPage = () => {
    <Loading  boxes={1} child='mt-10 w-[70%] max-md:w-[95%]  rounded-3xl h-[80vh]' parent=' w-full h-screen' />
     </div>;
   return (
-    <div className=' w-full min-h-screen flex flex-col justify-center items-center'>
-      <h1 className="text-2xl font-bold center mb-4">Update Transaction</h1>
+    <div className=' w-full min-h-screen flex flex-col  items-center'>
+      <h1 className="text-2xl font-bold center my-4">Update Transaction</h1>
       <form action={handelFormSubmit} className="space-y-4  w-[70%] border bordercolor max-md:w-[95%] mx-auto py-5 rounded-2xl flex px-4 flex-col">
 
         <div className=''>
@@ -93,12 +90,15 @@ const EditPage = () => {
             defaultValue={data?.category || ''}
             className="mt-1 block w-full border bordercolor card p-2 rounded-md shadow-sm "
           >
-            <option value="">Select category</option>
+              <option value="">Select category</option>
             <option value="food">Food</option>
             <option value="transport">Transport</option>
             <option value="entertainment">Entertainment</option>
-            <option value="utilities">Utilities</option>
-            <option value="other">Other</option>
+            <option value="purchases">Purchases</option>
+            <option value="education">Education</option>
+            <option value="rent">Rent</option>
+            <option value="travels">Travels</option>
+            <option value="bills">Bills</option>
           </select>
         </div>
 
@@ -126,7 +126,7 @@ const EditPage = () => {
 
 
 
-        <div>
+        <div className=' max-md:flex flex-col items-center justify-center'>
           <label className="block text-sm font-medium ">Date</label>
           <DatePicker
             required
@@ -137,6 +137,8 @@ const EditPage = () => {
               setSelectedDate(date);
               // You can handle additional logic here
             }}
+             calendarClassName='  customclass '
+              popperClassName="customclass2"
             selectsStart
             className="border-2 bordercolor w-[150px] center max-md:w-[120px] rounded-xl px-2 py-1 card text-white"
             placeholderText="Select start date"
