@@ -12,7 +12,7 @@ const Transations = ({ body }: { body: string }) => {
 
     // Try to detect transaction type: credit or debit
     const isCredit = /(credited|deposit(ed)?|received|added)/i.test(lowerBody);
-    const isDebit = /(debited|withdrawn|spent|deducted|paid|successful|purchase)/i.test(lowerBody);
+    const isDebit = /(debited|withdrawn|spent|debit|deducted|paid|successful|purchase)/i.test(lowerBody);
 
     // Extract amount like ₹1,000.00 or Rs.500.00 or Rs 3000
     // const amountRegex = /(rs\.?|₹)\s?([\d,]+(\.\d{1,2})?)/i;

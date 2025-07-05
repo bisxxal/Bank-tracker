@@ -5,7 +5,6 @@ import { ArrowDownLeft, ArrowDownRight, Loader } from 'lucide-react';
 import React, { useEffect, useState } from 'react'
 import { Area, CartesianGrid, Pie, PieChart, Cell, ResponsiveContainer, Tooltip, XAxis, YAxis, Legend, AreaChart, BarChart, Bar } from 'recharts'
 import { startOfMonth, endOfMonth } from "date-fns";
-import { extractFromEmail } from '@/lib/utils';
 import DateButton from '@/components/dateButton';
 import moment from 'moment';
 const TrackerPage = () => {
@@ -89,7 +88,7 @@ const TrackerPage = () => {
   const totalDebit = typedata.reduce((acc, curr) => curr.name === 'debit' ? acc + curr.amount : acc, 0);
 
   return (
-    <div className='w-full overflow-hidden min-h-screen p-4'>
+    <div className='w-full overflow-hidden min-h-screen pb-20 p-4'>
       <DateButton startDate={startDate} endDate={endDate} setStartDate={setStartDate} setEndDate={setEndDate} />
       <div>
         <div className='flex justify-evenly w-full flex-warp gap-3 items-center my-4'>
@@ -200,7 +199,7 @@ const TrackerPage = () => {
 
       </div>
          
-          <div className=' w-full h-[400px] '>
+          <div className=' w-full h-[400px] border bordercolor rounded-3xl mb-4 card p-2 px-4'>
            <ResponsiveContainer width="100%" height="100%">
         <AreaChart width={1200} height={400}
           data={barData} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
@@ -252,19 +251,7 @@ const TrackerPage = () => {
         </ResponsiveContainer>
          </div>
 
-    {/* 
-        {
-          data && data.map((item: any, index: number) => (
-            <div key={index} className='bg-white/10 p-4 rounded-lg my-2'>
-              <h1 className='text-lg font-semibold'>{item?.title}</h1>
-              <p className='text-sm text-gray-400'>Date: {moment(item?.date).format('DD/MM/YYYY')}</p>
-              <p className='text-sm text-gray-400'>Amount: ₹{item?.amount.toFixed(2)}</p>
-              <p className='text-sm text-gray-400'>Type: {item?.type}</p>
-              <p className='text-sm text-gray-400'>Bank: {extractFromEmail(item?.bank)}</p>
-            </div>
-          ))
-        } */}
-
+     
     </div>
   )
 }

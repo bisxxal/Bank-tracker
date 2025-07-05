@@ -1,43 +1,53 @@
 "use client";
  
-import { syncBank } from "@/actions/syncBank";
-import { useQueryClient } from "@tanstack/react-query";
+import { syncBankEmails } from "@/actions/syncBank";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { RefreshCcw } from "lucide-react";
 import Link from "next/link";
-import { useTransition, useState } from "react";
+import toast from "react-hot-toast";
 
 export function SyncButton() {
-  const [isPending, startTransition] = useTransition();
-  const [status, setStatus] = useState("");
   const queryClient = useQueryClient();
+
+  const createSync = useMutation({
+      mutationFn: async ( ) => {
+        return await syncBankEmails( );
+      },
+      onSuccess: (data) => {
+
+        console.log(data)
+        if (data.status === 200) {
+          toast.success('Synced! ✅ ');
+          queryClient.invalidateQueries({ queryKey: ['trackerData'] });
+        }
+        if (data.status === 400) {
+          toast.error(data.message);
+        }
+      },
+  
+      onError: ( ) => { 
+      },
+    });
+
+
   return (
     <div className="my-4 w-full flex items-center justify-between">
      <div>
        <button
-        onClick={() => {
-          setStatus("Syncing don't refresh page...");
-          startTransition(async () => {
-            try {
-              await syncBank();
-              setStatus("✅ Synced!");
-               queryClient.invalidateQueries({ queryKey: ['trackerData'] });
-              setTimeout(() => {
-                setStatus("");
-              }, 3000);
-            } catch (err) {
-              setStatus("❌ Failed to sync");
-            }
-          });
-        }}
-        disabled={isPending}
-        className={` px-4 ${isPending ? ' brightness-50 ' : ' brightness-100 ' } py-2 buttonbg center gap-1  text-white rounded-full `}
+        onClick={() => createSync.mutate() }
+        disabled={createSync.isPending}
+        className={` px-4 ${createSync.isPending ? ' brightness-50 ' : ' brightness-100 ' } py-2 buttonbg center gap-1  text-white rounded-full `}
       >
       
-        {isPending ? "Syncing..." : "Sync"} <RefreshCcw className={` ${isPending ? ' animate-spin  ' : ' ' }`} size={20} />
+        {createSync.isPending ? "Syncing..." : "Sync"} <RefreshCcw className={` ${createSync.isPending ? ' animate-spin  ' : ' ' }`} size={20} />
       </button>
-      <p className="mt-2 text-xs text-gray-600">{status}</p>
+      {
+        createSync.isPending && <p className="text-xs text-gray-600">Syncing Don't refresh page</p>
+      }
      </div>
      <div> <Link className="px-4 py-2 flex rounded-full buttonbg" href={'/create'}>Create Transactions</Link> </div>
     </div>
   );
 }
+
+ 

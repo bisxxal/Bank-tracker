@@ -7,9 +7,7 @@ import SwipeRevealActions from '@/components/ui/swipeToDelete';
 import { getLabelForDate } from '@/lib/dateformat';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { endOfMonth, startOfMonth } from 'date-fns';
-import { Loader } from 'lucide-react';
 import moment from 'moment';
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useRef, useState } from 'react'
 import toast from 'react-hot-toast';
@@ -123,10 +121,7 @@ const TransactionPage = () => {
                     {msg?.spendsOn && <p><strong> {msg.type === 'credit' ? ' Recived on ' : ' Spends On '}   :</strong> {msg.spendsOn}</p>}
                     {msg?.category && <p><strong>Category:</strong> {msg.category}</p>}
                     <p><strong>Date:</strong> {moment(msg.date).format('MMMM Do YYYY, h:mm:ss a')}</p>
-                  </div>
-                  {/* <div className="border h-full bg-[#262538] border-[#cba6f7]/50 w-fit rounded-full flex-col p-2 flex gap-3 center justify-between">
-                   <p>Id : <span className='text-sm text-[#cba6f7]'>{msg.id}</span></p>
-                  </div> */}
+                  </div> 
                 </div>
               </SwipeRevealActions>
 
@@ -134,7 +129,7 @@ const TransactionPage = () => {
           </div>
         )) : (
           isLoading ?
-            <Loading boxes={5} child="h-28 max-md:h-[200px] w-full rounded-3xl " parent="w-full px-0 mt-13 " /> : <p className='mt-20 text-lg center '>No data found</p>
+            <Loading boxes={5} child="h-28 max-md:h-[200px] w-full !rounded-3xl " parent="w-full px-0 mt-13 " /> : <p className='mt-20 text-lg center '>No data found</p>
         )}
 
       </div>

@@ -69,17 +69,19 @@ const SwipeRevealActions: React.FC<Props> = ({
     <div ref={containerRef} className="relative overflow-hidden mb-3">
       {/* Action buttons */}
       <div className="absolute inset-0 flex items-center justify-between">
-        <button
-          onClick={handleDelete}
-          className="bg-red-500 text-white px-4 flex items-center -end py-2 w-1/2 h-full rounded-3xl "
-        >
-          <Trash  />
-        </button>
+       
         <button
           onClick={handleUpdate}
-          className="bg-blue-500 text-white px-4 flex items-center justify-end  w-1/2 h-full py-2 -pr-5 rounded-3xl"
+          className="bg-blue-500 text-white px-4 flex items-center   w-1/2 h-full py-2 -pr-5 rounded-3xl"
         >
         <Pencil />
+        </button>
+
+         <button
+          onClick={handleDelete}
+          className="bg-red-500 text-white px-4 flex items-center justify-end  py-2 w-1/2 h-full rounded-3xl "
+        >
+          <Trash  />
         </button>
       </div>
 
