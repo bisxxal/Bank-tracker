@@ -104,62 +104,59 @@ const BankList = () => {
     });
     const deleteMutation = useMutation({
         mutationFn: async (id: string) => {
-          return await  deleteBank(id);
+            return await deleteBank(id);
         },
         onSuccess: (data) => {
-          if (data.status === 200) {
-            toast.success('Bank deleted successfully');
-            queryClient.invalidateQueries({ queryKey: ['banks'] });
-          }
+            if (data.status === 200) {
+                toast.success('Bank deleted successfully');
+                queryClient.invalidateQueries({ queryKey: ['banks'] });
+            }
         },
-    
+
         onError: (error) => {
-          toast.error('Failed to Bank transaction');
+            toast.error('Failed to Bank transaction');
         },
-      });
-      const [openItemId, setOpenItemId] = useState<string | null>(null);
-      const itemRefs = useRef<Record<string, HTMLDivElement | null>>({});
-      const setItemRef = (id: string, ref: HTMLDivElement | null) => {
+    });
+    const [openItemId, setOpenItemId] = useState<string | null>(null);
+    const itemRefs = useRef<Record<string, HTMLDivElement | null>>({});
+    const setItemRef = (id: string, ref: HTMLDivElement | null) => {
         itemRefs.current[id] = ref;
-      };
-      useEffect(() => {
+    };
+    useEffect(() => {
         const handleClickOutside = (e: MouseEvent | TouchEvent) => {
-          if (!openItemId) return;
-    
-          const openRef = itemRefs.current[openItemId];
-          if (openRef && !openRef.contains(e.target as Node)) {
-            setOpenItemId(null);
-          }
+            if (!openItemId) return;
+
+            const openRef = itemRefs.current[openItemId];
+            if (openRef && !openRef.contains(e.target as Node)) {
+                setOpenItemId(null);
+            }
         };
-    
+
         document.addEventListener('mousedown', handleClickOutside);
         document.addEventListener('touchstart', handleClickOutside);
         return () => {
-          document.removeEventListener('mousedown', handleClickOutside);
-          document.removeEventListener('touchstart', handleClickOutside);
+            document.removeEventListener('mousedown', handleClickOutside);
+            document.removeEventListener('touchstart', handleClickOutside);
         };
-      }, [openItemId]);
-    
-      const handleDelete = (id: string) => {
-        deleteMutation.mutateAsync(id)
-        // console.log('delete')
-      };
-    
-      const handleUpdate = (id: string) => {
-      };
-    
-      const handleOpen = (id: string) => {
-        setOpenItemId(id);
-      };
+    }, [openItemId]);
 
-      console.log('data', data)
+    const handleDelete = (id: string) => {
+        deleteMutation.mutateAsync(id)
+    };
+
+    const handleUpdate = (id: string) => {
+    };
+
+    const handleOpen = (id: string) => {
+        setOpenItemId(id);
+    };
+
 
     return (
         <div className=' min-h-screen w-[70%] max-md:w-[95%] mx-auto'>
             <h1 className='text-center  center gap-2 text-2xl font-semibold mb-4'>Your Banks <Landmark /></h1>
             <div className=' flex flex-col '>
-                {/* <Loading boxes={5} child="h-20 max-md:h-[200px] w-full !rounded-3xl " parent="w-full px-0 mt-13 " /> */}
-                { data && !isLoading ?  data?.map((bank) => (
+                {data && !isLoading ? data?.map((bank) => (
                     <SwipeRevealActions
                         key={bank.id}
                         id={bank.id}
@@ -169,14 +166,14 @@ const BankList = () => {
                         onOpen={handleOpen}
                         setRef={setItemRef}
                     >
-                 <div key={bank.value} className=' cursor-pointer card p-3 border bordercolor rounded-lg shadow-md'>
-                     <h2 className=' text-2xl font-semibold'>{bank.name}</h2>
-                     <p className=' text-gray-400'>{bank.mailId}</p>
-                 </div>
-              </SwipeRevealActions>
-                )) :(
-                    isLoading  ? <Loading boxes={5} child="h-20 max-md:h-[200px] w-full !rounded-3xl " parent="w-full px-0 mt-13 " /> : <p className=' h-[50vh] center text-center'>No Banks Found</p>
-                ) }
+                        <div key={bank.value} className=' cursor-pointer card p-3 border bordercolor rounded-lg shadow-md'>
+                            <h2 className=' text-2xl font-semibold'>{bank.name}</h2>
+                            <p className=' text-gray-400'>{bank.mailId}</p>
+                        </div>
+                    </SwipeRevealActions>
+                )) : (
+                    isLoading ? <Loading boxes={5} child="h-20 max-md:h-[200px] w-full !rounded-3xl " parent="w-full px-0 mt-13 " /> : <p className=' h-[50vh] center text-center'>No Banks Found</p>
+                )}
             </div>
         </div>
     )

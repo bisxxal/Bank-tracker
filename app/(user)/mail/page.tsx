@@ -22,7 +22,6 @@ const MailPage = async() => {
        
         {
           banks?.map((bank: { name: string; mailId: string }) => {
-            // Filter messages based on match with this bank's name
             const matchingMessages = messages?.filter((msg) => {
               const from = extractFromEmail(msg.from);
               return from && bank.name && from.toLowerCase().includes(bank.name.toLowerCase());

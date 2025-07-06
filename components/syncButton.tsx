@@ -14,8 +14,6 @@ export function SyncButton() {
         return await syncBankEmails( );
       },
       onSuccess: (data) => {
-
-        console.log(data)
         if (data.status === 200) {
           toast.success('Synced! ✅ ');
           queryClient.invalidateQueries({ queryKey: ['trackerData'] });

@@ -53,13 +53,11 @@ const TransactionPage = () => {
 
   const [openItemId, setOpenItemId] = useState<string | null>(null);
   const itemRefs = useRef<Record<string, HTMLDivElement | null>>({});
-
-  // Set reference to swipe items
+ 
   const setItemRef = (id: string, ref: HTMLDivElement | null) => {
     itemRefs.current[id] = ref;
   };
-
-  // Close open swipe on outside click
+ 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent | TouchEvent) => {
       if (!openItemId) return;

@@ -4,6 +4,8 @@ export function extractFromEmail(fullName: string): string {
 }
 
 
+
+
 export const banks = [
     { value: 'HDFCBANK', name: 'HDFC Bank' },
     { value: 'KOTAK', name: 'Kotak Mahindra Bank' },
@@ -26,3 +28,14 @@ export const banks = [
     { value: 'FEDERAL', name: 'Federal Bank' },
     { value: 'RBL', name: 'RBL Bank' }
 ];
+ 
+export const categories=[
+    { value: 'food', name: 'Food' },
+    { value: 'transport', name: 'Transport' },
+    { value: 'entertainment', name: 'Entertainment' },
+    { value: 'purchases', name: 'Purchases' },
+    { value: 'education', name: 'Education' },
+    { value: 'rent', name: 'Rent' },
+    { value: 'travels', name: 'Travels' },
+    { value: 'bills', name: 'Bills' }
+]

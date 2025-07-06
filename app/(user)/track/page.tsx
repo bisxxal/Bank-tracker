@@ -1,13 +1,14 @@
 'use client'
 import { getTransactionsBySelected } from '@/actions';
 import { useQuery } from '@tanstack/react-query';
-import { ArrowDownLeft, ArrowDownRight, Loader } from 'lucide-react';
+import { ArrowDownLeft, ArrowDownRight, CircleEllipsis, Loader } from 'lucide-react';
 import React, { useEffect, useState } from 'react'
 import { Area, CartesianGrid, Pie, PieChart, Cell, ResponsiveContainer, Tooltip, XAxis, YAxis, Legend, AreaChart, BarChart, Bar } from 'recharts'
 import { startOfMonth, endOfMonth } from "date-fns";
 import DateButton from '@/components/dateButton';
 import moment from 'moment';
 import Loading from '@/components/ui/loading';
+import Link from 'next/link';
 const TrackerPage = () => {
   const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
   const COLORS2 = ['#d0ed57', '#a4de6c', '#8dd1e1', '#ffc658', '#ff8042',];
@@ -72,8 +73,6 @@ const TrackerPage = () => {
         return acc;
       }, []);
       setBarData(barData);
-
-      console.log(barData, "Bar data")
       setTypeData(revData);
       setBankData(bankData);
     }
@@ -81,7 +80,7 @@ const TrackerPage = () => {
   }, [data, startDate, endDate])
 
   if (isLoading) {
-    return <div className=' h-screen overflow-x-hidden p-4'>
+    return <div className=' h-screen overflow-hidden  p-4'>
       
       <Loading child=' h-[150px] w-[300px] !rounded-3xl ' parent=' !mt-[75px] !flex !justify-evenly !flex-row !w-full !gap-3 !items-center !my-4' boxes={2} />
 
@@ -94,8 +93,6 @@ const TrackerPage = () => {
 
   return (
     <div className='w-full overflow-hidden min-h-screen pb-20 p-4'>
-
-     
       <DateButton startDate={startDate} endDate={endDate} setStartDate={setStartDate} setEndDate={setEndDate} />
       <div>
         <div className='flex justify-evenly w-full flex-warp gap-3 items-center my-4'>
@@ -111,6 +108,8 @@ const TrackerPage = () => {
             <span className='text-white text-3xl font-bold'>₹{totalDebit.toFixed(2)} </span>
           </div>
         </div>
+
+         
       </div>
 
       <div className='my-6  flex justify-evenly items-center flex-wrap gap-4'>
@@ -179,9 +178,6 @@ const TrackerPage = () => {
           </PieChart>
         </div>
       </div>
-
-        {/* <Loading child='flex flex-col max-md:w-full w-[420px] h-[320px]  !rounded-3xl items-center justify-center ' parent=' !my-6 !flex-row max-md:flex-col  !flex !justify-evenly !items-center !flex-wrap !gap-4' boxes={2} /> */}
-
       <div className=' w-full h-[400px] border bordercolor rounded-3xl mb-4 card p-2 px-4'>
         <ResponsiveContainer width="100%" height="100%">
           <BarChart width={730} height={250} data={barData}>

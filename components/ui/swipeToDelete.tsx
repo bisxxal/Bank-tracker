@@ -67,7 +67,6 @@ const SwipeRevealActions: React.FC<Props> = ({
 
   return (
     <div ref={containerRef} className="relative overflow-hidden mb-3">
-      {/* Action buttons */}
       <div className="absolute inset-0 flex items-center justify-between">
        
         <button
@@ -84,8 +83,6 @@ const SwipeRevealActions: React.FC<Props> = ({
           <Trash  />
         </button>
       </div>
-
-      {/* Swipeable content */}
       <div
         {...handlers}
         style={{

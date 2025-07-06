@@ -45,7 +45,6 @@ accessTokenExpires: credentials.expiry_date ?? Date.now() + 3600 * 1000,
       refreshToken: credentials.refresh_token ?? token.refreshToken,
     };
   } catch (error) {
-    console.error("🔴 Failed to refresh access token", error);
     return {
       ...token,
       error: "RefreshAccessTokenError",
@@ -63,8 +62,8 @@ export const authOptions: NextAuthOptions = {
       authorization: {
         params: {
           scope: "openid email profile https://www.googleapis.com/auth/gmail.readonly",
-          access_type: "offline", // 🟢 Required for refresh_token
-          prompt: "consent",      // 🟢 Needed to reissue refresh_token
+          access_type: "offline",  
+          prompt: "consent",   
            state: crypto.randomUUID(),
         },
 
@@ -77,7 +76,6 @@ export const authOptions: NextAuthOptions = {
   },
   callbacks: {
     async jwt({ token, account, user }) {
-      // 🔐 Initial sign in
       if (account && user) {
         return {
           accessToken: account.access_token,
@@ -91,18 +89,15 @@ export const authOptions: NextAuthOptions = {
           },
         };
       }
-
-      // `✅ Still valid access token
+ 
       if (Date.now() < (token.accessTokenExpires ?? 0)) {
         return token;
       }
-
-      // 🔁 Refresh access token
+ 
       return await refreshAccessToken(token);
     },
     async session({ session, token }) {
-      session.accessToken = token.accessToken;
-      // session.user.id = token.sub as string;  
+      session.accessToken = token.accessToken; 
       session.user = {
         id: token.user?.id,
         name: token.user?.name,
@@ -112,23 +107,7 @@ export const authOptions: NextAuthOptions = {
       return session;
     },
   },
-  
-  // events: {
-  //     async createUser({ user }) {
-  //       const existingProfile = await prisma.profile.findUnique({
-  //         where: { userId: user.id },
-  //       });
-
-  //       if (!existingProfile) {
-  //         await prisma.profile.create({
-  //           data: {
-  //             userId: user.id,
-  //           },
-  //         });
-  //       }
-
-  //     },
-  //   },
+   
 
 };
 

@@ -2,10 +2,7 @@
 import { google } from "googleapis";
 import { getServerSession } from "next-auth";
 import { authOptions } from "./auth";
-import { getBanks } from "@/actions";
-import { cache } from "react";
-
-// Throttle to avoid Gmail quota error
+import { getBanks } from "@/actions"; 
 function sleep(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
@@ -64,7 +61,7 @@ const session = await getServerSession(authOptions);
         body,
       });
     } catch (err) {
-      console.error("Failed to fetch individual message:", err);
+      // console.error("Failed to fetch individual message:", err);
     }
   }
 

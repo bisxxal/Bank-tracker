@@ -1,5 +1,6 @@
 'use client'
 import { createTransaction } from '@/actions';
+import { categories } from '@/lib/utils';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Loader } from 'lucide-react';
 import React, { useState } from 'react'
@@ -18,7 +19,6 @@ const CreateTransaction = () => {
       return await createTransaction(fromData);
     },
     onSuccess: (data) => {
-      console.log(data)
       if (data.status === 200) {
         toast.success('Transaction created successfully');
         queryClient.invalidateQueries({ queryKey: ['trackerData'] });
@@ -73,14 +73,11 @@ const CreateTransaction = () => {
             className="mt-1 block w-full border bordercolor card p-2 rounded-md shadow-sm "
           >
             <option value="">Select category</option>
-            <option value="food">Food</option>
-            <option value="transport">Transport</option>
-            <option value="entertainment">Entertainment</option>
-            <option value="purchases">Purchases</option>
-            <option value="education">Education</option>
-            <option value="rent">Rent</option>
-            <option value="travels">Travels</option>
-            <option value="bills">Bills</option>
+            {categories.map((category) => (
+              <option key={category.value} value={category.value}>
+                {category.name}
+              </option>
+            ))}
           </select>
         </div>
 
@@ -106,17 +103,16 @@ const CreateTransaction = () => {
 
 
 
-         <div className=' max-md:flex flex-col items-center justify-center'>
+        <div className=' max-md:flex flex-col items-center justify-center'>
           <label className="block text-sm font-medium ">Date</label>
           <DatePicker
             required
             name='date'
             selected={selectedDate}
             calendarClassName='  customclass '
-              popperClassName="customclass2"
+            popperClassName="customclass2"
             onChange={(date: Date | null) => {
-              setSelectedDate(date);
-              // You can handle additional logic here
+              setSelectedDate(date); 
             }}
             selectsStart
             className="border-2 bordercolor w-[150px] center max-md:w-[120px] rounded-xl px-2 py-1 card text-white"

@@ -1,6 +1,7 @@
 'use client'
 import { getTransactionById, updateTransaction } from '@/actions';
 import Loading from '@/components/ui/loading';
+import { categories } from '@/lib/utils';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { Loader } from 'lucide-react';
 import { useParams } from 'next/navigation';
@@ -17,34 +18,33 @@ const EditPage = () => {
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const handelFormSubmit = (fromData: FormData) => {
     CreateMutation.mutate(fromData);
-  } 
+  }
   const CreateMutation = useMutation({
     mutationFn: async (fromData: FormData) => {
-      return await updateTransaction(fromData , id);
+      return await updateTransaction(fromData, id);
     },
     onSuccess: (data) => {
-      console.log(data)
       if (data.status === 200) {
         toast.success('Transaction Updated successfully');
         queryClient.invalidateQueries({ queryKey: ['fetchTransaction'] });
       }
     },
 
-    onError: ( ) => {
+    onError: () => {
       toast.error('Failed to update transaction');
     },
   });
- const { data, isLoading,   } = useQuery({
-    queryKey: ['fetchTransaction',id],
+  const { data, isLoading, } = useQuery({
+    queryKey: ['fetchTransaction', id],
     queryFn: async () => {
       const res = await getTransactionById(id)
       return res
     }
   })
-  if (isLoading) return <div className=' min-h-screen '> 
-   
-   <Loading  boxes={1} child='mt-10 w-[70%] max-md:w-[95%]  rounded-3xl h-[80vh]' parent=' w-full h-screen' />
-    </div>;
+  if (isLoading) return <div className=' min-h-screen '>
+
+    <Loading boxes={1} child='mt-10 w-[70%] max-md:w-[95%]  rounded-3xl h-[80vh]' parent=' w-full h-screen' />
+  </div>;
   return (
     <div className=' w-full min-h-screen flex flex-col  items-center'>
       <h1 className="text-2xl font-bold center my-4">Update Transaction</h1>
@@ -90,15 +90,12 @@ const EditPage = () => {
             defaultValue={data?.category || ''}
             className="mt-1 block w-full border bordercolor card p-2 rounded-md shadow-sm "
           >
-              <option value="">Select category</option>
-            <option value="food">Food</option>
-            <option value="transport">Transport</option>
-            <option value="entertainment">Entertainment</option>
-            <option value="purchases">Purchases</option>
-            <option value="education">Education</option>
-            <option value="rent">Rent</option>
-            <option value="travels">Travels</option>
-            <option value="bills">Bills</option>
+            <option value="">Select category</option>
+            {categories.map((category) => (
+              <option key={category.value} value={category.value}>
+                {category.name}
+              </option>
+            ))}
           </select>
         </div>
 
@@ -134,11 +131,10 @@ const EditPage = () => {
 
             selected={data?.date ? data?.date : selectedDate}
             onChange={(date: Date | null) => {
-              setSelectedDate(date);
-              // You can handle additional logic here
+              setSelectedDate(date); 
             }}
-             calendarClassName='  customclass '
-              popperClassName="customclass2"
+            calendarClassName='  customclass '
+            popperClassName="customclass2"
             selectsStart
             className="border-2 bordercolor w-[150px] center max-md:w-[120px] rounded-xl px-2 py-1 card text-white"
             placeholderText="Select start date"

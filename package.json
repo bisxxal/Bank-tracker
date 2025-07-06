@@ -4,10 +4,13 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
-    "postinstall": "prisma generate",
+    "build": "next build", 
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "prisma:migrate": "prisma migrate deploy",
+    "studio": "prisma studio",
+    "prisma:docker": "npm run prisma:migrate && npm run studio",
+    "dev:docker": "npm run prisma:docker & next dev"
   },
   "dependencies": {
     "@next-auth/prisma-adapter": "^1.0.7",

@@ -90,8 +90,6 @@ export async function createTransaction(formData: FormData) {
   const spendsOn = formData.get('spendsOn') as string;
   const send = formData.get('send') as string;
   const date = new Date(formData.get('date') as string);
-
-  console.log(amount, type, bank, category, spendsOn, send, date)
   if (!amount || !type || !bank || !date) {
     return { status: 400 };
   }
@@ -149,8 +147,6 @@ export async function updateTransaction(formData: FormData, id: string) {
   const spendsOn = formData.get('spendsOn') as string;
   const send = formData.get('send') as string;
   const date = new Date(formData.get('date') as string);
-
-  console.log(amount, type, bank, category, spendsOn, send, date)
   if (!amount || !type || !bank || !date) {
     return { status: 400 };
   }
@@ -214,7 +210,7 @@ export async function AddBanks(formData: FormData) {
   if (!name || !email) {
     return { status: 400, message: "Bank name and at least one email are required" };
   }
-  // Check if bank already exists
+  //   if bank already exists
   const existingBank = await prisma.bank.findFirst({
     where: {
       name,
@@ -235,8 +231,6 @@ export async function AddBanks(formData: FormData) {
       mailId: email
     },
   })
-
-  console.log("New bank created:", addBank);
   return {
     status: 200,
     message: "New bank created and linked to user",
@@ -277,3 +271,35 @@ export async function deleteBank(bankId: string) {
   }
 }
 
+export async function getTransactionsBySelectedMonth(month: number, year: number) {
+  const session = await getServerSession(authOptions);
+  if (!session) {
+    return { status: 400, message: "User not authenticated" };
+  }
+
+  const startDate = new Date(year, month, 1);
+  const endDate = new Date(year, month + 1, 0, 23, 59, 59, 999); 
+
+  const transactions = await prisma.transaction.findMany({
+    where: {
+      userId: session.user.id,
+      date: {
+        gte: startDate,
+        lte: endDate,
+      },
+    },
+    select: {
+      id: true,
+      type: true,
+      bank: true,
+      amount: true,
+      date: true,
+      send: true,
+      spendsOn: true,
+      category: true,
+    },
+    orderBy: { date: "desc" },
+  });
+
+  return transactions;
+}
