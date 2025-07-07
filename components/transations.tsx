@@ -28,7 +28,7 @@ const Transations = ({ body }: { body: string }) => {
   }, [body]);
 
   return (
-    <div className={` ${credit ? ' border-green-500/80 bg-green-400/10 ' : 'border-red-600/80 bg-red-400/10 '}   border-2 rounded-3xl p-4 `}>
+    <div className={` ${credit ? ' border-green-500/80 bg-green-400/10 ' : 'border-red-600/80 bg-red-400/10 '} max-md:w-full  border-2 rounded-3xl p-4 `}>
       <h2 className=" font-semibold mb-2">Transaction </h2>
       { credit  ? <p className=" flex items-center justify-center gap-1">  <strong>Credit:</strong> ₹{credit.toFixed(2)}<MoveUpRight /></p>
     :  <p className=" flex items-center justify-center gap-1"> <strong>Debit:</strong> ₹{debit.toFixed(2)} <MoveUpLeft /></p>

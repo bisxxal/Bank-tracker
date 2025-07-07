@@ -25,11 +25,10 @@ const session = await getServerSession(authOptions);
     return { banks: [], results: [], error: "No bank emails found" };
   }
 
-  // Fetch matching emails (limit to avoid quota hit)
   const res = await gmail.users.messages.list({
     userId: "me",
     q: bankEmails,
-    maxResults: 20, // 👈 decrease this to avoid Gmail quota errors
+    maxResults: 100, // 👈 decrease this to avoid Gmail quota errors
   });
 
   const messages = res.data.messages || [];
@@ -37,7 +36,7 @@ const session = await getServerSession(authOptions);
   const results = [];
 
   for (const msg of messages) {
-    await sleep(150); // ⏳ throttle each request
+    await sleep(150); 
 
     try {
       const message = await gmail.users.messages.get({

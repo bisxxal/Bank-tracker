@@ -50,7 +50,7 @@ const MailPage = async() => {
                   <p><strong>Date:</strong> {moment(msg.date).format('MMMM Do YYYY, h:mm:ss a')}</p>
                 </div>
                 <div className=" flex flex-col justify-between max-md:mt-3  gap-2">
-                  <div className="border bg-[#262538] h-full rounded-3xl mr-3 p-2 px-4 flex flex-col justify-between">
+                  <div className="border max-md:w-full bg-[#262538] h-full rounded-2xl mr-3 p-2 px-4 flex flex-col justify-between">
                   <strong>Bank:</strong> {extractFromEmail(msg.from)}
                 </div>
                 <Transations body={msg.body} />

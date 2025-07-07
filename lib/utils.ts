@@ -2,10 +2,7 @@ export function extractFromEmail(fullName: string): string {
     const match = fullName.match(/<.*@(.*?)\./);
     return match ? match[1].toUpperCase() : 'Unknown';
 }
-
-
-
-
+ 
 export const banks = [
     { value: 'HDFCBANK', name: 'HDFC Bank' },
     { value: 'KOTAK', name: 'Kotak Mahindra Bank' },
@@ -39,3 +36,33 @@ export const categories=[
     { value: 'travels', name: 'Travels' },
     { value: 'bills', name: 'Bills' }
 ]
+// export const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
+// export const COLORS2 = ['#d0ed57', '#a4de6c', '#8dd1e1', '#ffc658', '#ff8042',];
+
+// export const COLORS = ['#FF6B6B', '#4ECDC4', '#FFD93D', '#1A8FE3', '#FF8E72'];
+// export const COLORS2 = [ '#F06595', '#FCA311', '#845EC2' ,'#C86DD7', '#5EEAD4',];
+ 
+export const COLORS = [
+    '#FF8E72', // Vibrant Coral
+    '#A29BFE', // Soft Purple
+    '#FFD93D', // Vivid Yellow
+    '#1A8FE3', // Sky Blue
+    '#55EFC4', // Aqua Green
+    '#F368E0', // Bright Pink
+    '#00CEC9', // Cyan Blue
+    '#FDCB6E',  // Soft Orange
+    '#FF6B6B', // Vivid Red
+    '#4ECDC4', // Bright Teal
+];
+export const COLORS2 = [
+    '#F06595', // Hot Pink
+    '#FCA311', // Deep Amber
+    '#845EC2', // Bold Violet
+    '#2EC4B6', // Teal Green
+    '#FF6F91', // Soft Rose
+    '#3D5A80', // Slate Blue
+    '#5EEAD4', // Minty Cyan
+    '#C86DD7', // Electric Purple
+  '#FF9F1C', // Bright Orange
+  '#6A0572',  // Deep Magenta
+];

@@ -1,14 +1,13 @@
 'use client'
 import { getTransactionsBySelectedMonth } from '@/actions'
 import Loading from '@/components/ui/loading'
-import { categories } from '@/lib/utils'
+import { categories, COLORS2 } from '@/lib/utils'
 import { useQuery } from '@tanstack/react-query'
 import moment from 'moment'
 import React, { useEffect, useState } from 'react'
 import { Cell, Pie, PieChart, Tooltip } from 'recharts'
 
 const CateGoryPage = () => {
-    const COLORS2 = ['#d0ed57', '#a4de6c', '#8dd1e1', '#ffc658', '#ff8042',];
     const now = new Date()
     const [selectedMonth, setSelectedMonth] = useState(now.getMonth())
     const [selectedYear, setSelectedYear] = useState(now.getFullYear())
@@ -106,7 +105,9 @@ const CateGoryPage = () => {
                     </select>
                 </div>
             </div>
-            <div className='flex flex-col min-h-[300px] overflow-hidden max-md:w-full bg-[#262538] border py-3 px-2 bordercolor rounded-3xl items-center justify-center'>
+            <div className='flex max-md:flex-col min-h-[300px] overflow-hidden max-md:w-full bg-[#262538] border py-3 px-2 bordercolor rounded-3xl items-center justify-around'>
+
+
                 {!isLoading && categoryData ? <PieChart width={400} height={300}>
                     <Pie
                         data={categoryData}
@@ -116,7 +117,7 @@ const CateGoryPage = () => {
                         cy="50%"
                         outerRadius={100}
                         fill="#8884d8"
-                        label={(entry) => `${entry.category}  ${((entry.amount / totalAmount) * 100).toFixed(2)}%`}
+                        label={(entry) => `${entry.category}  ₹${((entry.amount / totalAmount) * 100).toFixed(2)}%`}
                     >
                         {categoryData.map((_, index) => (
                             <Cell key={`cell-${index}`} fill={COLORS2[index % COLORS2.length]} />
@@ -137,9 +138,29 @@ const CateGoryPage = () => {
                         }} />
                 </PieChart> :
                     isLoading ?
-                        <Loading parent='w-full mt-[50px] ' boxes={1} child='w-[210px] h-[200px] !rounded-full' />
+                        <Loading parent='w-full mt-[50px] ' boxes={1} child='w-[210px] h-[200px]  border bordercolor text-sm !rounded-full' />
                         : categoryData.length === 0 && <p>No data found</p>
                 }
+                {!isLoading ? <div className=' w-[260px] '>
+                    {sortedCategories.map((category, index) => {
+                        if (category.total === 0) return null;
+                        return (
+                           <>
+                            <div
+                                key={category.value}
+                                className="   w-full flex items-center !text-sm gap-3 rounded-2xl my-2 px-4 py-3 max-md:py-0"
+                            >
+                                <div style={{ background: COLORS2[index % COLORS2.length] }} className="flex h-4 w-4 rounded justify-between items-center mb-2"></div>
+                                <div className="flex justify-between items-center mb-2">
+                                <h1 className="text-white center gap-1 w-full font-medium">{category.name}   ₹{category.total}</h1>
+                                </div>
+                            </div>
+                          
+                           </>
+                        )
+
+                    })}
+                </div> : <Loading parent='w-full mt-[50px] ' boxes={3} child='w-[250px] h-[30px] ounded-full' />}
             </div>
 
             <h2 className=' mt-5  font-bold text-xl'>Top list</h2>

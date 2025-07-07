@@ -1,13 +1,17 @@
 'use client';
 import { signIn, signOut, useSession } from "next-auth/react";
+import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function LoginPage() {
   const { data: session } = useSession();
-
+  const router = useRouter();
+  if (session) {
+    router.push("/");
+  }
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen p-4">
-       
+    <div className="flex flex-col items-center justify-center   p-4">
       <div>
       {session ? (
         <>
@@ -18,8 +22,8 @@ export default function LoginPage() {
          </div>
         </>
       ) : (
-        <div className=" flex flex-col items-center justify-center min-h-screen p-4">
-        <h1 className="text-2xl font-bold mb-4">Sign in to read your Gmail</h1>
+        <div className=" flex flex-col items-center justify-center mt-20 p-4">
+        <Image src='/bank.png' alt='logo' width={140} height={140} className='hover:scale-125 my-10 drop-shadow-[0_5px_13px_rgba(0,0,0,0.25)] drop-shadow-amber-100 transition-all hover:-translate-y-10 inline-block ml-2' />
         <button className=" buttonbg cursor-pointer rounded-4xl p-2 px-5" onClick={() => signIn("google",{ callbackUrl: "/" })}>Sign in with Google</button>
         </div>
       )}

@@ -61,7 +61,7 @@ const CalendarPage = () => {
         !isLoading ?
           <div
             key={d}
-            className={`text-center card border bordercolor mt-2 max-md:mt-1 rounded-lg w-full  h-40 max-md:h-28  flex flex-col items-start ${isToday ? 'bg-blue-500 text-white font-bold' : ''
+            className={`text-center   border bordercolor mt-2 max-md:mt-0 rounded-lg w-full  h-40 max-md:h-28  flex flex-col items-start ${isToday ? 'bg-blue-50 buttonbg text-white font-bold' : ' card '
               }`}
           >
             <h1 className='items-start px-2 pt-1 justify-start w-ful h-1/2 font-extrabold text-4xl max-md:text-xl'>  {d}</h1>
@@ -69,12 +69,12 @@ const CalendarPage = () => {
               {monthData
                 .filter((item) => moment(item.date).date() === d)
                 .map((item, index) => (
-                  <div key={index} className={`${item.name === 'credit' ? " text-green-500" : " text-red-500"} text-base items-center flex gap-1 max-md:text-xs text-gray-190 `}>
-                    {item.name === 'debit' && <ArrowDownRight color='#fb2c36' size={19} />} {item.amount} {item.name === 'credit' && <ArrowDownLeft color='#00c951' size={19} />}
+                  <div key={index} className={`${item.name === 'credit' ? " text-green-500" : " text-red-500"} text-base items-center flex gap-1 max-md:gap-0.5 max-md:text-xs text-gray-190 `}>
+                    {item.name === 'debit' && <ArrowDownRight className=' block max-md:hidden'  color='#fb2c36' size={19} />} {item.amount} {item.name === 'credit' && <ArrowDownLeft  className=' block max-md:hidden' color='#00c951' size={19} />}
                   </div>
                 ))}
             </div>
-          </div> : <Loading boxes={1} parent='items-start w-full' child='w-full h-40 max-md:h-28 !rounded-lg mt-2 max-md:mt-1 ' />
+          </div> : <Loading  boxes={1} parent='items-start w-full' child='w-full h-40 max-md:h-28 !rounded-lg mt-2 max-md:mt-0 ' />
       )
     }
 
@@ -82,7 +82,7 @@ const CalendarPage = () => {
   }
 
   return (
-    <div>
+    <div className=' pb-20 w-full min-h-screen'>
       <div className=" overflow-x-auto">
         <div className="flex  w-[90%] max-md:w-full mx-auto  justify-between items-center p-4">
           <h2 className="text-3xl max-md:lg font-bold">
@@ -133,22 +133,22 @@ const CalendarPage = () => {
 
           <div className=' flex gap-2 items-center'>
             <div className='flex flex-col items-center bg-green-600/10 border-green-500/80 border center max-md:w-[130px] h-[60px] w-[150px] rounded-xl'>
-              <h2 className=' center gap-2'>Total Credit </h2>
+              <h2 className=' center gap-2'>Total Credited </h2>
 
-              <p className=' text-white max-md:text-lg text-xl font-bold'>₹{monthData
+              <p className=' text-green-500 max-md:text-lg text-xl font-bold'>₹{monthData
                 .filter(item => item.name === 'credit')
                 .reduce((acc, curr) => acc + curr.amount, 0)
                 .toFixed(2)}</p>
             </div>
             <div className='flex flex-col items-center bg-red-500/10 border border-red-500 center max-md:w-[130px]  h-[60px] w-[150px] rounded-xl'>
               <h2 className=' center gap-2'>
-                Total Debit
+                Total Debited
               </h2>
-              <span className='text-white max-md:text-lg text-xl font-bold'>₹ {monthData
+              <span className='text-red-500 max-md:text-lg text-xl font-bold'>₹{monthData
                 .filter(item => item.name === 'debit')
                 .reduce((acc, curr) => acc + curr.amount, 0)
-                .toFixed(2)} </span>
-
+                .toFixed(2)} 
+              </span>
             </div>
           </div>
         </div>
@@ -157,7 +157,7 @@ const CalendarPage = () => {
           {daysOfWeek.map((day) => (
             <div
               key={day}
-              className="font-semibold w-full h-10 card bordercolor center rounded  border -r text-gray-400"
+              className="font-semibold w-full h-10 card bordercolor center rounded  border  max-md:mb-2 text-gray-400"
             >
               {day}
             </div>

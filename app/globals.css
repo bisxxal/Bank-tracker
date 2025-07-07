@@ -3,7 +3,7 @@
 body { 
   background-color: #181825;
   color: #cdd6f4;
-  font-family:monospace;
+  font-family: monospace , 'Noto Sans Mono';
 }
 
 .center {
@@ -33,9 +33,9 @@ body {
   border-color: #313244;
 }
  
-  .pulseShimmer {
+  /* .pulseShimmer {
   @apply backdrop-saturate-[180%] animate-[pulseShimmer_6.2s_infinite_linear];
-}
+} */
 @keyframes pulseShimmer {
   from {
     background-position: -1000px;
@@ -91,17 +91,4 @@ body {
   color: #eeeff1 !important;
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.fade-in {
-  animation: fadeIn 0.4s ease-in-out;
-}
+ 

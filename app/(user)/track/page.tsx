@@ -1,18 +1,15 @@
 'use client'
 import { getTransactionsBySelected } from '@/actions';
 import { useQuery } from '@tanstack/react-query';
-import { ArrowDownLeft, ArrowDownRight, CircleEllipsis, Loader } from 'lucide-react';
+import { ArrowDownLeft, ArrowDownRight  } from 'lucide-react';
 import React, { useEffect, useState } from 'react'
 import { Area, CartesianGrid, Pie, PieChart, Cell, ResponsiveContainer, Tooltip, XAxis, YAxis, Legend, AreaChart, BarChart, Bar } from 'recharts'
 import { startOfMonth, endOfMonth } from "date-fns";
 import DateButton from '@/components/dateButton';
 import moment from 'moment';
 import Loading from '@/components/ui/loading';
-import Link from 'next/link';
+import { COLORS, COLORS2 } from '@/lib/utils';
 const TrackerPage = () => {
-  const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
-  const COLORS2 = ['#d0ed57', '#a4de6c', '#8dd1e1', '#ffc658', '#ff8042',];
-
   const today = new Date();
   const [startDate, setStartDate] = useState<Date>(startOfMonth(today));
   const [endDate, setEndDate] = useState<Date>(endOfMonth(today));
@@ -97,13 +94,13 @@ const TrackerPage = () => {
       <div>
         <div className='flex justify-evenly w-full flex-warp gap-3 items-center my-4'>
           <div className='flex flex-col items-center bg-green-600/10 border-green-500/80 border center  h-[150px] w-[300px] rounded-3xl'>
-            <h2 className=' center gap-2'>Total Credit: <ArrowDownLeft color='#00c951' size={30} /></h2>
+            <h2 className=' center gap-2'>Total Credited: <ArrowDownLeft color='#00c951' size={30} /></h2>
             <p className=' text-white text-3xl font-bold'>₹{totalCredit.toFixed(2)}</p>
           </div>
           <div className='flex flex-col items-center bg-red-500/10 border border-red-500 center   h-[150px] w-[300px] rounded-3xl'>
             <h2 className=' center gap-2'>
               <ArrowDownRight color='#fb2c36' size={30} />
-              Total Debit:
+              Total Debited:
             </h2>
             <span className='text-white text-3xl font-bold'>₹{totalDebit.toFixed(2)} </span>
           </div>
@@ -160,7 +157,7 @@ const TrackerPage = () => {
               label={(entry) => `${entry.name}-(${(entry).amount})`}
             >
               {typedata.map((_, index) => (
-                <Cell key={`cell-${index}`} fill={COLORS2[index % COLORS.length]} />
+                <Cell key={`cell-${index}`} fill={COLORS2[index % COLORS2.length]} />
               ))}
             </Pie>
             <Tooltip
