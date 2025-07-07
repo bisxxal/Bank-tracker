@@ -40,7 +40,7 @@ async function refreshAccessToken(token: any) {
     return {
       ...token,
       accessToken: credentials.access_token,
-accessTokenExpires: credentials.expiry_date ?? Date.now() + 3600 * 1000,
+      accessTokenExpires: credentials.expiry_date ?? Date.now() + 3600 * 1000,
 
       refreshToken: credentials.refresh_token ?? token.refreshToken,
     };
@@ -62,9 +62,9 @@ export const authOptions: NextAuthOptions = {
       authorization: {
         params: {
           scope: "openid email profile https://www.googleapis.com/auth/gmail.readonly",
-          access_type: "offline",  
-          prompt: "consent",   
-           state: crypto.randomUUID(),
+          access_type: "offline",
+          prompt: "consent",
+          state: crypto.randomUUID(),
         },
 
       },
@@ -89,15 +89,15 @@ export const authOptions: NextAuthOptions = {
           },
         };
       }
- 
+
       if (Date.now() < (token.accessTokenExpires ?? 0)) {
         return token;
       }
- 
+
       return await refreshAccessToken(token);
     },
     async session({ session, token }) {
-      session.accessToken = token.accessToken; 
+      session.accessToken = token.accessToken;
       session.user = {
         id: token.user?.id,
         name: token.user?.name,
@@ -107,8 +107,6 @@ export const authOptions: NextAuthOptions = {
       return session;
     },
   },
-   
-
 };
 
 export default NextAuth(authOptions);

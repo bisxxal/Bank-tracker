@@ -3,31 +3,10 @@
 import { authOptions } from "@/lib/auth";
 import prisma from "@/lib/prisma";
 import { getServerSession } from "next-auth";
-
-
-export async function getTransactions() {
-  const session = await getServerSession(authOptions);
-  if (!session) {
-    throw new Error("User not authenticated");
-  }
-
-  const transactions = await prisma.transaction.findMany({
-    where: { userId: session.user.id },
-    select: {
-      id: true,
-      type: true,
-      bank: true,
-      amount: true,
-      date: true,
-    },
-    take: 20,
-    orderBy: { date: "desc" },
-  });
-
-  return transactions;
-}
+ 
 export async function getTransactionsBySelected(startDate: Date, endDate: Date) {
   const session = await getServerSession(authOptions);
+  // console.log(session)
   if (!session) {
     return { status: 400, message: "User not authenticated" };
   }

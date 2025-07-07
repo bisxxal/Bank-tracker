@@ -4,18 +4,19 @@ import type { NextRequest } from "next/server"
 
 export default withAuth(
   function middleware(req: NextRequest) {
-    // Allow access for authenticated users
-    return NextResponse.next()
+    return NextResponse.next();
   },
   {
     callbacks: {
-      authorized: ({ token }) => !!token, // Only allow if user is logged in
+      authorized: ({ token }) => {
+        return !!token?.accessToken && Date?.now() < (token.accessTokenExpires ?? 0);
+      },
     },
     pages: {
-      signIn: "/login",  
+      signIn: "/login",
     },
   }
-)
+);
 
 export const config = {
   matcher: [
@@ -29,4 +30,4 @@ export const config = {
     "/track/:path*", 
     "/transaction/:path*", 
   ],
-}
+};
