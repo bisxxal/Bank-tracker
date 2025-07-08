@@ -40,17 +40,7 @@ const DateButton = ({ startDate, endDate, setEndDate, setStartDate }:
                     placeholderText="Select end date"
                 />
             </div>
-
-            <div className='relative group '>
-                <label htmlFor='is'>
-                    <p><CircleEllipsis className=' text-gray-100' size={20} /></p>
-                </label>
-                <input type="checkbox" hidden id="is" />
-                <div className='group-has-checked:flex hidden  group-hover:  absolute  py-3.5 w-fit flex-col gap-2 border  text-white p-2 border-black/10 rounded-3xl bg-[#ffffff45] backdrop-blur-[5px] -left-[150px] '>
-                    <Link className=' hover:bg-indigo-500 bg-[#00000031] py-2 rounded-xl hover:text-[#e6e2eb] text-[#ddcaf5] px-6' href={`/calendar`}> View Calender </Link>
-                    <Link className=' hover:bg-indigo-500 bg-[#00000031] py-2 rounded-xl hover:text-[#e6e2eb] text-[#ddcaf5] px-6' href={`/category`}> View Category </Link>
-                </div>
-            </div>
+ 
         </div>
     )
 }

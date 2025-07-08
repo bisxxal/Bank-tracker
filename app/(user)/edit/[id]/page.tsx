@@ -5,17 +5,25 @@ import { categories } from '@/lib/utils';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { Loader } from 'lucide-react';
 import { useParams } from 'next/navigation';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import DatePicker from 'react-datepicker';
 import toast from 'react-hot-toast';
 
 const EditPage = () => {
-
   const params = useParams<{ tag: string; item: string }>()
-
   const id = params?.id || '';
   const queryClient = useQueryClient();
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+
+  const { data, isLoading, } = useQuery({
+    queryKey: ['fetchTransaction', id],
+    queryFn: async () => {
+      const res = await getTransactionById(id)
+      return res
+    }
+  })
+
+  const [types, setTypes] = useState<'debit' | 'credit'>(data?.type);
   const handelFormSubmit = (fromData: FormData) => {
     CreateMutation.mutate(fromData);
   }
@@ -34,17 +42,19 @@ const EditPage = () => {
       toast.error('Failed to update transaction');
     },
   });
-  const { data, isLoading, } = useQuery({
-    queryKey: ['fetchTransaction', id],
-    queryFn: async () => {
-      const res = await getTransactionById(id)
-      return res
-    }
-  })
-  if (isLoading) return <div className=' min-h-screen '>
 
-    <Loading boxes={1} child='mt-10 w-[70%] max-md:w-[95%]  rounded-3xl h-[80vh]' parent=' w-full h-screen' />
+
+  useEffect(() => {
+    if (data?.type === 'debit' || data?.type === 'credit') {
+      setTypes(data.type);
+    }
+  }, [data]);
+
+  if (isLoading) return <div className=' min-h-screen '>
+    <Loading boxes={1} child='mt-10 max-md:mt-0 w-[70%] max-md:w-[95%] !rounded-3xl h-[80vh]' parent=' w-full h-screen' />
   </div>;
+
+
   return (
     <div className=' w-full min-h-screen flex flex-col  items-center'>
       <h1 className="text-2xl font-bold center my-4">Update Transaction</h1>
@@ -54,15 +64,15 @@ const EditPage = () => {
           <label className="block text-sm font-medium ">Amount</label>
           <input required
             type="number"
-            defaultValue={data?.amount || ''}
+            defaultValue={data?.amount || 0}
             name="amount"
-            className="mt-1 block w-full border bordercolor card p-2 rounded-md shadow-sm  "
+            className={` ${types === 'credit' ? "text-green-500" : "text-red-500"} mt-1 font-bold  block w-full border bordercolor card p-2 rounded-md shadow-sm  `}
             placeholder="Enter amount"
           />
         </div>
         <div>
           <label className="block text-sm font-medium ">Transaction</label>
-          <select required
+          <select required onChange={(e) => setTypes(e.target.value as 'credit' | 'debit')}
             defaultValue={data?.type || 'credit'}
             name='type'
             className="mt-1 block w-full border bordercolor card p-2 rounded-md shadow-sm "
@@ -84,7 +94,7 @@ const EditPage = () => {
           </select>
         </div>
 
-        <div>
+        {types === 'debit' && <div>
           <label className="block text-sm font-medium ">Category</label>
           <select name='category'
             defaultValue={data?.category || ''}
@@ -97,27 +107,27 @@ const EditPage = () => {
               </option>
             ))}
           </select>
-        </div>
+        </div>}
 
-        <div>
-          <label className="block text-sm font-medium ">Spends on / Recevied </label>
+        {types === 'debit' && <div>
+          <label className="block text-sm font-medium ">Spends on</label>
           <input
             type="text"
             name='send'
             defaultValue={data?.send || ''}
             className="mt-1 block w-full border bordercolor card p-2 rounded-md shadow-sm  "
-            placeholder="Enter reason for spending or receiving"
+            placeholder="Enter reason for spending "
           />
-        </div>
+        </div>}
 
         <div>
-          <label className="block text-sm font-medium ">Send to / Recevied by (spends) </label>
+          <label className="block text-sm font-medium "> {types === 'credit' ? 'Who sends you ' : 'Send to '} </label>
           <input
             type="text"
             defaultValue={data?.spendsOn || ''}
             name='spendsOn'
             className="mt-1 block w-full border bordercolor card p-2 rounded-md shadow-sm  "
-            placeholder="Enter reason for spending or receiving"
+            placeholder={types === 'credit' ? 'Sender name' : 'xyz private lim'}
           />
         </div>
 
@@ -131,7 +141,7 @@ const EditPage = () => {
 
             selected={data?.date ? data?.date : selectedDate}
             onChange={(date: Date | null) => {
-              setSelectedDate(date); 
+              setSelectedDate(date);
             }}
             calendarClassName='  customclass '
             popperClassName="customclass2"

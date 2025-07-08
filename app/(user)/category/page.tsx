@@ -1,6 +1,7 @@
 'use client'
 import { getTransactionsBySelectedMonth } from '@/actions'
 import Loading from '@/components/ui/loading'
+import { TransactionTypeProps } from '@/lib/types'
 import { categories, COLORS2 } from '@/lib/utils'
 import { useQuery } from '@tanstack/react-query'
 import moment from 'moment'
@@ -23,7 +24,7 @@ const CateGoryPage = () => {
 
     useEffect(() => {
         if (data) {
-            const revData = data?.reduce((acc: { type: string, name: string, amount: number, category: string, date: Date | string }[], curr) => {
+            const revData = data?.reduce((acc: { name: string, amount: number, category: string, date: Date | string }[], curr: TransactionTypeProps) => {
                 const type = curr?.type || 'Unknown';
                 const date = moment(curr.date).format("YYYY-MM-DD");
                 const existing = acc.find(
@@ -145,18 +146,18 @@ const CateGoryPage = () => {
                     {sortedCategories.map((category, index) => {
                         if (category.total === 0) return null;
                         return (
-                           <>
-                            <div
-                                key={category.value}
-                                className="   w-full flex items-center !text-sm gap-3 rounded-2xl my-2 px-4 py-3 max-md:py-0"
-                            >
-                                <div style={{ background: COLORS2[index % COLORS2.length] }} className="flex h-4 w-4 rounded justify-between items-center mb-2"></div>
-                                <div className="flex justify-between items-center mb-2">
-                                <h1 className="text-white center gap-1 w-full font-medium">{category.name}   ₹{category.total}</h1>
+                            <>
+                                <div
+                                    key={category.value}
+                                    className="   w-full flex items-center !text-sm gap-3 rounded-2xl my-2 px-4 py-3 max-md:py-0"
+                                >
+                                    <div style={{ background: COLORS2[index % COLORS2.length] }} className="flex h-4 w-4 rounded justify-between items-center mb-2"></div>
+                                    <div className="flex justify-between items-center mb-2">
+                                        <h1 className="text-white center gap-1 w-full font-medium">{category.name}   ₹{category.total}</h1>
+                                    </div>
                                 </div>
-                            </div>
-                          
-                           </>
+
+                            </>
                         )
 
                     })}

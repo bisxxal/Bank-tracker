@@ -7,6 +7,7 @@
     "build": "next build", 
     "start": "next start",
     "lint": "next lint",
+    "postinstall": "prisma generate",
     "prisma:migrate": "prisma migrate deploy",
     "studio": "prisma studio",
     "prisma:docker": "npm run prisma:migrate && npm run studio",

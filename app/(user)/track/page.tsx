@@ -9,6 +9,7 @@ import DateButton from '@/components/dateButton';
 import moment from 'moment';
 import Loading from '@/components/ui/loading';
 import { COLORS, COLORS2 } from '@/lib/utils';
+import { TransactionTypeProps } from '@/lib/types';
 const TrackerPage = () => {
   const today = new Date();
   const [startDate, setStartDate] = useState<Date>(startOfMonth(today));
@@ -29,7 +30,7 @@ const TrackerPage = () => {
   useEffect(() => {
     if (data) {
 
-      const revData = data.reduce((acc: any[], curr) => {
+      const revData = data.reduce((acc: {name:string ,  amount:number}[], curr:TransactionTypeProps) => {
         const type = curr?.type || 'Unknown';
         const existing = acc.find((item) => item.name === type);
         if (existing) {
@@ -40,7 +41,7 @@ const TrackerPage = () => {
         return acc;
       }, []);
 
-      const bankData = data.reduce((acc: any[], curr) => {
+      const bankData = data?.reduce((acc: {name:string , amount:number}[], curr:TransactionTypeProps) => {
         const bank = curr?.bank || 'Unknown';
         const existing = acc.find((item) => item.name === bank);
         if (existing) {
@@ -51,7 +52,7 @@ const TrackerPage = () => {
         return acc;
       }, []);
 
-      const barData = data.reduce((acc: any[], curr) => {
+      const barData =  data?.reduce((acc: {name:string ,credit:number,  debit:number}[], curr:TransactionTypeProps) => {
         const date = moment(curr.date).format('DD/MM/YYYY');
         const existing = acc.find((item) => item.name === date);
         if (existing) {
@@ -87,22 +88,21 @@ const TrackerPage = () => {
   }
   const totalCredit = typedata.reduce((acc, curr) => curr.name === 'credit' ? acc + curr.amount : acc, 0);
   const totalDebit = typedata.reduce((acc, curr) => curr.name === 'debit' ? acc + curr.amount : acc, 0);
-
   return (
     <div className='w-full overflow-hidden min-h-screen pb-20 p-4'>
       <DateButton startDate={startDate} endDate={endDate} setStartDate={setStartDate} setEndDate={setEndDate} />
       <div>
         <div className='flex justify-evenly w-full flex-warp gap-3 items-center my-4'>
           <div className='flex flex-col items-center bg-green-600/10 border-green-500/80 border center  h-[150px] w-[300px] rounded-3xl'>
-            <h2 className=' center gap-2'>Total Credited: <ArrowDownLeft color='#00c951' size={30} /></h2>
-            <p className=' text-white text-3xl font-bold'>₹{totalCredit.toFixed(2)}</p>
+            <h2 className='max-md:text-sm center gap-1'>Total Credited: <ArrowDownLeft color='#00c951' size={30} /></h2>
+            <p className=' text-white max-md:text-2xl text-3xl font-bold'>₹{totalCredit.toFixed(2)}</p>
           </div>
           <div className='flex flex-col items-center bg-red-500/10 border border-red-500 center   h-[150px] w-[300px] rounded-3xl'>
-            <h2 className=' center gap-2'>
+            <h2 className='max-md:text-sm center gap-1'>
               <ArrowDownRight color='#fb2c36' size={30} />
               Total Debited:
             </h2>
-            <span className='text-white text-3xl font-bold'>₹{totalDebit.toFixed(2)} </span>
+            <span className='text-white max-md:text-2xl text-3xl font-bold'>₹{totalDebit.toFixed(2)} </span>
           </div>
         </div>
 

@@ -8,6 +8,7 @@ import DatePicker from 'react-datepicker';
 import toast from 'react-hot-toast';
 
 const CreateTransaction = () => {
+  const [type , setType] = useState<'credit' | 'debit'>('credit');
   const queryClient = useQueryClient();
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const handelFormSubmit = (fromData: FormData) => {
@@ -35,19 +36,18 @@ const CreateTransaction = () => {
       <h1 className="text-2xl font-bold center  my-4">Create Transaction</h1>
 
       <form action={handelFormSubmit} className="space-y-4  w-[70%] border bordercolor max-md:w-[95%] mx-auto py-5 rounded-2xl flex px-4 flex-col">
-
         <div className=''>
           <label className="block text-sm font-medium ">Amount</label>
           <input required
             type="number"
             name="amount"
-            className="mt-1 block w-full border bordercolor card p-2 rounded-md shadow-sm  "
+            className={` ${type==='credit'? "text-green-500" :"text-red-500"} mt-1 font-bold  block w-full border bordercolor card p-2 rounded-md shadow-sm  `}
             placeholder="Enter amount"
           />
         </div>
         <div>
           <label className="block text-sm font-medium ">Transaction</label>
-          <select required
+          <select onChange={(e)=>setType(e.target.value as 'credit' | 'debit')} required
             name='type'
             className="mt-1 block w-full border bordercolor card p-2 rounded-md shadow-sm "
           >
@@ -67,7 +67,7 @@ const CreateTransaction = () => {
           </select>
         </div>
 
-        <div>
+       { type === 'debit' && <div>
           <label className="block text-sm font-medium ">Category</label>
           <select name='category'
             className="mt-1 block w-full border bordercolor card p-2 rounded-md shadow-sm "
@@ -79,25 +79,25 @@ const CreateTransaction = () => {
               </option>
             ))}
           </select>
-        </div>
+        </div>}
 
-        <div>
-          <label className="block text-sm font-medium ">Spends on / Recevied </label>
+       {type === 'debit' && <div>
+          <label className="block text-sm font-medium ">Spends on </label>
           <input
             type="text"
             name='send'
             className="mt-1 block w-full border bordercolor card p-2 rounded-md shadow-sm  "
-            placeholder="Enter reason for spending or receiving"
+            placeholder="Enter reason for spending "
           />
-        </div>
+        </div>}
 
         <div>
-          <label className="block text-sm font-medium ">Send to / Recevied by (spends) </label>
+          <label className="block text-sm font-medium "> {type === 'credit' ? 'Who sends you ' : 'Send to ' }  </label>
           <input
             type="text"
             name='spendsOn'
             className="mt-1 block w-full border bordercolor card p-2 rounded-md shadow-sm  "
-            placeholder="Enter reason for spending or receiving"
+            placeholder={type === 'credit' ? 'Sender name' : 'xyz private lim'}
           />
         </div>
 
@@ -115,8 +115,8 @@ const CreateTransaction = () => {
               setSelectedDate(date); 
             }}
             selectsStart
-            className="border-2 bordercolor w-[150px] center max-md:w-[120px] rounded-xl px-2 py-1 card text-white"
-            placeholderText="Select start date"
+            className="border-2 bordercolor placeholder:text-xs w-[150px] center max-md:w-[120px] rounded-xl px-2 py-1 card text-white"
+            placeholderText="Select date"
           />
         </div>
         <button

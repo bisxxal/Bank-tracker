@@ -1,6 +1,7 @@
 'use client'
 import { getTransactionsBySelectedMonth } from '@/actions'
 import Loading from '@/components/ui/loading'
+import { TransactionTypeProps } from '@/lib/types'
 import { useQuery } from '@tanstack/react-query'
 import { ArrowDownLeft, ArrowDownRight } from 'lucide-react'
 import moment from 'moment'
@@ -22,7 +23,7 @@ const CalendarPage = () => {
 
   useEffect(() => {
     if (data) {
-      const revData = data?.reduce((acc: {type:string , name:string ,amount:number, date:Date|string}[], curr) => {
+      const revData = data?.reduce((acc: {  name:string ,amount:number, date:Date|string}[], curr:TransactionTypeProps) => {
         const type = curr?.type || 'Unknown';
         const date = moment(curr.date).format("YYYY-MM-DD");
         const existing = acc.find(
@@ -131,17 +132,17 @@ const CalendarPage = () => {
             </select>
           </div>
 
-          <div className=' flex gap-2 items-center'>
-            <div className='flex flex-col items-center bg-green-600/10 border-green-500/80 border center max-md:w-[130px] h-[60px] w-[150px] rounded-xl'>
-              <h2 className=' center gap-2'>Total Credited </h2>
+          <div className=' max-md:w-full  flex gap-2 items-center'>
+            <div className='flex flex-col items-center bg-green-600/10 border-green-500/80 border center max-md:w-[170px] h-[60px] w-[150px] rounded-xl'>
+              <h2 className='max-md:text-sm center gap-2'>Total Credited </h2>
 
               <p className=' text-green-500 max-md:text-lg text-xl font-bold'>₹{monthData
                 .filter(item => item.name === 'credit')
                 .reduce((acc, curr) => acc + curr.amount, 0)
                 .toFixed(2)}</p>
             </div>
-            <div className='flex flex-col items-center bg-red-500/10 border border-red-500 center max-md:w-[130px]  h-[60px] w-[150px] rounded-xl'>
-              <h2 className=' center gap-2'>
+            <div className='flex flex-col items-center bg-red-500/10 border border-red-500 center max-md:w-[170px]  h-[60px] w-[150px] rounded-xl'>
+              <h2 className='max-md:text-sm center gap-2'>
                 Total Debited
               </h2>
               <span className='text-red-500 max-md:text-lg text-xl font-bold'>₹{monthData

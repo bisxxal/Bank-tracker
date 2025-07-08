@@ -33,9 +33,6 @@ body {
   border-color: #313244;
 }
  
-  /* .pulseShimmer {
-  @apply backdrop-saturate-[180%] animate-[pulseShimmer_6.2s_infinite_linear];
-} */
 @keyframes pulseShimmer {
   from {
     background-position: -1000px;
@@ -84,11 +81,23 @@ body {
 }
 .react-datepicker__current-month{ 
   color: #ffffff !important;
-  /* background-color: transparent !important; */
 }
 
 .react-datepicker__day-name{
   color: #eeeff1 !important;
 }
 
- 
+.appear {
+  animation: appear 0.5s ease-in-out forwards;
+}
+@keyframes appear {
+  0% {
+    transform: translateX(50px);
+  }
+  50% {
+      transform: translateX(-20px);
+    }
+  100% {
+    transform: translateX(0);
+  }
+}
