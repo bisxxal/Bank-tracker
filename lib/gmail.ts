@@ -6,8 +6,7 @@ import { getBanks } from "@/actions";
 function sleep(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
-
-export const getBankEmails = async()=> {
+export const getBankEmails = async(limit: number = 10)=> {
 const session = await getServerSession(authOptions);
 
   if (!session || !session.accessToken) {
@@ -28,9 +27,8 @@ const session = await getServerSession(authOptions);
   const res = await gmail.users.messages.list({
     userId: "me",
     q: bankEmails,
-    maxResults: 100, // 👈 decrease this to avoid Gmail quota errors
+    maxResults: limit, // 👈 decrease this to avoid Gmail quota errors
   });
-
   const messages = res.data.messages || [];
 
   const results = [];

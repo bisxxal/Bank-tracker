@@ -5,12 +5,12 @@ import prisma from "@/lib/prisma";
 import { extractFromEmail } from "@/lib/utils";
 import { getServerSession } from "next-auth";
 
-export async function syncBankEmails() {
+export async function syncBankEmails(limit: number = 10) {
   const session = await getServerSession(authOptions);
   const accessToken = (session as any)?.accessToken;
   if (!accessToken) throw new Error("No access token");
 
-  const emails = await getBankEmails();
+  const emails = await getBankEmails(limit);
 
   if (!session) {
     return { status: 400, message: " user not authenticated." };

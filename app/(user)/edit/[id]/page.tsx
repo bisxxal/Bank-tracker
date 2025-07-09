@@ -1,7 +1,8 @@
 'use client'
 import { getTransactionById, updateTransaction } from '@/actions';
 import Loading from '@/components/ui/loading';
-import { categories } from '@/lib/utils';
+import { TransactionTypeProps } from '@/lib/types';
+import { banks, categories } from '@/lib/utils';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { Loader } from 'lucide-react';
 import { useParams } from 'next/navigation';
@@ -10,19 +11,19 @@ import DatePicker from 'react-datepicker';
 import toast from 'react-hot-toast';
 
 const EditPage = () => {
-  const params = useParams<{ tag: string; item: string }>()
+  const params = useParams<{ id: string }>()
   const id = params?.id || '';
   const queryClient = useQueryClient();
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
 
-  const { data, isLoading, } = useQuery({
+  const { data, isLoading } = useQuery ({
     queryKey: ['fetchTransaction', id],
     queryFn: async () => {
       const res = await getTransactionById(id)
       return res
     }
   })
-
+  
   const [types, setTypes] = useState<'debit' | 'credit'>(data?.type);
   const handelFormSubmit = (fromData: FormData) => {
     CreateMutation.mutate(fromData);
@@ -89,8 +90,13 @@ const EditPage = () => {
             className="mt-1 block w-full border bordercolor card p-2 rounded-md shadow-sm "
           >
             <option value="">Select bank</option>
-            <option value="HDFCBANK">Hdfc</option>
-            <option value="KOTAK">Kotak 811</option>
+            {
+              banks.map((i)=>{
+                return(
+                  <option key={i.value} value={i.value}>{i.name}</option>
+                )
+              })
+            }
           </select>
         </div>
 

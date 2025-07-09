@@ -7,7 +7,6 @@ import React from 'react'
 
 const Navbar = () => {
   const { data: session ,status} = useSession()
-
   return (
     <div className='z-[100] w-full top-0 border-b bordercolor -white/20 left-0 fixed backdrop-blur-xl h-[60px] flex items-center justify-center '>
       <div className=' w-full max-md:px-2 px-4 flex items-center justify-between'>
@@ -26,16 +25,18 @@ const Navbar = () => {
                 <Image src={session.user?.image!} alt='profile' width={30} height={30} className='rounded-full' />
               </Link>
                 <div className='relative group '>
-                <label htmlFor='is'>
-                    <p><CircleEllipsis className=' text-gray-100' size={20} /></p>
+                <label className=' cursor-pointer' htmlFor='is'>
+                      <CircleEllipsis className=' text-gray-100' size={20} />
                 </label>
                 <input type="checkbox" hidden id="is" />
                 <div className='group-has-checked:flex hidden appear absolute  py-3.5 w-  flex-col gap-2 border  text-white p-2 border-black/10 rounded-3xl bg-[#393b5ff0] !backdrop-blur-[15px] -left-[165px] '>
                     <Link className='text-sm hover:bg-indigo-500 bg-[#00000031] py-2 rounded-xl hover:text-[#e6e2eb] text-[#ddcaf5] px-6 center' href={`/track`}> Track </Link>
+                    <Link className='text-sm hover:bg-indigo-500 bg-[#00000031] py-2 rounded-xl hover:text-[#e6e2eb] text-[#ddcaf5] center' href={`/bank`}> Add Bank</Link>
                     <Link className='text-sm hover:bg-indigo-500 bg-[#00000031] py-2 rounded-xl hover:text-[#e6e2eb] text-[#ddcaf5] px-6 center' href={`/transaction`}> Transaction </Link>
                     <Link className='text-sm hover:bg-indigo-500 bg-[#00000031] py-2 rounded-xl hover:text-[#e6e2eb] text-[#ddcaf5] center  ' href={`/calendar`}> View Calender </Link>
                     <Link className='text-sm hover:bg-indigo-500 bg-[#00000031] py-2 rounded-xl hover:text-[#e6e2eb] text-[#ddcaf5] center' href={`/category`}> View Category </Link>
                     <Link className='text-sm hover:bg-indigo-500 bg-[#00000031] py-2 rounded-xl hover:text-[#e6e2eb] text-[#ddcaf5] whitespace-nowrap center text-center px-2 ' href={`/create`}> Create transaction </Link>
+                    <Link className='text-sm hover:bg-indigo-500 bg-[#00000031] py-2 rounded-xl hover:text-[#e6e2eb] text-[#ddcaf5] whitespace-nowrap center text-center px-2 ' href={`/syncmail`}> Sync Trancatioons </Link>
                 </div>
             </div>
             </div>

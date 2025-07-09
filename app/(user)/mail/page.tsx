@@ -6,7 +6,7 @@ import moment from 'moment';
 import React from 'react'
 
 const MailPage = async() => {
-    const {results:messages , banks } = await getBankEmails();
+    const {results:messages , banks } = await getBankEmails(10);
   
   const groupedMessages = messages.reduce((acc: Record<string, typeof messages>, msg) => {
     const label = getLabelForDate(msg?.date);

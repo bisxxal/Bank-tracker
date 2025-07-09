@@ -1,7 +1,6 @@
 'use client';
 import { deleteTransaction, getTransactionsBySelected } from '@/actions';
 import DateButton from '@/components/dateButton';
-import { SyncButton } from '@/components/syncButton';
 import Loading from '@/components/ui/loading';
 import SwipeRevealActions from '@/components/ui/swipeToDelete';
 import { getLabelForDate } from '@/lib/dateformat';
@@ -152,28 +151,25 @@ const TransactionPage = () => {
       </div>}
       <h1 className="text-center">Your Transactions {data?.length}</h1>
       <div className="flex flex-col gap-4 px-14 max-md:px-2.5 pt-10">
-        <SyncButton />
         <DateButton startDate={startDate} endDate={endDate} setStartDate={setStartDate} setEndDate={setEndDate} />
-
-        {/* <Loading boxes={2} child="h-28 !w-[250px] h-[150px] !rounded-3xl " parent="w-full !flex-row px-0 mt-13 !justify-start " />   */}
         {  uniqueBanks &&  !isLoading ?
         <div className='flex w-full overflow-x-auto gap-2'>
-          {uniqueBanks.map((i, index) => (
-            <div key={index} className='appear bg-blue-500/20 border border-blue-500 rounded-3xl flex flex-col !items-start !justify-start  !w-[250px]  p-4  '>
+          {uniqueBanks.map((i:{bank:string ,creditAmount:number ,credit:boolean,debit:boolean,debitAmount:number }, index:number) => (
+            <div key={index} className=' bg-blue-500/20 border border-blue-500 rounded-3xl flex flex-col !items-start !justify-start  !w-[250px]  p-4  '>
               <p className='w-full text-center text-xl text-white font-bold'> {i.bank}</p>
               {i.credit && <p className='w-full text-green-500'>Credit: ₹{i.creditAmount.toFixed(2)}</p>}
               {i.debit && <p className='w-full text-red-500'>Debit: ₹{i.debitAmount.toFixed(2)}</p>}
               <p className='w-full text-gray-500'>Total: ₹{(i.creditAmount - i.debitAmount).toFixed(2)}</p>
             </div>
           ))}
-        </div> :
-         <Loading boxes={2} child="h-28 !w-[250px] h-[150px] !rounded-3xl " parent="w-full !flex-row px-0   !justify-start " />  
+        </div> : isLoading ?
+         <Loading boxes={2} child="h-28 !w-[250px] h-[150px] !rounded-3xl " parent="w-full !flex-row px-0   !justify-start " />  : <p>No Data found</p>
         }
 
         {groupedMessages && Object.entries(groupedMessages).length !== 0 && !isLoading ? Object?.entries(groupedMessages).map(([label, group]) => (
           <div key={label}>
             <div className="text-center border bordercolor bg-[#262538] w-fit mx-auto rounded-full px-2 text-sm basecolor2 font-semibold my-4">{label}</div>
-            {group.map((msg) => (
+            {group.map((msg:TransactionTypeProps) => (
               <SwipeRevealActions
                 key={msg.id}
                 id={msg.id}

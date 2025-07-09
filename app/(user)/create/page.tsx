@@ -1,6 +1,6 @@
 'use client'
 import { createTransaction } from '@/actions';
-import { categories } from '@/lib/utils';
+import { banks, categories } from '@/lib/utils';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Loader } from 'lucide-react';
 import React, { useState } from 'react'
@@ -62,8 +62,13 @@ const CreateTransaction = () => {
             className="mt-1 block w-full border bordercolor card p-2 rounded-md shadow-sm "
           >
             <option value="">Select bank</option>
-            <option value="HDFCBANK">Hdfc</option>
-            <option value="KOTAK">Kotak 811</option>
+             {
+              banks.map((i)=>{
+                return(
+                  <option key={i.value} value={i.value}>{i.name}</option>
+                )
+              })
+             }
           </select>
         </div>
 
