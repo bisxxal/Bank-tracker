@@ -23,7 +23,7 @@ export default function RootLayout({
         <Providers>
           <Toaster />
           <Navbar />
-          <div className=" mt-[75px] ">
+          <div className=" mt-[0px] ">
             {children}
           </div>
         </Providers>

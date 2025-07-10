@@ -106,3 +106,6 @@ button:hover , a:hover{
   scale: 0.95;
   transition: all 0.2s ease-in-out;
 }
+.textshadow{
+  text-shadow: -2px 1px 20px #ffffff;
+}

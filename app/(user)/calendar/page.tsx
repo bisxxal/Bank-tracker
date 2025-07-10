@@ -23,7 +23,7 @@ const CalendarPage = () => {
 
   useEffect(() => {
     if (data) {
-      const revData = data?.reduce((acc: {  name:string ,amount:number, date:Date|string}[], curr:TransactionTypeProps) => {
+      const revData = data?.reduce((acc: { name: string, amount: number, date: Date | string }[], curr: TransactionTypeProps) => {
         const type = curr?.type || 'Unknown';
         const date = moment(curr.date).format("YYYY-MM-DD");
         const existing = acc.find(
@@ -47,11 +47,11 @@ const CalendarPage = () => {
     const daysInMonth = new Date(year, month + 1, 0).getDate()
 
     const days = []
- 
+
     for (let i = 0; i < firstDay; i++) {
       days.push(<div key={`empty-${i}`} />)
     }
- 
+
     for (let d = 1; d <= daysInMonth; d++) {
       const isToday =
         d === now.getDate() &&
@@ -62,7 +62,7 @@ const CalendarPage = () => {
         !isLoading ?
           <div
             key={d}
-            className={`text-center   border bordercolor mt-2 max-md:mt-0 rounded-lg w-full  h-40 max-md:h-28  flex flex-col items-start ${isToday ? 'bg-blue-50 buttonbg text-white font-bold' : ' card '
+            className={`text-center border hover:bg-[#ffffff3a] bordercolor mt-2 max-md:mt-0 rounded-lg w-full  h-40 max-md:h-28  flex flex-col items-start ${isToday ? 'bg-blue-50 buttonbg text-white font-bold' : ' !hover:bg-[#ffffff3a] card '
               }`}
           >
             <h1 className='items-start px-2 pt-1 justify-start w-ful h-1/2 font-extrabold text-4xl max-md:text-xl'>  {d}</h1>
@@ -71,11 +71,11 @@ const CalendarPage = () => {
                 .filter((item) => moment(item.date).date() === d)
                 .map((item, index) => (
                   <div key={index} className={`${item.name === 'credit' ? " text-green-500" : " text-red-500"} text-base items-center flex gap-1 max-md:gap-0.5 max-md:text-xs text-gray-190 `}>
-                    {item.name === 'debit' && <ArrowDownRight className=' block max-md:hidden'  color='#fb2c36' size={19} />} {item.amount} {item.name === 'credit' && <ArrowDownLeft  className=' block max-md:hidden' color='#00c951' size={19} />}
+                    {item.name === 'debit' && <ArrowDownRight className=' block max-md:hidden' color='#fb2c36' size={19} />} {item.amount} {item.name === 'credit' && <ArrowDownLeft className=' block max-md:hidden' color='#00c951' size={19} />}
                   </div>
                 ))}
             </div>
-          </div> : <Loading  boxes={1} parent='items-start w-full' child='w-full h-40 max-md:h-28 !rounded-lg mt-2 max-md:mt-0 ' />
+          </div> : <Loading boxes={1} parent='items-start w-full' child='w-full h-40 max-md:h-28 !rounded-lg mt-2 max-md:mt-0 ' />
       )
     }
 
@@ -148,7 +148,7 @@ const CalendarPage = () => {
               <span className='text-red-500 max-md:text-lg text-xl font-bold'>₹{monthData
                 .filter(item => item.name === 'debit')
                 .reduce((acc, curr) => acc + curr.amount, 0)
-                .toFixed(2)} 
+                .toFixed(2)}
               </span>
             </div>
           </div>

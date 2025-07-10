@@ -41,7 +41,9 @@ const Navbar = () => {
             </div>
             </div>
           ) : (
-            <button className=" buttonbg cursor-pointer rounded-4xl p-2 px-5" onClick={() => signIn("google")}>Sign in </button>
+<Link href="/login" className="rounded-full text-[#89dceb] border-[#89dceb] bg-[#89dceb2b] border p-2 px-5 text-sm max-md:px-3 ">
+          Sign In
+        </Link>
           )}
         </div>}
       </div>

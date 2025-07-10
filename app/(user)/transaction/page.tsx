@@ -169,7 +169,7 @@ const TransactionPage = () => {
         {groupedMessages && Object.entries(groupedMessages).length !== 0 && !isLoading ? Object?.entries(groupedMessages).map(([label, group]) => (
           <div key={label}>
             <div className="text-center border bordercolor bg-[#262538] w-fit mx-auto rounded-full px-2 text-sm basecolor2 font-semibold my-4">{label}</div>
-            {group.map((msg:TransactionTypeProps) => (
+            {group?.map((msg:TransactionTypeProps) => (
               <SwipeRevealActions
                 key={msg.id}
                 id={msg.id}
