@@ -12,7 +12,7 @@ const BankPage = () => {
     const [show, setShow] = useState(true);
 
     return (
-        <div>
+        <>
             <div className=' flex justify-between items-center w-fit  overflow-hidden rounded-full mx-auto my-4'>
                 <button onClick={() => setShow(true)} className={`${show ? " border-none buttonbg" : " border border-[#cba6f7] "} rounded-l-4xl px-4 py-2 `}>Add Bank</button>
                 <button onClick={() => setShow(false)} className={`${show ? " border border-[#cba6f7] " : "buttonbg border-none  "} rounded-r-4xl px-4 py-2 `}>Bank List</button>
@@ -20,7 +20,7 @@ const BankPage = () => {
             {show ? <AddBank />
                 : <BankList />
             }
-        </div>
+        </>
     )
 }
 

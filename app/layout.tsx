@@ -22,7 +22,6 @@ export default function RootLayout({
       <body className={inter.className}>
         <Providers>
           <Toaster />
-          <Navbar />
           <div className=" mt-[0px] ">
             {children}
           </div>

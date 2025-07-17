@@ -106,7 +106,7 @@ const CateGoryPage = () => {
                     </select>
                 </div>
             </div>
-            <div className='flex max-md:flex-col min-h-[300px] overflow-hidden max-md:w-full bg-[#262538] border py-3 px-2 bordercolor rounded-3xl items-center justify-around'>
+            <div className='flex max-md:flex-col min-h-[300px] overflow-hidden max-md:w-full bg-[#262538 card border py-3 px-2 bordercolor rounded-3xl items-center justify-around'>
 
 
                 {!isLoading && categoryData ? <PieChart width={400} height={300}>
@@ -116,7 +116,9 @@ const CateGoryPage = () => {
                         nameKey="category"
                         cx="50%"
                         cy="50%"
-                        outerRadius={100}
+                        outerRadius={120}
+                        innerRadius={70}
+                        paddingAngle={5}
                         fill="#8884d8"
                         label={(entry) => `${entry.category}  ₹${((entry.amount / totalAmount) * 100).toFixed(2)}%`}
                     >
@@ -139,7 +141,7 @@ const CateGoryPage = () => {
                         }} />
                 </PieChart> :
                     isLoading ?
-                        <Loading parent='w-full mt-[50px] ' boxes={1} child='w-[210px] h-[200px]  border bordercolor text-sm !rounded-full' />
+                        <Loading parent='w-full mt-[50px] ' boxes={1} child='w-[260px] h-[260px]  border bordercolor text-sm !rounded-full' />
                         : categoryData.length === 0 && <p>No data found</p>
                 }
                 {!isLoading ? <div className=' w-[260px] '>

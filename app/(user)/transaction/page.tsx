@@ -7,6 +7,7 @@ import { getLabelForDate } from '@/lib/dateformat';
 import { TransactionTypeProps } from '@/lib/types';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { endOfMonth, startOfMonth } from 'date-fns';
+import { TrendingDown, TrendingUp } from 'lucide-react';
 import moment from 'moment';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useRef, useState } from 'react'
@@ -27,7 +28,7 @@ const TransactionPage = () => {
     }
   })
 
-  const groupedMessages = data?.reduce((acc: Record<string, typeof data>, msg:TransactionTypeProps) => {
+  const groupedMessages = data?.reduce((acc: Record<string, typeof data>, msg: TransactionTypeProps) => {
     const label = getLabelForDate(String(msg?.date ?? ''));
     if (!acc[label]) acc[label] = [];
     acc[label].push(msg);
@@ -50,7 +51,7 @@ const TransactionPage = () => {
     },
   });
 
-  const banks = data?.reduce((acc:{bank:string , amount:number ,type:string}[], curr:TransactionTypeProps) => {
+  const banks = data?.reduce((acc: { bank: string, amount: number, type: string }[], curr: TransactionTypeProps) => {
 
     const existingBank = acc.find(item => item.bank === curr.bank && item.type === curr.type);
     if (existingBank) {
@@ -63,7 +64,7 @@ const TransactionPage = () => {
   }, [])
 
 
-  const uniqueBanks = banks?.reduce((acc:{bank:string , creditAmount:number , debitAmount:number ,credit:boolean , debit:boolean}[], curr:TransactionTypeProps) => {
+  const uniqueBanks = banks?.reduce((acc: { bank: string, creditAmount: number, debitAmount: number, credit: boolean, debit: boolean }[], curr: TransactionTypeProps) => {
     const bankEntry = acc.find(item => item.bank === curr.bank);
     if (bankEntry) {
       if (curr.type === 'credit') {
@@ -84,8 +85,8 @@ const TransactionPage = () => {
     }
     return acc;
   }, []);
- 
- console.log(uniqueBanks)
+
+  console.log(uniqueBanks)
   const [openItemId, setOpenItemId] = useState<string | null>(null);
   const itemRefs = useRef<Record<string, HTMLDivElement | null>>({});
 
@@ -152,24 +153,32 @@ const TransactionPage = () => {
       <h1 className="text-center">Your Transactions {data?.length}</h1>
       <div className="flex flex-col gap-4 px-14 max-md:px-2.5 pt-10">
         <DateButton startDate={startDate} endDate={endDate} setStartDate={setStartDate} setEndDate={setEndDate} />
-        {  uniqueBanks &&  !isLoading ?
-        <div className='flex w-full overflow-x-auto gap-2'>
-          {uniqueBanks.map((i:{bank:string ,creditAmount:number ,credit:boolean,debit:boolean,debitAmount:number }, index:number) => (
-            <div key={index} className=' bg-blue-500/20 border border-blue-500 rounded-3xl flex flex-col !items-start !justify-start  !w-[250px]  p-4  '>
-              <p className='w-full text-center text-xl text-white font-bold'> {i.bank}</p>
-              {i.credit && <p className='w-full text-green-500'>Credit: ₹{i.creditAmount.toFixed(2)}</p>}
-              {i.debit && <p className='w-full text-red-500'>Debit: ₹{i.debitAmount.toFixed(2)}</p>}
-              <p className='w-full text-gray-500'>Total: ₹{(i.creditAmount - i.debitAmount).toFixed(2)}</p>
-            </div>
-          ))}
-        </div> : isLoading ?
-         <Loading boxes={2} child="h-28 !w-[250px] h-[150px] !rounded-3xl " parent="w-full !flex-row px-0   !justify-start " />  : <p>No Data found</p>
+        {uniqueBanks && !isLoading ?
+          <div className='flex w-full overflow-x-auto gap-2'>
+            {uniqueBanks.map((i: { bank: string, creditAmount: number, credit: boolean, debit: boolean, debitAmount: number }, index: number) => {
+              const balance = i.creditAmount - i.debitAmount;
+              const percentage = i.creditAmount > 0 ? (balance / i.creditAmount) * 100 : 0;
+              const isPositive = balance >= 0;
+
+              return (
+                <div key={index} className=' bg-gradient-to-br from-[#4477ef] shadow-xl font-medium to-[#1703d293] rounded-3xl flex flex-col !items-start !justify-start !w-[250px] p-4'>
+                  <p className='w-full text-center   text-xl text-white font-bold'>{i.bank} </p>
+                  {i.credit && <p className='w-full text-green-500'>Credit: ₹{i.creditAmount.toFixed(2)}</p>}
+                  {i.debit && <p className='w-full text-red-500'>Debit: ₹{i.debitAmount.toFixed(2)}</p>}
+                  <p className='w-full text-gray-100 flex items-center gap-2'>Total: {balance.toFixed(2)}{' '}</p>
+                  {percentage ? <p className={`font-semibold ${isPositive ? "text-green-500" : " text-red-500"} center `}> {isPositive ? <TrendingUp size={20} /> : <TrendingDown size={20} />} {percentage.toFixed(2)}%</p> : ''}
+                </div>
+              );
+            })}
+
+          </div> : isLoading ?
+            <Loading boxes={2} child="h-28 !w-[250px] h-[150px] !rounded-3xl " parent="w-full !flex-row px-0   !justify-start " /> : <p>No Data found</p>
         }
 
         {groupedMessages && Object.entries(groupedMessages).length !== 0 && !isLoading ? Object?.entries(groupedMessages).map(([label, group]) => (
           <div key={label}>
             <div className="text-center border bordercolor bg-[#262538] w-fit mx-auto rounded-full px-2 text-sm basecolor2 font-semibold my-4">{label}</div>
-            {group?.map((msg:TransactionTypeProps) => (
+            {group?.map((msg: TransactionTypeProps) => (
               <SwipeRevealActions
                 key={msg.id}
                 id={msg.id}

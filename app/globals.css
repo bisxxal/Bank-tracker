@@ -109,3 +109,12 @@ button:hover , a:hover{
 .textshadow{
   text-shadow: -2px 1px 20px #ffffff;
 }
+
+.creditbg{
+  @apply bg-gradient-to-br   from-[#4dff7f6c] font-medium to-[#00ae03] border border-green-600;
+  box-shadow: inset -12px -3px 20px 2px #00000021, 0 8px 10px -6px rgb(0 0 0 / 0.1) ;
+}
+.debitbg{
+  @apply bg-gradient-to-br   from-[#ff535388] font-medium to-[#ff0000d4] border border-red-600;
+  box-shadow: inset -12px -3px 20px 2px #00000021, 0 8px 10px -6px rgb(0 0 0 / 0.1) ;
+}

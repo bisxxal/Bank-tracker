@@ -3,6 +3,7 @@ import { authOptions } from "@/lib/auth";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import BottomBar from "@/components/buttombar";
+import Navbar from "@/components/navbar";
 
 export const metadata: Metadata = {
   title: "Dashboard",
@@ -21,7 +22,8 @@ export default async function UserLayout({
 
   return (
     <main>
-      <div className=" mt-[75px] ">
+      <div className=" mt-[60px] ">
+        <Navbar />
         {children}
       </div>
       <BottomBar />

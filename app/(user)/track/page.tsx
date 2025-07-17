@@ -1,7 +1,7 @@
 'use client'
 import { getTransactionsBySelected } from '@/actions';
 import { useQuery } from '@tanstack/react-query';
-import { ArrowDownLeft, ArrowDownRight  } from 'lucide-react';
+import { ArrowDownLeft, ArrowDownRight, TrendingDown, TrendingUp  } from 'lucide-react';
 import React, { useEffect, useState } from 'react'
 import { Area, CartesianGrid, Pie, PieChart, Cell, ResponsiveContainer, Tooltip, XAxis, YAxis, Legend, AreaChart, BarChart, Bar } from 'recharts'
 import { startOfMonth, endOfMonth } from "date-fns";
@@ -93,13 +93,15 @@ const TrackerPage = () => {
       <DateButton startDate={startDate} endDate={endDate} setStartDate={setStartDate} setEndDate={setEndDate} />
       <div>
         <div className='flex justify-evenly w-full flex-warp gap-3 items-center my-4'>
-          <div className='flex flex-col items-center bg-green-600/10 border-green-500/80 border center  h-[150px] w-[300px] rounded-3xl'>
-            <h2 className='max-md:text-sm center gap-1'>Total Credited: <ArrowDownLeft color='#00c951' size={30} /></h2>
+          <div className='flex flex-col items-center  creditbg   center  h-[150px] w-[300px] rounded-3xl'>
+            <h2 className='max-md:text-sm center gap-1'>Total Credited: 
+              <TrendingUp size={30} className="text-green-400" /> 
+              </h2>
             <p className=' text-white max-md:text-2xl text-3xl font-bold'>₹{totalCredit.toFixed(2)}</p>
           </div>
-          <div className='flex flex-col items-center bg-red-500/10 border border-red-500 center   h-[150px] w-[300px] rounded-3xl'>
+          <div className='flex flex-col items-center   debitbg   center   h-[150px] w-[300px] rounded-3xl'>
             <h2 className='max-md:text-sm center gap-1'>
-              <ArrowDownRight color='#fb2c36' size={30} />
+              <TrendingDown size={30} className="text-red-400" />
               Total Debited:
             </h2>
             <span className='text-white max-md:text-2xl text-3xl font-bold'>₹{totalDebit.toFixed(2)} </span>
@@ -119,7 +121,9 @@ const TrackerPage = () => {
               nameKey="name"
               cx="50%"
               cy="50%"
-              outerRadius={100}
+              outerRadius={120}
+              innerRadius={70}
+              paddingAngle={5}
               fill="#8884d8"
               label={(entry) => `${entry.name} (${(entry).amount})`}
             >
@@ -152,7 +156,9 @@ const TrackerPage = () => {
               nameKey="name"
               cx="50%"
               cy="50%"
-              outerRadius={100}
+               outerRadius={120}
+              innerRadius={70}
+              paddingAngle={5}
               fill="red"
               label={(entry) => `${entry.name}-(${(entry).amount})`}
             >
@@ -206,7 +212,7 @@ const TrackerPage = () => {
           <AreaChart width={1200} height={400}
             data={barData} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
             <defs>
-              <linearGradient id="colorcredit" x1="0" y1="0" x2="0" y2="1">
+             <linearGradient id="colorcredit" x1="0" y1="0" x2="0" y2="1">
                 <stop offset="5%" stopColor="#E11D47" stopOpacity={0.8} />
                 <stop offset="95%" stopColor="#D44D66" stopOpacity={0} />
               </linearGradient>
@@ -240,6 +246,7 @@ const TrackerPage = () => {
               fillOpacity={0.2}
               fill="url(#colordebit)"
               stackId="2"
+               dot={{ fill: '#23D824', strokeWidth: 1, r: 3 }}
             />
             <Area
               type="monotone"
@@ -248,6 +255,7 @@ const TrackerPage = () => {
               fillOpacity={0.5}
               fill="url(#colorcredit)"
               stackId="1"
+               dot={{ fill: '#E11D47', strokeWidth: 1, r: 3 }}
             />
           </AreaChart>
         </ResponsiveContainer>

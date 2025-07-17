@@ -62,7 +62,8 @@ const CalendarPage = () => {
         !isLoading ?
           <div
             key={d}
-            className={`text-center border hover:bg-[#ffffff3a] bordercolor mt-2 max-md:mt-0 rounded-lg w-full  h-40 max-md:h-28  flex flex-col items-start ${isToday ? 'bg-blue-50 buttonbg text-white font-bold' : ' !hover:bg-[#ffffff3a] card '
+            className={`text-center  mt-2 max-md:mt-0 rounded-lg w-full  h-40 max-md:h-28  flex flex-col hover:border-[white] items-start 
+              ${isToday ? 'bg-blue-50 buttonbg text-white font-bold' : 'border hover:bg-[#181825] bg-[#1E1E2E] bordercolor   '
               }`}
           >
             <h1 className='items-start px-2 pt-1 justify-start w-ful h-1/2 font-extrabold text-4xl max-md:text-xl'>  {d}</h1>
@@ -133,19 +134,19 @@ const CalendarPage = () => {
           </div>
 
           <div className=' max-md:w-full  flex gap-2 items-center'>
-            <div className='flex flex-col items-center bg-green-600/10 border-green-500/80 border center max-md:w-[170px] h-[60px] w-[150px] rounded-xl'>
+            <div className='flex flex-col items-center bg-green-600/10 border-green-500/80 border creditbg center max-md:w-[170px] h-[60px] w-[150px] rounded-xl'>
               <h2 className='max-md:text-sm center gap-2'>Total Credited </h2>
 
-              <p className=' text-green-500 max-md:text-lg text-xl font-bold'>₹{monthData
+              <p className='    max-md:text-lg text-xl font-bold'> ₹{monthData
                 .filter(item => item.name === 'credit')
                 .reduce((acc, curr) => acc + curr.amount, 0)
                 .toFixed(2)}</p>
             </div>
-            <div className='flex flex-col items-center bg-red-500/10 border border-red-500 center max-md:w-[170px]  h-[60px] w-[150px] rounded-xl'>
+            <div className='flex flex-col items-center bg-red-500/10 debitbg border border-red-500 center max-md:w-[170px]  h-[60px] w-[150px] rounded-xl'>
               <h2 className='max-md:text-sm center gap-2'>
                 Total Debited
               </h2>
-              <span className='text-red-500 max-md:text-lg text-xl font-bold'>₹{monthData
+              <span className=' max-md:text-lg text-xl font-bold'>₹{monthData
                 .filter(item => item.name === 'debit')
                 .reduce((acc, curr) => acc + curr.amount, 0)
                 .toFixed(2)}
