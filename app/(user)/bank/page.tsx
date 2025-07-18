@@ -12,15 +12,15 @@ const BankPage = () => {
     const [show, setShow] = useState(true);
 
     return (
-        <>
-            <div className=' flex justify-between items-center w-fit  overflow-hidden rounded-full mx-auto my-4'>
+        <div className=' min-h-screen border border-[#ffffff00] mt-20 w-full'>
+            <div className='flex justify-between items-center w-fit  overflow-hidden rounded-full mx-auto my-4'>
                 <button onClick={() => setShow(true)} className={`${show ? " border-none buttonbg" : " border border-[#cba6f7] "} rounded-l-4xl px-4 py-2 `}>Add Bank</button>
                 <button onClick={() => setShow(false)} className={`${show ? " border border-[#cba6f7] " : "buttonbg border-none  "} rounded-r-4xl px-4 py-2 `}>Bank List</button>
             </div>
             {show ? <AddBank />
                 : <BankList />
             }
-        </>
+        </div>
     )
 }
 
@@ -56,7 +56,7 @@ const AddBank = () => {
     });
 
     return (
-        <form action={handelFormSubmit} className="space-y-4  w-[70%] border bordercolor max-md:w-[95%] mx-auto py-5 rounded-2xl flex px-4 flex-col">
+        <form action={handelFormSubmit} className="space-y-4  mt-3 w-[70%] border bordercolor max-md:w-[95%] mx-auto py-5 rounded-2xl flex px-4 flex-col">
             <div>
                 <label className="block text-sm font-medium ">Bank Name</label>
                 <select required

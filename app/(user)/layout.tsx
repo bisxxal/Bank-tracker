@@ -4,12 +4,13 @@ import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import BottomBar from "@/components/buttombar";
 import Navbar from "@/components/navbar";
+import { getCachedSession } from "@/lib/session";
 
 export const metadata: Metadata = {
-  title: "Dashboard",
+  title: "Dashboard | My bank",
 };
 
-export default function UserLayout({
+export default async function UserLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
@@ -19,7 +20,11 @@ export default function UserLayout({
   // if (!session) {
   //   redirect("/login");
   // }
+  const session = await getCachedSession();
 
+  if (!session) {
+    redirect("/login");
+  }
   return (
     <main>
       <div className=" mt-[60px] ">

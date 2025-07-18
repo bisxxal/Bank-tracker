@@ -62,7 +62,7 @@ const CalendarPage = () => {
         !isLoading ?
           <div
             key={d}
-            className={`text-center  mt-2 max-md:mt-0 rounded-lg w-full  h-40 max-md:h-28  flex flex-col hover:border-[white] items-start 
+            className={`text-center mt-2 max-md:mt-0 rounded-lg max-md:rounded-none w-full  h-40 max-md:h-28  flex flex-col hover:border-[white] items-start 
               ${isToday ? 'bg-blue-50 buttonbg text-white font-bold' : 'border hover:bg-[#181825] bg-[#1E1E2E] bordercolor   '
               }`}
           >
@@ -76,7 +76,7 @@ const CalendarPage = () => {
                   </div>
                 ))}
             </div>
-          </div> : <Loading boxes={1} parent='items-start w-full' child='w-full h-40 max-md:h-28 !rounded-lg mt-2 max-md:mt-0 ' />
+          </div> : <Loading boxes={1} parent='items-start w-full' child='w-full h-40 max-md:h-28 max-md:rounded-none rounded-lg mt-2 max-md:mt-0 ' />
       )
     }
 
@@ -155,11 +155,11 @@ const CalendarPage = () => {
           </div>
         </div>
 
-        <div className="grid  grid-cols-7 place-items-center w-[90%] max-md:w-full mx-auto  gap-x-2 max-md:gap-1 mt- 4 p-4 max-md:p-1">
+        <div className="grid  grid-cols-7 place-items-center w-[90%] max-md:w-full mx-auto  gap-x-2  max-md:gap-x-0  p-4 max-md:p-1">
           {daysOfWeek.map((day) => (
             <div
               key={day}
-              className="font-semibold w-full h-10 card bordercolor center rounded  border  max-md:mb-2 text-gray-400"
+              className="font-semibold w-full h-10 card bordercolor center rounded  max-md:rounded-none border  max-md:mb-2 text-gray-400"
             >
               {day}
             </div>

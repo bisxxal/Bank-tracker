@@ -170,7 +170,7 @@ const sortedCategories = categories
                         )
 
                     })}
-                </div> : <Loading parent='w-full mt-[50px] ' boxes={3} child='w-[250px] h-[30px] ounded-full' />}
+                </div> : <Loading parent='w-full mt-[50px] ' boxes={3} child='w-[250px]  h-[30px] rounded-xl' />}
             </div>
 
             <h2 className=' mt-5  font-bold text-xl'>Top list</h2>
