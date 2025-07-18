@@ -1,44 +1,20 @@
 'use client'
-// import { redirect } from "next/navigation";
-// import Image from "next/image";
-// import { useSession } from "next-auth/react";
-
-// export default function InboxPage() { 
-//   const { data  ,status} = useSession()
-
-//   if (!data || status !== 'authenticated') {
-//     return (
-//       <div className="relative flex w-full font-bold text-xl overflow-hidden h-screen justify-center items-center flex-col">
-//         <div className="absolute top-0 left-0 w-full flex items-center bg-[#080812] justify-center h-full max-md:flex-col overflow-hidden flex-wrap brightness-[0.5] contrast-[1.1] z-[-1]">
-//           <Image src='/bg1.png' alt='logo' width={1000} height={1240} className='w-1/2 max-md:w-full h-[300px] max-md:h-[270px] object-cover ' />
-//           <Image src='/bg3.png' alt='logo' width={1000} height={1240} className='w-1/2 h-[300px] max-md:w-full max-md:h-[270px] object-cover ' />
-//           <Image src='/bg4.png' alt='logo' width={1000} height={1240} className='w-1/2 h-[300px] max-md:w-full max-md:h-[270px] object-cover ' />
-//           <Image src='/bg5.png' alt='logo' width={1000} height={1240} className='w-1/2 max-md:w-full max-md:hidden h-[300px] object-cover ' />
-//           <div className="w-full">
-//             <Image src='/bg7.png' alt='logo' width={1000} height={1240} className='w-full object-bottom-left object-cover' />
-//           </div>
-//         </div>
-
-//         <div className="w- relative ">
-//           <h1 className="text-[130px] max-md:text-[65px] max-md:-left-4 max-md:top-0 -left-18 -top-18 font-extrabold textshadow whitespace-nowrap text-white absolute ">My Bank</h1>
-//           <Image src='/bank.png' alt='logo' width={240} height={240} className='mb-10 hover:scale-125 drop-shadow-[0_5px_13px_rgba(0,0,0,0.25)] drop-shadow-amber-100  transition-all duration-300 inline-block ml-2' />
-//         </div>
-//         <h1 className=" max-md:text-base text-xl textshadow mt-20">Add Bank. Track Transaction. Visualize.</h1>
-//       </div>
-//     )
-//   }
-//   redirect('/transaction');
-// }
+import { useSession } from "next-auth/react";
 
 import React, { useState, useEffect } from 'react';
 import { PieChart, Pie, Cell, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, LineChart, Line, AreaChart, Area } from 'recharts';
 import { TrendingUp, PieChartIcon, TrendingDown, Wallet, BarChart3, Mail, Plus, CreditCard, Target, Shield, Zap, Calendar, ChevronLeft, ChevronRight } from 'lucide-react';
 import Link from 'next/link';
+import { useRouter } from "next/navigation";
 
 const BankTrackerHero = () => {
+  const { data, status } = useSession()
+  const router = useRouter();
+  if (data && status === 'authenticated') {
+    router.push('/transaction');
+  }
   const [animationStep, setAnimationStep] = useState(0);
 
-  // Sample data for charts
   const expenseData = [
     { name: 'Food', value: 2400, color: '#8b5cf6' },
     { name: 'Transport', value: 1200, color: '#06b6d4' },
@@ -67,7 +43,6 @@ const BankTrackerHero = () => {
     { day: 'Sun', amount: 80 }
   ];
 
-  // Calendar data - sample transactions for each day
   const calendarData = {
     3: { income: 0, expense: 112 },
     6: { income: 0, expense: 95 },
@@ -208,25 +183,28 @@ const BankTrackerHero = () => {
               {/* Stats Cards */}
               <div className="grid grid-cols-2 gap-4 mb-6">
                 <div className="bg-gradient-to-br from-green-500/20 to-green-600/20 p-6 rounded-2xl border border-green-500/30">
-                  <div className="flex items-center justify-between">
-                    <div>
+                  <div className="flex w-full  items-center justify-between">
+                    <div className=' w-full'>
                       <p className="text-green-300 text-sm">Total Income</p>
-                      <p className="text-2xl font-bold text-white">₹32,400</p>
+                      <div className="text-2xl flex items-center !justify-between w-full font-bold text-white">₹32,400
+                        <TrendingUp className="w-8 h-8 text-green-400" />
+                      </div>
                     </div>
-                    <TrendingUp className="w-8 h-8 text-green-400" />
                   </div>
-                  <p className="text-green-300 text-sm mt-2">↗ +12% from last month</p>
+                  <p className="text-green-300 text-sm mt-2">↗+12% from last month</p>
                 </div>
 
                 <div className="bg-gradient-to-br from-red-500/20 to-red-600/20 p-6 rounded-2xl border border-red-500/30">
                   <div className="flex items-center justify-between">
-                    <div>
+                    <div className=' w-full'>
                       <p className="text-red-300 text-sm">Total Expenses</p>
-                      <p className="text-2xl font-bold text-white">₹23,100</p>
+                      <div className="text-2xl flex items-center !justify-between w-full font-bold text-white">₹23,100
+                        <TrendingDown className="w-8 h-8 text-red-400" />
+                      </div>
                     </div>
-                    <TrendingDown className="w-8 h-8 text-red-400" />
+
                   </div>
-                  <p className="text-red-300 text-sm mt-2">↘ -5% from last month</p>
+                  <p className="text-red-300 text-sm mt-2">↘-5% from last month</p>
                 </div>
               </div>
 
@@ -275,7 +253,7 @@ const BankTrackerHero = () => {
                       <BarChart data={monthlyData}>
                         <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
                         <XAxis dataKey="month" stroke="#9ca3af" />
-                        <YAxis stroke="#9ca3af" />
+                        {/* <YAxis stroke="#9ca3af" /> */}
                         <Tooltip
                           contentStyle={{
                             backgroundColor: '#ffffff20',
@@ -309,7 +287,7 @@ const BankTrackerHero = () => {
                           </linearGradient>
                         </defs>
                         <XAxis dataKey="day" stroke="#9ca3af" />
-                        <YAxis stroke="#9ca3af" />
+                        {/* <YAxis stroke="#9ca3af" /> */}
                         <Tooltip
                           contentStyle={{
                             backgroundColor: '#ffffff20',

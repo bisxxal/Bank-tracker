@@ -28,6 +28,7 @@ export const banks = [
  
 export const categories=[
     { value: 'food', name: 'Food' },
+    { value: 'Others', name: 'Others' },
     { value: 'transport', name: 'Transport' },
     { value: 'entertainment', name: 'Entertainment' },
     { value: 'purchases', name: 'Purchases' },
@@ -36,11 +37,6 @@ export const categories=[
     { value: 'travels', name: 'Travels' },
     { value: 'bills', name: 'Bills' }
 ]
-// export const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
-// export const COLORS2 = ['#d0ed57', '#a4de6c', '#8dd1e1', '#ffc658', '#ff8042',];
-
-// export const COLORS = ['#FF6B6B', '#4ECDC4', '#FFD93D', '#1A8FE3', '#FF8E72'];
-// export const COLORS2 = [ '#F06595', '#FCA311', '#845EC2' ,'#C86DD7', '#5EEAD4',];
  
 export const COLORS = [
     '#FF8E72', // Vibrant Coral

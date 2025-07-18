@@ -1,7 +1,6 @@
 'use client'
 import { getTransactionById, updateTransaction } from '@/actions';
 import Loading from '@/components/ui/loading';
-import { TransactionTypeProps } from '@/lib/types';
 import { banks, categories } from '@/lib/utils';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { Loader } from 'lucide-react';

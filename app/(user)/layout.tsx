@@ -9,16 +9,16 @@ export const metadata: Metadata = {
   title: "Dashboard",
 };
 
-export default async function UserLayout({
+export default function UserLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const session = await getServerSession(authOptions);
+  // const session = await getServerSession(authOptions);
 
-  if (!session) {
-    redirect("/login");
-  }
+  // if (!session) {
+  //   redirect("/login");
+  // }
 
   return (
     <main>

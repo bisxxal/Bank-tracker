@@ -6,7 +6,6 @@ import { getServerSession } from "next-auth";
  
 export async function getTransactionsBySelected(startDate: Date, endDate: Date) {
   const session = await getServerSession(authOptions);
-  // console.log(session)
   if (!session) {
     return { status: 400, message: "User not authenticated" };
   }
@@ -47,7 +46,6 @@ export async function deleteTransaction(id: string) {
   const deletedTransaction = await prisma.transaction.delete({
     where: {
       id: id,
-
     },
   });
 

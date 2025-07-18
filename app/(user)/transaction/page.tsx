@@ -85,8 +85,6 @@ const TransactionPage = () => {
     }
     return acc;
   }, []);
-
-  console.log(uniqueBanks)
   const [openItemId, setOpenItemId] = useState<string | null>(null);
   const itemRefs = useRef<Record<string, HTMLDivElement | null>>({});
 
