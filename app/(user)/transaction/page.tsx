@@ -148,7 +148,7 @@ const TransactionPage = () => {
           </div>
         </div>
       </div>}
-      <h1 className="text-center">Your Transactions {data?.length}</h1>
+      <h1 className="text-center mt-6 ">Your Transactions {data?.length}</h1>
       <div className="flex flex-col gap-4 px-14 max-md:px-2.5 pt-10">
         <DateButton startDate={startDate} endDate={endDate} setStartDate={setStartDate} setEndDate={setEndDate} />
         {uniqueBanks && !isLoading ?
@@ -179,6 +179,7 @@ const TransactionPage = () => {
             {group?.map((msg: TransactionTypeProps) => (
               <SwipeRevealActions
                 key={msg.id}
+                editable={true}
                 id={msg.id}
                 onDelete={handleDelete}
                 onUpdate={handleUpdate}
@@ -199,7 +200,6 @@ const TransactionPage = () => {
                   </div>
                 </div>
               </SwipeRevealActions>
-
             ))}
           </div>
         )) : (

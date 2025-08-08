@@ -1,6 +1,5 @@
 'use client'
 import { getTransactionsBySelectedMonth } from '@/actions'
-import Loading from '@/components/ui/loading'
 import { TransactionTypeProps } from '@/lib/types'
 import { useQuery } from '@tanstack/react-query'
 import { ArrowDownLeft, ArrowDownRight } from 'lucide-react'
@@ -13,7 +12,7 @@ const CalendarPage = () => {
   const [selectedYear, setSelectedYear] = useState(now.getFullYear())
   const [monthData, setMonthData] = useState<any[]>([])
 
-  const { data, isLoading } = useQuery({
+  const { data  } = useQuery({
     queryKey: ['trackerDataMonth', selectedMonth, selectedYear],
     queryFn: async () => {
       const res = await getTransactionsBySelectedMonth(selectedMonth, selectedYear)
@@ -59,7 +58,7 @@ const CalendarPage = () => {
         year === now.getFullYear()
 
       days.push(
-        !isLoading ?
+        
           <div
             key={d}
             className={`text-center mt-2 max-md:mt-0 rounded-lg max-md:rounded-none w-full  h-40 max-md:h-28  flex flex-col hover:border-[white] items-start 
@@ -76,7 +75,7 @@ const CalendarPage = () => {
                   </div>
                 ))}
             </div>
-          </div> : <Loading boxes={1} parent='items-start w-full' child='w-full h-40 max-md:h-28 max-md:rounded-none rounded-lg mt-2 max-md:mt-0 ' />
+          </div>  
       )
     }
 

@@ -20,6 +20,7 @@ model User {
   profile  Profile?
   transactions  Transaction[]
   bank Bank[]  
+  brrows brrow[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -36,7 +37,7 @@ model Bank {
   userId    String
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
- 
+
 model Transaction {
   id        String   @id  @default(cuid())
 
@@ -53,7 +54,16 @@ model Transaction {
   createdAt DateTime @default(now())
 }
 
+model brrow {
+  id        String   @id  @default(cuid())
+  amount    Int
+  name     String?
+  type      String?
 
+  userId    String  
+  user      User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+}
 model Account {
   id                String  @id @default(cuid())
   userId            String  @map("user_id")

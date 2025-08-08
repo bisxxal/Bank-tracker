@@ -280,3 +280,81 @@ export async function getTransactionsBySelectedMonth(month: number, year: number
 
   return transactions;
 }
+
+export async function getBrrows(){
+  try {
+    const session = await getServerSession(authOptions);
+    if (!session) {
+      return { status: 400, message: "User not authenticated" };
+    }
+  
+    const brrows = await prisma.brrow.findMany({
+      where: {
+        userId: session.user.id,
+      },
+      select: {
+        id: true,
+        amount: true,
+        name: true,
+        type: true,
+        createdAt: true,
+      },
+      orderBy: { createdAt: "desc" },
+    });
+  
+    return brrows;
+  } catch (error) {
+    
+  }
+}
+
+export async function createBrrow(formData: FormData) {
+  try {
+    const session = await getServerSession(authOptions);
+    if (!session) {
+      return { status: 400, message: "User not authenticated" };
+    }
+    const amount = parseInt(formData.get('amount') as string);
+    const name = formData.get('name') as string;
+    const type = formData.get('type') as string;
+  
+    if (!amount  ) {
+      return { status: 400, message: "Amount and name are required" };
+    }
+  
+    const brrow = await prisma.brrow.create({
+      data: {
+        amount,
+        name,
+        userId: session.user.id,
+        type,
+      },
+    });
+  
+    return { status: 200, message: "Brrow created successfully", brrow };
+  } catch (error) {
+    
+  }
+}
+
+export async function deleteBrrow(id: string) {
+  try {
+    const session = await getServerSession(authOptions);
+    if (!session) {
+      return { status: 400, message: "User not authenticated" };
+    }
+  
+    const deletedBrrow = await prisma.brrow.delete({
+      where: {
+        id: id,
+      },
+    });
+  
+    if (!deletedBrrow) {
+      return { status: 500, message: "Failed to delete brrow" };
+    }
+    return { status: 200, message: "Brrow deleted successfully" };
+  } catch (error) {
+    
+  }
+}

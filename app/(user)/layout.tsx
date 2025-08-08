@@ -15,11 +15,7 @@ export default async function UserLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  // const session = await getServerSession(authOptions);
 
-  // if (!session) {
-  //   redirect("/login");
-  // }
   const session = await getCachedSession();
 
   if (!session) {
@@ -27,8 +23,8 @@ export default async function UserLayout({
   }
   return (
     <main>
+      <Navbar />
       <div className=" mt-[60px] ">
-        <Navbar />
         {children}
       </div>
       <BottomBar />
