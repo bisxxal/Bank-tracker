@@ -82,7 +82,7 @@ const AddBank = () => {
                 />
             </div>
 
-
+            <p className=' text-xs'> ⚠️ Note this Bank account email id is should able to do fetch transaction only </p>
             <button
                 type="submit"
                 disabled={CreateMutation.isPending}
@@ -144,8 +144,7 @@ const BankList = () => {
         deleteMutation.mutateAsync(id)
     };
 
-    const handleUpdate = (id: string) => {
-    };
+    
 
     const handleOpen = (id: string) => {
         setOpenItemId(id);
@@ -161,7 +160,8 @@ const BankList = () => {
                         key={bank.id}
                         id={bank.id}
                         onDelete={handleDelete}
-                        onUpdate={handleUpdate}
+                        onUpdate={null}
+                        editable={false}
                         isOpen={openItemId === bank.id}
                         onOpen={handleOpen}
                         setRef={setItemRef}
@@ -172,7 +172,7 @@ const BankList = () => {
                         </div>
                     </SwipeRevealActions>
                 )) : (
-                    isLoading ? <Loading boxes={5} child="h-20 max-md:h-[200px] w-full !rounded-3xl " parent="w-full px-0 mt-13 " /> : <p className=' h-[50vh] center text-center'>No Banks Found</p>
+                    isLoading ? <Loading boxes={5} child="h-20 max-md:h-[200px] w-full !rounded-3xl " parent="w-full px-0  " /> : <p className=' h-[50vh] center text-center'>No Banks Found</p>
                 )}
             </div>
         </div>

@@ -1,5 +1,6 @@
 'use client'
 import { createBrrow, deleteBrrow, getBrrows } from '@/actions'
+import Loading from '@/components/ui/loading'
 import SwipeRevealActions from '@/components/ui/swipeToDelete'
 import { toastError, toastSuccess } from '@/lib/toast'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
@@ -10,15 +11,13 @@ import React, { useEffect, useRef, useState } from 'react'
 const Borrow = () => {
     const [show, setShow] = useState(false);
     return (
-        <div>
-        <div className='flex justify-between items-center w-fit  overflow-hidden rounded-full mx-auto mt-2 my-4'>
-            <button onClick={() => setShow(true)} className={`${show ? " border-none buttonbg" : " border border-[#cba6f7] "} rounded-l-4xl px-4 py-2 `}>Create</button>
-            <button onClick={() => setShow(false)} className={`${show ? " border border-[#cba6f7] " : "buttonbg border-none  "} rounded-r-4xl px-4 py-2 `}>All List</button>
-        </div>
-            {!show ? <ListBorrow />
-                : <CreateBrrows />
-            }
-        </div>
+        <>
+            <div className='flex justify-between items-center w-fit  overflow-hidden rounded-full mx-auto mt-[100px] my-4'>
+                <button onClick={() => setShow(true)} className={`${show ? " border-none buttonbg" : " border border-[#cba6f7] "} rounded-l-4xl px-4 py-2 `}>Create</button>
+                <button onClick={() => setShow(false)} className={`${show ? " border border-[#cba6f7] " : "buttonbg border-none  "} rounded-r-4xl px-4 py-2 `}>All List</button>
+            </div>
+            {!show ? <ListBorrow />: <CreateBrrows />}
+        </>
     )
 }
 
@@ -27,13 +26,11 @@ export default Borrow
 
 const ListBorrow = () => {
     const client = useQueryClient();
-    const { data, isLoading } = useQuery({
+    const [showDeleteConfirmation, setShowDeleteConfirmation] = useState<string | null>(null);
+     const { data, isLoading } = useQuery({
         queryKey: ['borrow'],
         queryFn: async () => await getBrrows()
     })
-    const [showDeleteConfirmation, setShowDeleteConfirmation] = useState<string | null>(null);
-
-
     const [openItemId, setOpenItemId] = useState<string | null>(null);
     const itemRefs = useRef<Record<string, HTMLDivElement | null>>({});
 
@@ -108,46 +105,43 @@ const ListBorrow = () => {
                     </div>
                 </div>
             </div>}
-            <h1 className=' text-center text-4xl font-semibold'>Borrow</h1>
-            <div className='flex flex-col gap-4 mt-4'>
-                {isLoading ? (
-                    <p className='text-center'>Loading...</p>
-                ) : (
-
-                    <div className=' w-1/2 max-md:w-full mx-auto'>
-                        {
-                            data?.map((item) => (
-                                <SwipeRevealActions
-                                    editable={false}
-                                    key={item.id}
-                                    id={item.id}
-                                    onDelete={handleDelete}
-                                    onUpdate={null}
-                                    isOpen={openItemId === item.id}
-                                    onOpen={handleOpen}
-                                    setRef={setItemRef}
-                                >
-                                    <div key={item.id} className=' rounded-none bordercolor border p-4 card '>
-                                        <h2 className='text-xl font-bold'>{item.type}</h2>
-                                        <p>Amount: {item.amount}</p>
-                                        <p>Send: {item.send}</p>
-                                        <p>Name: {item.name}</p>
-                                        <p>Date: {moment(item.createdAt).format('MMMM Do YYYY, h:mm:ss a')}</p>
-                                    </div>
-                                </SwipeRevealActions>
-
-                            ))
-                        }
-                    </div>
-                )
+        <div className='flex flex-col gap-4 mt-4'>
+            {isLoading ? (
+                <Loading boxes={5} child="h-32  w-1/2 max-md:w-full !rounded-none " parent="w-full px-0" />
+            ) : (
+                !isLoading && data && data?.length !== 0 ?
+            <div className=' w-1/2 max-md:w-full mx-auto'>
+                {
+                    data?.map((item) => (
+                        <SwipeRevealActions
+                            editable={false}
+                            key={item.id}
+                            id={item.id}
+                            onDelete={handleDelete}
+                            onUpdate={null}
+                            isOpen={openItemId === item.id}
+                            onOpen={handleOpen}
+                            setRef={setItemRef}
+                        >
+                            <div key={item.id} className=' rounded-none bordercolor border p-4 card '>
+                                <h2 className='text-xl font-bold'>{item.type}</h2>
+                                <p>Amount: ₹{item.amount}</p>
+                                <p>Name: {item.name}</p>
+                                <p>Date: {moment(item.createdAt).format('MMMM Do YYYY, h:mm:ss a')}</p>
+                            </div>
+                        </SwipeRevealActions>
+                    ))
                 }
-            </div>
+            </div> : <p className='mt-20 text-lg center '>No data found</p>
+            )
+            }
+        </div>
         </div>
     )
 }
 
 const CreateBrrows = () => {
-
+    const [type, setType] = useState<"To be received"|"To be paid" | null>(null)
     const client = useQueryClient();
     const handelFormSubmit = (fromData: FormData) => {
         CreateMutation.mutate(fromData);
@@ -159,7 +153,6 @@ const CreateBrrows = () => {
             if (!amount) {
                 toastError('Amount is required');
             }
-
             return await createBrrow(fromData);
         },
         onSuccess: (data) => {
@@ -177,27 +170,23 @@ const CreateBrrows = () => {
     return (
         <div>
             <form className=' space-y-4  w-[70%] border bordercolor max-md:w-[95%] mx-auto py-5 rounded-2xl flex px-4 flex-col' action={handelFormSubmit}>
-                <div className=''>
-                    <label className="block text-sm font-medium ">Name</label>
+                <div>
+                    <label className="block text-sm font-medium ">Type</label>
+                    <select onChange={(e)=>setType(e.target.value )} className='mt-1 block w-full border bordercolor card p-2 rounded-md shadow-sm' name="type" >
+                        <option value="">Select</option>
+                        <option value="To be received">To be received</option>
+                        <option value="To be paid">To be Paid </option>
+                    </select>
+                </div>
+               { type !== null && <div>
+                    <label className="block text-sm font-medium ">{type !== 'To be paid' ? 'Name of receiver' : 'Name Of sender'}</label>
                     <input required
                         type="text"
                         name="name"
                         className='mt-1 block w-full border bordercolor card p-2 rounded-md shadow-sm  '
-                        placeholder="Name"
+                        placeholder="Jhon Doe"
                     />
-                </div>
-
-
-                <div>
-                    <label className="block text-sm font-medium ">Type</label>
-                    <select className='mt-1 block w-full border bordercolor card p-2 rounded-md shadow-sm' name="type" >
-                        <option value="">Select</option>
-                        <option value="To be recived">To be recived</option>
-                        <option value="To be paid">To be Paid </option>
-                    </select>
-                </div>
-
-
+                </div>}
                 <div className=''>
                     <label className="block text-sm font-medium ">Amount</label>
                     <input required
