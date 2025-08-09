@@ -4,6 +4,7 @@ import DateButton from '@/components/dateButton';
 import Loading from '@/components/ui/loading';
 import SwipeRevealActions from '@/components/ui/swipeToDelete';
 import { getLabelForDate } from '@/lib/dateformat';
+import { toastError, toastSuccess } from '@/lib/toast';
 import { TransactionTypeProps } from '@/lib/types';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { endOfMonth, startOfMonth } from 'date-fns';
@@ -41,13 +42,13 @@ const TransactionPage = () => {
     },
     onSuccess: (data) => {
       if (data.status === 200) {
-        toast.success('Transaction deleted successfully');
+        toastSuccess('Transaction deleted successfully');
         queryClient.invalidateQueries({ queryKey: ['trackerData'] });
       }
     },
 
     onError: (error) => {
-      toast.error('Failed to delete transaction');
+      toastError('Failed to delete transaction');
     },
   });
 

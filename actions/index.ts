@@ -302,7 +302,10 @@ export async function getBrrows(){
       orderBy: { createdAt: "desc" },
     });
   
-    return brrows;
+    if(brrows){
+      return { status: 200, data: brrows };
+    }
+    return { status: 404, message: "No brrows found" };
   } catch (error) {
     
   }
@@ -330,6 +333,9 @@ export async function createBrrow(formData: FormData) {
         type,
       },
     });
+    if(!brrow) {  
+      return { status: 500, message: "Failed to create brrow" };
+    }
   
     return { status: 200, message: "Brrow created successfully", brrow };
   } catch (error) {

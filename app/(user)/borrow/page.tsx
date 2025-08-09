@@ -74,11 +74,12 @@ const ListBorrow = () => {
                 toastSuccess('Transaction deleted successfully');
                 client.invalidateQueries({ queryKey: ['borrow'] });
             }
-            toastError('Failed to delete transaction');
+            else{
+                toastError('Failed to delete transaction');
+            }
         },
 
         onError: (error) => {
-            toastError('Failed to delete transaction');
         },
     });
     return (
@@ -109,10 +110,10 @@ const ListBorrow = () => {
             {isLoading ? (
                 <Loading boxes={5} child="h-32  w-1/2 max-md:w-full !rounded-none " parent="w-full px-0" />
             ) : (
-                !isLoading && data && data?.length !== 0 ?
+            !isLoading && data && data?.data?.length !== 0 ?
             <div className=' w-1/2 max-md:w-full mx-auto'>
                 {
-                    data?.map((item) => (
+                   data?.data && data?.data?.map((item) => (
                         <SwipeRevealActions
                             editable={false}
                             key={item.id}
@@ -132,8 +133,7 @@ const ListBorrow = () => {
                         </SwipeRevealActions>
                     ))
                 }
-            </div> : <p className='mt-20 text-lg center '>No data found</p>
-            )
+            </div> : <p className='mt-20 text-lg center '>No data found</p>)
             }
         </div>
         </div>
@@ -179,7 +179,7 @@ const CreateBrrows = () => {
                     </select>
                 </div>
                { type !== null && <div>
-                    <label className="block text-sm font-medium ">{type !== 'To be paid' ? 'Name of receiver' : 'Name Of sender'}</label>
+                    <label className="block text-sm font-medium ">{type !== 'To be paid' ? 'Name who will give you ' : 'Name you will send '}</label>
                     <input required
                         type="text"
                         name="name"

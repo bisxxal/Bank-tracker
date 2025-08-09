@@ -1,6 +1,7 @@
 'use client'
 import { getTransactionById, updateTransaction } from '@/actions';
 import Loading from '@/components/ui/loading';
+import { toastError, toastSuccess } from '@/lib/toast';
 import { banks, categories } from '@/lib/utils';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { Loader } from 'lucide-react';
@@ -33,13 +34,13 @@ const EditPage = () => {
     },
     onSuccess: (data) => {
       if (data.status === 200) {
-        toast.success('Transaction Updated successfully');
+        toastSuccess('Transaction Updated successfully');
         queryClient.invalidateQueries({ queryKey: ['fetchTransaction'] });
       }
     },
 
     onError: () => {
-      toast.error('Failed to update transaction');
+      toastError('Failed to update transaction');
     },
   });
 

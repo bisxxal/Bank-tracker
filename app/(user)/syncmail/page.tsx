@@ -1,5 +1,6 @@
 "use client";
 import { syncBankEmails } from "@/actions/syncBank";
+import { toastError, toastSuccess } from "@/lib/toast";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { RefreshCcw } from "lucide-react";
 import { useState } from "react";
@@ -14,11 +15,11 @@ const SyncMailPage = () => {
         },
         onSuccess: (data) => {
             if (data.status === 200) {
-                toast.success('Synced! ✅ ');
+                toastSuccess('Synced! ✅ ');
                 queryClient.invalidateQueries({ queryKey: ['trackerData'] });
             }
             if (data.status === 400) {
-                toast.error(data.message);
+                toastError(data.message);
             }
         },
 

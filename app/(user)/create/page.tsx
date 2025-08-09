@@ -1,5 +1,6 @@
 'use client'
 import { createTransaction } from '@/actions';
+import { toastError, toastSuccess } from '@/lib/toast';
 import { banks, categories } from '@/lib/utils';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Loader } from 'lucide-react';
@@ -21,13 +22,13 @@ const CreateTransaction = () => {
     },
     onSuccess: (data) => {
       if (data.status === 200) {
-        toast.success('Transaction created successfully');
+        toastSuccess('Transaction created successfully');
         queryClient.invalidateQueries({ queryKey: ['trackerData'] });
       }
     },
 
     onError: (error) => {
-      toast.error('Failed to create transaction');
+      toastError('Failed to create transaction');
     },
   });
 

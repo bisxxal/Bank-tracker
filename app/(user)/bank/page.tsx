@@ -2,11 +2,11 @@
 import { AddBanks, deleteBank, getBanks } from '@/actions'
 import Loading from '@/components/ui/loading'
 import SwipeRevealActions from '@/components/ui/swipeToDelete'
+import { toastError, toastSuccess } from '@/lib/toast'
 import { banks } from '@/lib/utils'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { Landmark, Loader } from 'lucide-react'
 import React, { useEffect, useRef, useState } from 'react'
-import toast from 'react-hot-toast'
 
 const BankPage = () => {
     const [show, setShow] = useState(true);
@@ -32,7 +32,7 @@ const AddBank = () => {
         const name = fromData.get('name') as string;
         const email = fromData.get('email') as string;
         if (!name || !email) {
-            toast.error('Name and MailId are required');
+            toastError('Name and MailId are required');
         }
         CreateMutation.mutate(fromData);
     }
@@ -43,15 +43,15 @@ const AddBank = () => {
         },
         onSuccess: (data) => {
             if (data.status === 200) {
-                toast.success('Bank added successfully');
+                toastSuccess('Bank added successfully');
             }
             else {
-                toast.error(data.message || 'Failed to add bank');
+                toastError(data.message || 'Failed to add bank');
             }
         },
 
         onError: (error) => {
-            toast.error('Failed to add bank');
+            toastError('Failed to add bank');
         },
     });
 
@@ -108,13 +108,13 @@ const BankList = () => {
         },
         onSuccess: (data) => {
             if (data.status === 200) {
-                toast.success('Bank deleted successfully');
+                toastSuccess('Bank deleted successfully');
                 queryClient.invalidateQueries({ queryKey: ['banks'] });
             }
         },
 
         onError: (error) => {
-            toast.error('Failed to Bank transaction');
+            toastError('Failed to Bank transaction');
         },
     });
     const [openItemId, setOpenItemId] = useState<string | null>(null);
