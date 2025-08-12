@@ -149,7 +149,7 @@ const TransactionPage = () => {
           </div>
         </div>
       </div>}
-      <h1 className="text-center mt-6 ">Your Transactions {data?.length}</h1>
+      <h1 className="text-center font-semibold text-lg mt-6 ">Your Total Transactions {data?.length}</h1>
       <div className="flex flex-col gap-4 px-14 max-md:px-2.5 pt-10">
         <DateButton startDate={startDate} endDate={endDate} setStartDate={setStartDate} setEndDate={setEndDate} />
         {uniqueBanks && !isLoading ?
