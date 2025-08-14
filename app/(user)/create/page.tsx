@@ -6,7 +6,6 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Loader } from 'lucide-react';
 import React, { useState } from 'react'
 import DatePicker from 'react-datepicker';
-import toast from 'react-hot-toast';
 
 const CreateTransaction = () => {
   const [type , setType] = useState<'credit' | 'debit'>('credit');

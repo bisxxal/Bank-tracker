@@ -27,15 +27,19 @@ export const banks = [
 ];
  
 export const categories=[
-    { value: 'food', name: 'Food' },
-    { value: 'Others', name: 'Others' },
-    { value: 'transport', name: 'Transport' },
+    { value: 'snacks', name: 'Snacks' },
+    { value: 'breakfast', name: 'Breakfast' },
+    { value: 'lunch', name: 'Lunch' },
+    { value: 'dinner', name: 'Dinner' }, 
+    { value: 'petrol', name: 'Petrol' },
     { value: 'entertainment', name: 'Entertainment' },
     { value: 'purchases', name: 'Purchases' },
     { value: 'education', name: 'Education' },
     { value: 'rent', name: 'Rent' },
+    { value: 'grocery', name: 'Grocery' },
     { value: 'travels', name: 'Travels' },
-    { value: 'bills', name: 'Bills' }
+    { value: 'bills', name: 'Bills' },
+    { value: 'Others', name: 'Others' },
 ]
  
 export const COLORS = [
