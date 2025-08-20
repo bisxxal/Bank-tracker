@@ -12,7 +12,6 @@ import { TrendingDown, TrendingUp } from 'lucide-react';
 import moment from 'moment';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useRef, useState } from 'react'
-import toast from 'react-hot-toast';
 
 const TransactionPage = () => {
   const router = useRouter();
@@ -129,7 +128,7 @@ const TransactionPage = () => {
 
       {showDeleteConfirmation !== null && <div className=' bg-[#00000023] z-[10] top-10 fixed center backdrop-blur-[10px] w-full h-full'>
         <div className=' bg-[#26253897] w-fit mx-auto mt-20 p-6 rounded-3xl shadow-lg'>
-          <h2> Are you want to delete the Transaction ?</h2>
+          <h2 className=' text-base max-md:text-[13px] '> Are you want to delete the Transaction ?</h2>
           <div className='flex justify-center gap-4 mt-4'>
             <button
               className='bg-red-600/20 border border-red-500 text-white px-4 py-2 rounded-lg'

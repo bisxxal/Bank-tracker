@@ -118,3 +118,121 @@ button:hover , a:hover{
   @apply bg-gradient-to-br   from-[#ff535388] font-medium to-[#ff0000d4] border border-red-600;
   box-shadow: inset -12px -3px 20px 2px #00000021, 0 8px 10px -6px rgb(0 0 0 / 0.1) ;
 }
+
+.navbaranimation{
+  animation: navbaranimation 0.8s ease-in-out forwards;
+}
+
+@keyframes navbaranimation {
+  0% {
+    transform: translateY(-200px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+}
+.appeartext {
+  animation: appeartext 0.9s ease-in-out forwards;
+}
+@keyframes appeartext {
+  0% {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+  50% {
+      opacity: 0.5;
+      transform: translateY(10px);
+    }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.heroimgshadow {
+  animation: heroimgshadow 1.8s ease-in-out ;   
+}
+.whyshadow {
+  box-shadow: 0px -10px 20px 4px #ffffff;
+  animation: heroimgshadow 1.8s ease-in-out ;   
+}
+
+@keyframes heroimgshadow {
+  0% {
+    opacity: 0;
+    transform: translateY(200px);
+  }
+  50% {
+    transform: translateY(-30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
+
+.logoanimation:hover {
+  animation: logoanimation 0.2s linear ;
+}
+  
+  
+@keyframes logoanimation {
+  0%  {transform: rotate(0deg)}
+  100% {transform: rotate(560deg)}
+}
+.boxanimation{
+  animation: boxanimation 0.8s ease-in-out forwards;
+}
+@keyframes boxanimation {
+  0% {
+    transform: translateY(100px);
+    scale: 0.1;
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0px);
+    scale: 1;
+    opacity: 1;
+  }
+}
+.slogo {
+  background: rgb(17, 17, 17);
+  background: linear-gradient(179deg, #ffffff 50%, #090a1500 95%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.buttongred{
+    background: rgb(17, 17, 17);
+    background: linear-gradient(359deg, #ffffff3b 4%, #090a1500 85%);
+}
+ @keyframes fade-in {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes slide-up {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes scale-up {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+  }
+  .animate-fade-in {
+    animation: fade-in 0.8s ease-out forwards;
+  }
+  .animate-slide-up {
+    animation: slide-up 0.8s ease-out forwards;
+  }
+  .animate-scale-up {
+    animation: scale-up 0.8s ease-out forwards;
+  }
+
+.goldengred{
+  background: #836B4F;
+/* background: linear-gradient(246deg, #a27746e0 0%, #dccfb53b 100%); */
+background: radial-gradient(circle,#b88244e0 0%, #dccfb53b 100%);
+
+}

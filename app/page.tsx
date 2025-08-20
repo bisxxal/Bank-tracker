@@ -83,10 +83,10 @@ const BankTrackerHero = () => {
   }, []);
 
   return (
-    <div className="min-h-screen text-white" style={{ backgroundColor: '#181825' }}>
+    <div className="min-h-screen relative text-white" style={{ backgroundColor: '#181825' }}>
       {/* Header */}
-      <header className="relative z-10 px-6 py-4">
-        <nav className="flex items-center justify-between max-w-7xl mx-auto">
+      <header className=" navbaranimation w-full border-b border-[#ffffff29] h-[65px] backdrop-blur-xl z-30 fixed top-0 left-0  px-6 py-4">
+        <nav className="flex  items-center justify-between max-w-7xl mx-auto">
           <div className="flex items-center space-x-2">
             <div className="w-8 h-8 bg-gradient-to-br from-purple-500 to-cyan-500 rounded-lg flex items-center justify-center">
               <Wallet className="w-5 h-5 text-white" />
@@ -96,31 +96,31 @@ const BankTrackerHero = () => {
             </span>
           </div>
           <div className=" flex items-center ">
-            <Link href={`/login`} className="bg-gradient-to-r from-purple-500 to-cyan-500 px-6 max-md:px-4 max-md:text-sm py-2 rounded-full text-white font-medium hover:shadow-lg hover:shadow-purple-500/25 transition-all duration-300">
+          { status== 'unauthenticated' && <Link href={`/login`} className="bg-gradient-to-r from-purple-500 to-cyan-500 px-6 max-md:px-4 max-md:text-sm py-2 rounded-full text-white font-medium hover:shadow-lg hover:shadow-purple-500/25 transition-all duration-300">
               Get Started
-            </Link>
+            </Link>}
           </div>
         </nav>
       </header>
 
       {/* Hero Section */}
-      <section className="relative px-6 py-20 overflow-hidden">
+      <section className="relative px-6 py-20   overflow-hidden">
         {/* Background Elements */}
         <div className="absolute inset-0 bg-gradient-to-br from-purple-900/20 via-transparent to-cyan-900/20" />
         <div className="absolute top-20 left-10 w-72 h-72 bg-purple-500/10 rounded-full blur-3xl animate-pulse" />
         <div className="absolute bottom-20 right-10 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl animate-pulse delay-1000" />
 
-        <div className="relative z-10 max-w-7xl mx-auto">
+        <div className="relative pt-[60px] z-10 max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Left Content */}
             <div className="space-y-8">
               <div className="space-y-6">
-                <div className="inline-flex max-md:text-sm items-center space-x-2 bg-gradient-to-r from-purple-500/20 to-cyan-500/20 rounded-full px-4 py-2 border border-purple-500/30">
+                <div className="inline-flex animate-scale-up max-md:text-sm items-center space-x-2 bg-gradient-to-r from-purple-500/20 to-cyan-500/20 rounded-full px-4 py-2 border border-purple-500/30">
                   <Zap className="w-4 h-4 text-purple-400" />
                   <span className="text-sm text-purple-300">AI-Powered Financial Tracking</span>
                 </div>
 
-                <h1 className="text-4xl lg:text-6xl font-bold leading-tight">
+                <h1 className="text-4xl lg:text-6xl animate-scale-up delay-700 font-bold leading-tight">
                   Track Your{' '}
                   <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400 bg-clip-text text-transparent">
                     Finances
@@ -128,7 +128,7 @@ const BankTrackerHero = () => {
                   {' '}Like Never Before
                 </h1>
 
-                <p className="text-xl max-md:text-sm text-gray-300 leading-relaxed">
+                <p className="text-xl animate-pulse max-md:text-sm text-gray-300 leading-relaxed">
                   Monitor expenses, track income, and categorize spending with intelligent insights.
                   Get personalized financial reports and take control of your money.
                 </p>
@@ -136,28 +136,28 @@ const BankTrackerHero = () => {
 
               {/* Features Grid */}
               <div className="grid grid-cols-2 gap-4">
-                <div className="flex items-center space-x-3 p-4 max-md:p-2 max-md:text-sm   bg-white/5 rounded-lg border border-white/10">
+                <div className="flex items-center space-x-3 p-4 max-md:p-2 animate-slide-up max-md:text-sm   bg-white/5 rounded-lg border border-white/10">
                   <Mail className="w-6 h-6 text-cyan-400" />
                   <div>
                     <p className="font-medium">Email Tracking</p>
                     <p className="text-sm text-gray-400">Fetch by email</p>
                   </div>
                 </div>
-                <div className="flex items-center space-x-3 p-4 max-md:p-2 max-md:text-sm   bg-white/5 rounded-lg border border-white/10">
+                <div className="flex items-center space-x-3 p-4 max-md:p-2 animate-slide-up max-md:text-sm   bg-white/5 rounded-lg border border-white/10">
                   <PieChartIcon className="w-6 h-6 text-purple-400" />
                   <div>
                     <p className="font-medium">Smart Categories</p>
                     <p className="text-sm text-gray-400">Auto categorize</p>
                   </div>
                 </div>
-                <div className="flex items-center space-x-3 p-4 max-md:p-2 max-md:text-sm   bg-white/5 rounded-lg border border-white/10">
+                <div className="flex items-center space-x-3 p-4 max-md:p-2 animate-slide-up max-md:text-sm   bg-white/5 rounded-lg border border-white/10">
                   <CreditCard className="w-6 h-6 text-green-400" />
                   <div>
                     <p className="font-medium">Statements</p>
                     <p className="text-sm text-gray-400">Credit & Debit</p>
                   </div>
                 </div>
-                <div className="flex items-center space-x-3 p-4 max-md:p-2 max-md:text-sm   bg-white/5 rounded-lg border border-white/10">
+                <div className="flex items-center space-x-3 p-4 max-md:p-2 animate-slide-up max-md:text-sm   bg-white/5 rounded-lg border border-white/10">
                   <Target className="w-6 h-6 text-yellow-400" />
                   <div>
                     <p className="font-medium">Real-time</p>

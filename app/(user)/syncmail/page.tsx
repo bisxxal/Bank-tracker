@@ -33,6 +33,8 @@ const SyncMailPage = () => {
 
             <div className="my-4 flex items-center w-1/2 mx-auto max-md:w-[80%] mt-20 justify-between">
                 <select onChange={(e) => setLimit(Number(e?.target?.value))} className="px-4 py-2 rounded-2xl border bordercolor card ">
+                    <option value="2">previous 2</option>
+                    <option value="5">previous 5</option>
                     <option value="10">previous 10</option>
                     <option value="20">previous 20</option>
                     <option value="30">previous 30</option>
