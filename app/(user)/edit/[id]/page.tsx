@@ -8,7 +8,6 @@ import { Loader } from 'lucide-react';
 import { useParams } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
 import DatePicker from 'react-datepicker';
-import toast from 'react-hot-toast';
 
 const EditPage = () => {
   const params = useParams<{ id: string }>()
