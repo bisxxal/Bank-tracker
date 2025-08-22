@@ -13,9 +13,9 @@ const BankPage = () => {
 
     return (
         <div className=' min-h-screen border border-[#ffffff00] mt-20 w-full'>
-            <div className='flex justify-between items-center w-fit  overflow-hidden rounded-full mx-auto my-4'>
-                <button onClick={() => setShow(true)} className={`${show ? " border-none buttonbg" : " border border-[#cba6f7] "} rounded-l-4xl px-4 py-2 `}>Add Bank</button>
-                <button onClick={() => setShow(false)} className={`${show ? " border border-[#cba6f7] " : "buttonbg border-none  "} rounded-r-4xl px-4 py-2 `}>Bank List</button>
+            <div className='flex justify-between items-center border border-[#cba6f788] w-fit  overflow-hidden rounded-full mx-auto my-4'>
+                <button onClick={() => setShow(true)} className={`${show ? " border-none buttonbg" : " "} rounded-l-4xl px-4 py-2 `}>Add Bank</button>
+                <button onClick={() => setShow(false)} className={`${show ? " " : "buttonbg border-none  "} rounded-r-4xl px-4 py-2 `}>Bank List</button>
             </div>
             {show ? <AddBank />
                 : <BankList />
@@ -27,7 +27,7 @@ const BankPage = () => {
 export default BankPage
 
 const AddBank = () => {
-
+    const queryClient = useQueryClient();
     const handelFormSubmit = (fromData: FormData) => {
         const name = fromData.get('name') as string;
         const email = fromData.get('email') as string;
@@ -44,6 +44,7 @@ const AddBank = () => {
         onSuccess: (data) => {
             if (data.status === 200) {
                 toastSuccess('Bank added successfully');
+                queryClient.invalidateQueries({ queryKey: ['banks'] });
             }
             else {
                 toastError(data.message || 'Failed to add bank');

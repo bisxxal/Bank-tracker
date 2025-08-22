@@ -6,21 +6,11 @@ const withPWA = require("@ducanh2912/next-pwa").default({
   dest: "public",
   // disable: process.env.NODE_ENV === "development",
   disable: false, // Set to false to enable PWA in development mode
-  // register: true,
-  // scope: "/app",
-  sw: "service-worker.js",
-  // customWorkerDest: "service-worker",
-  // cacheStartUrl: true,
-  // dynamicStartUrl: true,
-  // dynamicStartUrlRedirect: "/foo/bar",
+  sw: "service-worker.js", 
   cacheOnFrontendNav: true,
   aggressiveFrontEndNavCaching: true,
-  reloadOnOnline: true,
-  // scope: "/beta",
-  workboxOptions: {
-    
-  },
-  // ...
+  reloadOnOnline: true, 
+   
 });
 
 
@@ -43,5 +33,5 @@ const nextConfig: NextConfig = {
   devIndicators:false,
 };
 
-export default withPWA(nextConfig);
+export default withPWA (nextConfig);
  

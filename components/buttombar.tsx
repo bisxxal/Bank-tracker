@@ -1,5 +1,5 @@
 'use client'
-import { ArrowLeftRight, Calendar, ChartLine, Mail, User, Wallet } from 'lucide-react'
+import { ArrowLeftRight, Calendar, ChartLine, User, Wallet } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import React from 'react'
@@ -7,7 +7,6 @@ import React from 'react'
 const BottomBar = () => {
     const bgs = 'bg-gradient-to-r from-[#2b7fff] to-[#ad46ff] '
     const path = usePathname()
-    console.log(path)
     return (
         <div className=' fixed bottom-[20px] z-[100] w-full center h-[60px] '>
             <div className='w-fit  backdrop-blur-[10px] p-2 rounded-2xl bg border border-[#d3d3d346] flex !justify-evenly items-center gap-5 h-full '>

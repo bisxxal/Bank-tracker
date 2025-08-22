@@ -12,11 +12,11 @@ const Borrow = () => {
     const [show, setShow] = useState(false);
     return (
         <>
-            <div className='flex justify-between items-center w-fit  overflow-hidden rounded-full mx-auto mt-[100px] my-4'>
-                <button onClick={() => setShow(true)} className={`${show ? " border-none buttonbg" : " border border-[#cba6f7] "} rounded-l-4xl px-4 py-2 `}>Create</button>
-                <button onClick={() => setShow(false)} className={`${show ? " border border-[#cba6f7] " : "buttonbg border-none  "} rounded-r-4xl px-4 py-2 `}>All List</button>
+            <div className='flex justify-between items-center w-fit overflow-hidden border border-[#cba6f788] rounded-full mx-auto mt-[100px] my-4'>
+                <button onClick={() => setShow(true)} className={`${show ? "   buttonbg " : "  "} rounded-l-4xl px-4 py-2 `}>Create</button>
+                <button onClick={() => setShow(false)} className={`${show ? "  " : "buttonbg  "} rounded-r-4xl px-4 py-2 `}>All List</button>
             </div>
-            {!show ? <ListBorrow />: <CreateBrrows />}
+            {!show ? <ListBorrow /> : <CreateBrrows />}
         </>
     )
 }
@@ -27,7 +27,7 @@ export default Borrow
 const ListBorrow = () => {
     const client = useQueryClient();
     const [showDeleteConfirmation, setShowDeleteConfirmation] = useState<string | null>(null);
-     const { data, isLoading } = useQuery({
+    const { data, isLoading } = useQuery({
         queryKey: ['borrow'],
         queryFn: async () => await getBrrows()
     })
@@ -74,7 +74,7 @@ const ListBorrow = () => {
                 toastSuccess('Transaction deleted successfully');
                 client.invalidateQueries({ queryKey: ['borrow'] });
             }
-            else{
+            else {
                 toastError('Failed to delete transaction');
             }
         },
@@ -106,42 +106,42 @@ const ListBorrow = () => {
                     </div>
                 </div>
             </div>}
-        <div className='flex flex-col gap-4 mt-4'>
-            {isLoading ? (
-                <Loading boxes={5} child="h-32  w-1/2 max-md:w-full !rounded-none " parent="w-full px-0" />
-            ) : (
-            !isLoading && data && data?.data?.length !== 0 ?
-            <div className=' w-1/2 max-md:w-full mx-auto'>
-                {
-                   data?.data && data?.data?.map((item) => (
-                        <SwipeRevealActions
-                            editable={false}
-                            key={item.id}
-                            id={item.id}
-                            onDelete={handleDelete}
-                            onUpdate={null}
-                            isOpen={openItemId === item.id}
-                            onOpen={handleOpen}
-                            setRef={setItemRef}
-                        >
-                            <div key={item.id} className=' rounded-none bordercolor border p-4 card '>
-                                <h2 className='text-xl font-bold'>{item.type}</h2>
-                                <p>Amount: ₹{item.amount}</p>
-                                <p>Name: {item.name}</p>
-                                <p>Date: {moment(item.createdAt).format('MMMM Do YYYY, h:mm:ss a')}</p>
-                            </div>
-                        </SwipeRevealActions>
-                    ))
+            <div className='flex flex-col gap-4 mt-4'>
+                {isLoading ? (
+                    <Loading boxes={5} child="h-32  w-1/2 max-md:w-full !rounded-none " parent="w-full px-0" />
+                ) : (
+                    !isLoading && data && data?.data?.length !== 0 ?
+                        <div className=' w-1/2 max-md:w-full mx-auto'>
+                            {
+                                data?.data && data?.data?.map((item) => (
+                                    <SwipeRevealActions
+                                        editable={false}
+                                        key={item.id}
+                                        id={item.id}
+                                        onDelete={handleDelete}
+                                        onUpdate={null}
+                                        isOpen={openItemId === item.id}
+                                        onOpen={handleOpen}
+                                        setRef={setItemRef}
+                                    >
+                                        <div key={item.id} className=' rounded-none bordercolor border p-4 card '>
+                                            <h2 className='text-xl font-bold'>{item.type}</h2>
+                                            <p>Amount: ₹{item.amount}</p>
+                                            <p>Name: {item.name}</p>
+                                            <p>Date: {moment(item.createdAt).format('MMMM Do YYYY, h:mm:ss a')}</p>
+                                        </div>
+                                    </SwipeRevealActions>
+                                ))
+                            }
+                        </div> : <p className='mt-20 text-lg center '>No data found</p>)
                 }
-            </div> : <p className='mt-20 text-lg center '>No data found</p>)
-            }
-        </div>
+            </div>
         </div>
     )
 }
 
 const CreateBrrows = () => {
-    const [type, setType] = useState<"To be received"|"To be paid" | null>(null)
+    const [type, setType] = useState<"To be received" | "To be paid" | null>(null)
     const client = useQueryClient();
     const handelFormSubmit = (fromData: FormData) => {
         CreateMutation.mutate(fromData);
@@ -172,13 +172,13 @@ const CreateBrrows = () => {
             <form className=' space-y-4  w-[70%] border bordercolor max-md:w-[95%] mx-auto py-5 rounded-2xl flex px-4 flex-col' action={handelFormSubmit}>
                 <div>
                     <label className="block text-sm font-medium ">Type</label>
-                    <select onChange={(e)=>setType(e.target.value )} className='mt-1 block w-full border bordercolor card p-2 rounded-md shadow-sm' name="type" >
+                    <select onChange={(e) => setType(e.target.value)} className='mt-1 block w-full border bordercolor card p-2 rounded-md shadow-sm' name="type" >
                         <option value="">Select</option>
                         <option value="To be received">To be received</option>
                         <option value="To be paid">To be Paid </option>
                     </select>
                 </div>
-               { type !== null && <div>
+                {type !== null && <div>
                     <label className="block text-sm font-medium ">{type !== 'To be paid' ? 'Name who will give you ' : 'Name you will send '}</label>
                     <input required
                         type="text"

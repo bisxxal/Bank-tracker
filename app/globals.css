@@ -43,7 +43,7 @@ body {
 }
 
 .buttonbg{
-  @apply bg-gradient-to-br   from-[#cba6f7] font-medium to-[#5154f2];
+  @apply bg-gradient-to-br from-[#8723ff] font-medium to-[#6706bb];
   box-shadow: inset -12px -3px 20px 2px #00000021, 0 8px 10px -6px rgb(0 0 0 / 0.1) ;
 }
  
@@ -103,8 +103,8 @@ body {
 }
 
 button:hover , a:hover{
-  scale: 0.95;
-  transition: all 0.2s ease-in-out;
+  scale: 0.99;
+  transition: all 0.3s ease-in-out;
 }
 .textshadow{
   text-shadow: -2px 1px 20px #ffffff;

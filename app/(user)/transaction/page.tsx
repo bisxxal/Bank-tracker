@@ -9,7 +9,6 @@ import { TransactionTypeProps } from '@/lib/types';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { endOfMonth, startOfMonth } from 'date-fns';
 import { TrendingDown, TrendingUp } from 'lucide-react';
-import moment from 'moment';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useRef, useState } from 'react'
 
@@ -196,7 +195,17 @@ const TransactionPage = () => {
                     {msg?.send && <p><strong> {msg.type === 'credit' ? ' Send By ' : ' Send to'}   : </strong> {msg.send}</p>}
                     {msg?.spendsOn && <p><strong> {msg.type === 'credit' ? ' Recived on ' : ' Spends On '}   :</strong> {msg.spendsOn}</p>}
                     {msg?.category && <p><strong>Category:</strong> {msg.category}</p>}
-                    <p><strong>Date:</strong> {moment(msg.date).format('MMMM Do YYYY, h:mm:ss a')}</p>
+                    <p><strong>Date:</strong>
+                      <p><strong>Date:</strong> {new Date(msg.date).toLocaleString('en-US', {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric',
+                        hour: 'numeric',
+                        minute: '2-digit',
+                        second: '2-digit',
+                        hour12: true
+                      })}</p>
+                    </p>
                   </div>
                 </div>
               </SwipeRevealActions>

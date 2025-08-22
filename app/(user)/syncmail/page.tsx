@@ -3,8 +3,7 @@ import { syncBankEmails } from "@/actions/syncBank";
 import { toastError, toastSuccess } from "@/lib/toast";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { RefreshCcw } from "lucide-react";
-import { useState } from "react";
-import toast from "react-hot-toast";
+import { useState } from "react"; 
 
 const SyncMailPage = () => {
     const [limit, setLimit] = useState<number>(10);
