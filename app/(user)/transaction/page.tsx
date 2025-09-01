@@ -169,7 +169,7 @@ const TransactionPage = () => {
             })}
 
           </div> : isLoading ?
-            <Loading boxes={2} child="h-28 !w-[250px] h-[150px] !rounded-3xl " parent="w-full !flex-row px-0   !justify-start " /> : <p>No Data found</p>
+            <Loading boxes={3} child="h-28 !w-[250px] h-[150px] !rounded-3xl " parent="w-full !flex-row px-0   !justify-start " /> : <p>No Data found</p>
         }
 
         {groupedMessages && Object.entries(groupedMessages).length !== 0 && !isLoading ? Object?.entries(groupedMessages).map(([label, group]) => (
@@ -196,7 +196,7 @@ const TransactionPage = () => {
                     {msg?.spendsOn && <p><strong> {msg.type === 'credit' ? ' Recived on ' : ' Spends On '}   :</strong> {msg.spendsOn}</p>}
                     {msg?.category && <p><strong>Category:</strong> {msg.category}</p>}
                     <p><strong>Date:</strong>
-                      <p><strong>Date:</strong> {new Date(msg.date).toLocaleString('en-US', {
+                       {new Date(msg.date).toLocaleString('en-US', {
                         year: 'numeric',
                         month: 'long',
                         day: 'numeric',
@@ -204,7 +204,7 @@ const TransactionPage = () => {
                         minute: '2-digit',
                         second: '2-digit',
                         hour12: true
-                      })}</p>
+                      })} 
                     </p>
                   </div>
                 </div>

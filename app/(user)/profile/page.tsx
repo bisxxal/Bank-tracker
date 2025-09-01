@@ -8,8 +8,8 @@ const Profile = () => {
   const { data: session, status } = useSession()
   return (
     <div className=' relative w-full min-h-screen overflow-hidden'>
-      <div className='flex flex-col items-center justify-center h-full'>
-        <h1 className='text-2xl font-bold mb-4'>User Profile</h1>
+      <div className=' mt-[50px] flex flex-col items-center justify-center h-full'>
+        <h1 className='text-2xl font-bold mb-4'> Profile</h1>
       </div>
 
 
@@ -26,14 +26,14 @@ const Profile = () => {
 
         <div className='flex !flex-col items-center w-full justify-center h-full'>
           <div className=' my-7 flex-warp max-md: flex-col w-full center gap-3'>
-            <Link className="w-full bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 text-white font-semibold py-3 px-6 rounded-xl flex items-center justify-center space-x-2 transition-all duration-200 transform hover:scale-105"
+            <Link className="w-full buttonbg hover:from-purple-600 text-white font-semibold py-3 px-6 rounded-2xl flex items-center justify-center space-x-2 transition-all duration-200 transform hover:scale-105"
               href={'/create'}>Create Transaction</Link>
-            <Link className="w-full bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 text-white font-semibold py-3 px-6 rounded-xl flex items-center justify-center space-x-2 transition-all duration-200 transform hover:scale-105" href={'/bank'}>Bank Page</Link>
-            <Link className="w-full bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 text-white font-semibold py-3 px-6 rounded-xl flex items-center justify-center space-x-2 transition-all duration-200 transform hover:scale-105" href={'/mail'}>View all mail</Link>
+            <Link className="w-full buttonbg hover:from-purple-600 text-white font-semibold py-3 px-6 rounded-2xl flex items-center justify-center space-x-2 transition-all duration-200 transform hover:scale-105" href={'/bank'}>Bank Page</Link>
+            <Link className="w-full buttonbg hover:from-purple-600 text-white font-semibold py-3 px-6 rounded-2xl flex items-center justify-center space-x-2 transition-all duration-200 transform hover:scale-105" href={'/mail'}>View all mail</Link>
           </div>
         </div>
         <div className='flex flex-col items-center justify-center h-full'>
-          <button className="w-full max-md:text-xs border border-red-500/50 text-red-500/80 cursor-pointer rounded-4xl bg-red-400/10  p-2 max-md:px-3 px-5" onClick={() => signOut()}>Sign out</button>
+          <button className="w-full   border border-red-500/50 text-red-500/80 cursor-pointer rounded-4xl bg-red-400/20 font-bold  p-3 max-md:px-3 px-5" onClick={() => signOut()}>Sign out</button>
         </div>
       </div>
       <div className=' w-fit mx-auto mt-20 max-md:mt-32 flex items-center justify-center'>

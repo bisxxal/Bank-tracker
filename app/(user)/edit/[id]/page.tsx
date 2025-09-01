@@ -148,6 +148,7 @@ const EditPage = () => {
             onChange={(date: Date | null) => {
               setSelectedDate(date);
             }}
+            showTimeInput
             calendarClassName='  customclass '
             popperClassName="customclass2"
             selectsStart

@@ -112,6 +112,7 @@ const CreateTransaction = () => {
           <label className="block text-sm font-medium ">Date</label>
           <DatePicker
             required
+            showTimeInput
             name='date'
             selected={selectedDate}
             calendarClassName='  customclass '

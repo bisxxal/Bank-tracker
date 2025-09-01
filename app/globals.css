@@ -35,9 +35,9 @@ body {
  
 @keyframes pulseShimmer {
   from {
-    background-position: -1000px;
+    background-position: -1000px; 
   }
-  to {
+  to { 
      background-position: 1000px;
   }
 }
@@ -70,6 +70,9 @@ body {
 .react-datepicker__day--in-selecting-range:hover, .react-datepicker__day--in-range:hover{
   background-color: #cba6f7 !important;
   color: #ffffff !important;
+}
+  .react-datepicker__day , .react-datepicker__input-time-container .react-datepicker-time__caption, .react-datepicker__input-time-container .react-datepicker-time__input-container .react-datepicker-time__input {
+  color: #d0d0d0 !important;
 }
 
 .react-datepicker__header {
