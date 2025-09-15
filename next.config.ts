@@ -33,5 +33,5 @@ const nextConfig: NextConfig = {
   devIndicators:false,
 };
 
-export default withPWA (nextConfig);
+export default   (nextConfig);
  

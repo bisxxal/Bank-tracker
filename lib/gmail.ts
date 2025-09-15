@@ -58,7 +58,6 @@ const session = await getServerSession(authOptions);
         body,
       });
     } catch (err) {
-      // console.error("Failed to fetch individual message:", err);
     }
   }
 

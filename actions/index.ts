@@ -66,7 +66,8 @@ export async function createTransaction(formData: FormData) {
   const category = formData.get('category') as string;
   const spendsOn = formData.get('spendsOn') as string;
   const send = formData.get('send') as string;
-  const date = new Date(formData.get('date') as string);
+  const date = new Date(formData.get('date2') as string);
+
   if (!amount || !type || !bank || !date) {
     return { status: 400 };
   }
@@ -86,6 +87,7 @@ export async function createTransaction(formData: FormData) {
   if (!transaction) {
     return { status: 500, message: "Failed to create transaction" };
   }
+
   return { status: 200 };
 }
 
@@ -123,7 +125,8 @@ export async function updateTransaction(formData: FormData, id: string) {
   const category = formData.get('category') as string;
   const spendsOn = formData.get('spendsOn') as string;
   const send = formData.get('send') as string;
-  const date = new Date(formData.get('date') as string);
+  const date = new Date(formData.get('date2') as string);
+
   if (!amount || !type || !bank || !date) {
     return { status: 400 };
   }

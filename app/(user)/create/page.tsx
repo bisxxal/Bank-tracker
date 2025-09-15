@@ -8,11 +8,15 @@ import React, { useState } from 'react'
 import DatePicker from 'react-datepicker';
 
 const CreateTransaction = () => {
-  const [type , setType] = useState<'credit' | 'debit'>('credit');
+  const [type , setType] = useState<'credit' | 'debit'>('debit');
   const queryClient = useQueryClient();
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
-  const handelFormSubmit = (fromData: FormData) => {
-    CreateMutation.mutate(fromData);
+  
+  const handelFormSubmit = (formData: FormData) => {
+    if(selectedDate){
+      formData.set('date2', selectedDate); 
+      CreateMutation.mutate(formData);
+    }
   }
 
   const CreateMutation = useMutation({
@@ -32,7 +36,7 @@ const CreateTransaction = () => {
   });
 
   return (
-    <div className=' w-full min-h-screen flex flex-col items-center'>
+    <div className=' w-full min-h-screen mb-20 flex flex-col items-center'>
       <h1 className="text-2xl font-bold center  my-4">Create Transaction</h1>
 
       <form action={handelFormSubmit} className="space-y-4  w-[70%] border bordercolor max-md:w-[95%] mx-auto py-5 rounded-2xl flex px-4 flex-col">

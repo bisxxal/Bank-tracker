@@ -6,7 +6,7 @@ import { RefreshCcw } from "lucide-react";
 import { useState } from "react"; 
 
 const SyncMailPage = () => {
-    const [limit, setLimit] = useState<number>(10);
+    const [limit, setLimit] = useState<number>(1);
     const queryClient = useQueryClient();
     const createSync = useMutation({
         mutationFn: async (limit: number) => {
@@ -27,11 +27,12 @@ const SyncMailPage = () => {
     });
     return (
         <div className=' w-full h-screen'>
-            <h2 className=' text-center text-4xl font-bold'> Sync Mail </h2>
+            <h2 className=' text-center mt-20 text-4xl font-bold'> Sync Mail </h2>
             <p className=' text-sm mt-2 text-gray-500 text-center'>Sync Transaction by mail</p>
 
-            <div className="my-4 flex items-center w-1/2 mx-auto max-md:w-[80%] mt-20 justify-between">
+            <div className="my-4 flex flex-col gap-4 items-center w-1/2 mx-auto max-md:w-[80%] mt-20 justify-between">
                 <select onChange={(e) => setLimit(Number(e?.target?.value))} className="px-4 py-2 rounded-2xl border bordercolor card ">
+                    <option value="1">previous 1</option>
                     <option value="2">previous 2</option>
                     <option value="5">previous 5</option>
                     <option value="10">previous 10</option>
@@ -44,8 +45,8 @@ const SyncMailPage = () => {
                 <div>
                     <button
                         onClick={() => createSync.mutate(limit)}
-                        disabled={createSync.isPending}
-                        className={` px-4 ${createSync.isPending ? ' brightness-50 ' : ' brightness-100 '} py-2 buttonbg center gap-1  text-white rounded-full `}
+                        disabled={createSync.isPending || limit === 0}
+                        className={` px-4 ${createSync.isPending ? ' brightness-50 ' : ' brightness-100 '} py-2 buttonbg px-10 center gap-1  disabled:opacity-25 text-white rounded-full `}
                     >
                     {createSync.isPending ? "Syncing..." : "Sync"} <RefreshCcw className={` ${createSync.isPending ? ' animate-spin  ' : ' '}`} size={20} />
                     </button>

@@ -25,7 +25,13 @@ const EditPage = () => {
   
   const [types, setTypes] = useState<'debit' | 'credit'>(data?.type);
   const handelFormSubmit = (fromData: FormData) => {
-    CreateMutation.mutate(fromData);
+    if(selectedDate){
+      fromData.set('date2', selectedDate);
+      CreateMutation.mutate(fromData);
+    }
+    else{
+      toastError('Please select a date');
+    }
   }
   const CreateMutation = useMutation({
     mutationFn: async (fromData: FormData) => {
@@ -48,6 +54,10 @@ const EditPage = () => {
     if (data?.type === 'debit' || data?.type === 'credit') {
       setTypes(data.type);
     }
+
+     if (data?.date) {
+    setSelectedDate(new Date(data.date)); // Ensure it's a Date object
+  }
   }, [data]);
 
   if (isLoading) return <div className=' min-h-screen '>
@@ -56,7 +66,7 @@ const EditPage = () => {
 
 
   return (
-    <div className=' w-full min-h-screen flex flex-col  items-center'>
+    <div className=' w-full min-h-screen pb-20 flex flex-col  items-center'>
       <h1 className="text-2xl font-bold center my-4">Update Transaction</h1>
       <form action={handelFormSubmit} className="space-y-4  w-[70%] border bordercolor max-md:w-[95%] mx-auto py-5 rounded-2xl flex px-4 flex-col">
 
@@ -135,16 +145,15 @@ const EditPage = () => {
             placeholder={types === 'credit' ? 'Sender name' : 'xyz private lim'}
           />
         </div>
-
-
+ 
 
         <div className=' max-md:flex flex-col items-center justify-center'>
           <label className="block text-sm font-medium ">Date</label>
           <DatePicker
             required
             name='date'
-
-            selected={data?.date ? data?.date : selectedDate}
+            selected={selectedDate}
+            // selected={data?.date ? data?.date : selectedDate}
             onChange={(date: Date | null) => {
               setSelectedDate(date);
             }}
