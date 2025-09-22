@@ -5,13 +5,14 @@ import { toastError, toastSuccess } from '@/lib/toast';
 import { banks, categories } from '@/lib/utils';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { Loader } from 'lucide-react';
-import { useParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
 import DatePicker from 'react-datepicker';
 
 const EditPage = () => {
   const params = useParams<{ id: string }>()
   const id = params?.id || '';
+  const router = useRouter()
   const queryClient = useQueryClient();
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
 
@@ -41,6 +42,7 @@ const EditPage = () => {
       if (data.status === 200) {
         toastSuccess('Transaction Updated successfully');
         queryClient.invalidateQueries({ queryKey: ['fetchTransaction'] });
+        router.push('/transaction')
       }
     },
 

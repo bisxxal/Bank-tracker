@@ -241,7 +241,7 @@ const TrackerPage = () => {
               }} />
             <Area
               type="monotone"
-              dataKey="debit"
+              dataKey="credit"
               stroke="#23D824"
               fillOpacity={0.2}
               fill="url(#colordebit)"
@@ -250,7 +250,7 @@ const TrackerPage = () => {
             />
             <Area
               type="monotone"
-              dataKey="credit"
+              dataKey="debit"
               stroke="#E11D47"
               fillOpacity={0.5}
               fill="url(#colorcredit)"
