@@ -3,7 +3,7 @@ import { getTransactionsBySelectedMonth } from '@/actions'
 import Download from '@/components/dowload'
 import Loading from '@/components/ui/loading'
 import { TransactionTypeProps } from '@/lib/types'
-import { categories, COLORS2 } from '@/lib/utils'
+import { categories, COLORS, COLORS2 } from '@/lib/utils'
 import { useQuery } from '@tanstack/react-query'
 import moment from 'moment'
 import React, { useEffect, useState } from 'react'
@@ -133,7 +133,7 @@ const CateGoryPage = () => {
                             label={(entry) => `${entry.category} ${((entry.amount / totalAmount) * 100).toFixed(2)}%`}
                         >
                             {categoryData.map((_, index) => (
-                                <Cell key={`cell-${index}`} fill={COLORS2[index % COLORS2.length]} />
+                                <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                             ))}
 
                         </Pie>

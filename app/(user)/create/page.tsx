@@ -55,8 +55,8 @@ const CreateTransaction = () => {
             name='type'
             className="mt-1 block w-full border bordercolor card p-2 rounded-md shadow-sm "
           >
-            <option value="credit">Credit</option>
             <option value="debit">Debit</option>
+            <option value="credit">Credit</option>
           </select>
         </div>
 

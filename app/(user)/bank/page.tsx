@@ -173,7 +173,7 @@ const BankList = () => {
                         </div>
                     </SwipeRevealActions>
                 )) : (
-                    isLoading ? <Loading boxes={5} child="h-20 max-md:h-[200px] w-full !rounded-3xl " parent="w-full px-0  " /> : <p className=' h-[50vh] center text-center'>No Banks Found</p>
+                    isLoading ? <Loading boxes={4} child="h  h-[80px] w-full !rounded-xl " parent="w-full px-0  " /> : <p className=' h-[50vh] center text-center'>No Banks Found</p>
                 )}
             </div>
         </div>

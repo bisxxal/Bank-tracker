@@ -9,9 +9,7 @@ const Profile = () => {
   const { data: session, status } = useSession()
   return (
     <div className=' w-full min-h-screen overflow-hidden'>
-
-       
-
+ 
       <div className=' mt-[50px] relative flex flex-col items-center justify-center h-full'>
         <h1 className='text-2xl font-bold mb-4'> Profile</h1>
 

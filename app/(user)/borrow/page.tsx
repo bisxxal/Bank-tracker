@@ -179,7 +179,7 @@ const CreateBrrows = () => {
                     </select>
                 </div>
                 {type !== null && <div>
-                    <label className="block text-sm font-medium ">{type !== 'To be paid' ? 'Name who will give you ' : 'Name you will send '}</label>
+                    <label className="block text-sm font-medium ">{type !== 'To be paid' ? 'Who will give you ?' : 'You will send to ?'}</label>
                     <input required
                         type="text"
                         name="name"
