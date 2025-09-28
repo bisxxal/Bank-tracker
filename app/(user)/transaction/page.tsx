@@ -123,7 +123,7 @@ const TransactionPage = () => {
 
 
   return (
-    <div className='mt-[100px] relative w-full min-h-screen'>
+    <div className='mt-[100px] relative w-full min-h-screen pb-20'>
 
       {showDeleteConfirmation !== null && <div className=' bg-[#00000023] z-[10] top-10 fixed center backdrop-blur-[10px] w-full h-full'>
         <div className=' bg-[#26253897] w-fit mx-auto mt-20 p-6 rounded-3xl shadow-lg'>
@@ -147,18 +147,18 @@ const TransactionPage = () => {
           </div>
         </div>
       </div>}
-      <h1 className="text-center font-semibold text-lg mt-6 ">Your Total Transactions {data?.length}</h1>
-      <div className="flex flex-col gap-4 px-14 max-md:px-2.5 pt-10">
+      <h1 className="text-center flex flex-col font-semibold text-lg mt-6 ">Your Total Transactions  {data?.length} 
+      </h1>
+      <div className="flex flex-col gap-4 px-14 max-md:px-2.5 pt-5">
         <DateButton startDate={startDate} endDate={endDate} setStartDate={setStartDate} setEndDate={setEndDate} />
         {uniqueBanks && !isLoading ?
-          <div className='flex w-full overflow-x-auto gap-2'>
+          <div className='flex w-full hidescrollbar overflow-x-auto gap-2'>
             {uniqueBanks.map((i: { bank: string, creditAmount: number, credit: boolean, debit: boolean, debitAmount: number }, index: number) => {
               const balance = i.creditAmount - i.debitAmount;
               const percentage = i.creditAmount > 0 ? (balance / i.creditAmount) * 100 : 0;
               const isPositive = balance >= 0;
-
               return (
-                <div key={index} className=' bg-gradient-to-br from-[#4477ef] shadow-xl font-medium to-[#1703d293] rounded-3xl flex flex-col !items-start !justify-start !w-[250px] p-4'>
+                <div key={index} className=' bg-gradient-to-t from-[#43434300] shadow-xl font-medium to-[#365cf523] rounded-3xl flex flex-col !items-start !justify-start max-md:min-w-[200px] min-w-[250px] p-4'>
                   <p className='w-full text-center   text-xl text-white font-bold'>{i.bank} </p>
                   {i.credit && <p className='w-full text-green-500'>Credit: ₹{i.creditAmount.toFixed(2)}</p>}
                   {i.debit && <p className='w-full text-red-500'>Debit: ₹{i.debitAmount.toFixed(2)}</p>}
@@ -167,9 +167,10 @@ const TransactionPage = () => {
                 </div>
               );
             })}
-
           </div> : isLoading ?
-            <Loading boxes={3} child="h-28 !w-[250px] h-[150px] !rounded-3xl " parent="w-full !flex-row px-0   !justify-start " /> : <p>No Data found</p>
+          <div className='flex w-full hidescrollbar overflow-x-auto '>
+            <Loading boxes={3} child="h-28 max-md:min-w-[200px] min-w-[250px] h-[150px] !rounded-3xl " parent="w-full !flex-row px-0   !justify-start " />  </div> : <p>No Data found</p>
+          
         }
 
         {groupedMessages && Object.entries(groupedMessages).length !== 0 && !isLoading ? Object?.entries(groupedMessages).map(([label, group]) => (
