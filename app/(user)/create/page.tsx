@@ -90,28 +90,16 @@ const CreateTransaction = () => {
           </select>
         </div>}
 
-       {type === 'debit' && <div>
-          <label className="block text-sm font-medium ">Spends on </label>
+       <div>
+          <label className="block text-sm font-medium ">
+            {type === 'credit' ? 'Who sends you ' : 'Send On ' }  </label>
           <input
             type="text"
             name='send'
             className="mt-1 block w-full border bordercolor card p-2 rounded-md shadow-sm  "
-            placeholder="Enter reason for spending "
-          />
-        </div>}
-
-        <div>
-          <label className="block text-sm font-medium "> {type === 'credit' ? 'Who sends you ' : 'Send to ' }  </label>
-          <input
-            type="text"
-            name='spendsOn'
-            className="mt-1 block w-full border bordercolor card p-2 rounded-md shadow-sm  "
-            placeholder={type === 'credit' ? 'Sender name' : 'xyz private lim'}
+            placeholder={type === 'credit' ? 'Sender name' : 'Enter reason for spending'}
           />
         </div>
-
-
-
         <div className=' max-md:flex flex-col items-center justify-center'>
           <label className="block text-sm font-medium ">Date</label>
           <DatePicker

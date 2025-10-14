@@ -124,7 +124,7 @@ const ListBorrow = () => {
                                         onOpen={handleOpen}
                                         setRef={setItemRef}
                                     >
-                                        <div key={item.id} className=' rounded-none bordercolor border p-4 card '>
+                                        <div key={item.id} className={` ${item?.type?.toLowerCase() === 'to be paid' ? ' border-green-500 text-green-400' :' border-red-500 text-red-400 ' } rounded-none border p-4 card `}>
                                             <h2 className='text-xl font-bold'>{item.type}</h2>
                                             <p>Amount: ₹{item.amount}</p>
                                             <p>Name: {item.name}</p>

@@ -1,7 +1,8 @@
 @import "tailwindcss";
  
 body { 
-  background-color: #181825;
+  /* background-color: #181825; */
+  background-color: #13131e;
   color: #cdd6f4;
   font-family: monospace , 'Noto Sans Mono';
 }

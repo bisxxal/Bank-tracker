@@ -17,7 +17,6 @@ export default async function UserLayout({
 }>) {
 
   const session = await getCachedSession();
-
   if (!session) {
     redirect("/login");
   }

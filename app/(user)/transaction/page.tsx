@@ -152,13 +152,13 @@ const TransactionPage = () => {
       <div className="flex flex-col gap-4 px-14 max-md:px-2.5 pt-5">
         <DateButton startDate={startDate} endDate={endDate} setStartDate={setStartDate} setEndDate={setEndDate} />
         {uniqueBanks && !isLoading ?
-          <div className='flex w-full hidescrollbar overflow-x-auto gap-2'>
+          <div className='flex w-full hidescrollbar overflow-x-auto py-2 gap-2'>
             {uniqueBanks.map((i: { bank: string, creditAmount: number, credit: boolean, debit: boolean, debitAmount: number }, index: number) => {
               const balance = i.creditAmount - i.debitAmount;
               const percentage = i.creditAmount > 0 ? (balance / i.creditAmount) * 100 : 0;
               const isPositive = balance >= 0;
               return (
-                <div key={index} className=' bg-gradient-to-t from-[#43434300] shadow-xl font-medium to-[#365cf523] rounded-3xl flex flex-col !items-start !justify-start max-md:min-w-[200px] min-w-[250px] p-4'>
+                <div key={index} className=' bg-gradient-to-t from-[#43434300]   font-medium to-[#365cf523] rounded-3xl flex flex-col !items-start !justify-start max-md:min-w-[200px] min-w-[250px] p-4'>
                   <p className='w-full text-center   text-xl text-white font-bold'>{i.bank} </p>
                   {i.credit && <p className='w-full text-green-500'>Credit: ₹{i.creditAmount.toFixed(2)}</p>}
                   {i.debit && <p className='w-full text-red-500'>Debit: ₹{i.debitAmount.toFixed(2)}</p>}

@@ -2,7 +2,7 @@ export function extractFromEmail(fullName: string): string {
     const match = fullName.match(/<.*@(.*?)\./);
     return match ? match[1].toUpperCase() : 'Unknown';
 }
- 
+
 export const banks = [
     { value: 'HDFCBANK', name: 'HDFC Bank' },
     { value: 'KOTAK', name: 'Kotak Mahindra Bank' },
@@ -25,8 +25,8 @@ export const banks = [
     { value: 'FEDERAL', name: 'Federal Bank' },
     { value: 'RBL', name: 'RBL Bank' }
 ];
- 
-export const categories=[
+
+export const categories = [
     { value: 'snacks', name: 'Snacks' },
     { value: 'breakfast', name: 'Breakfast' },
     { value: 'dinner', name: 'Dinner' },
@@ -34,9 +34,10 @@ export const categories=[
     { value: 'entertainment', name: 'Entertainment' },
     { value: 'purchases', name: 'Online Purchases' },
     { value: 'education', name: 'Education' },
-    { value: 'recharge', name: 'Recharge' }, 
+    { value: 'recharge', name: 'Recharge' },
     { value: 'travels', name: 'Travels' },
     { value: 'bills', name: 'Bills' },
+    { value: 'clothes', name: 'Clothes' },
     { value: 'Others', name: 'Others' },
 ]
 
@@ -61,6 +62,6 @@ export const COLORS2 = [
     '#3D5A80', // Slate Blue
     '#5EEAD4', // Minty Cyan
     '#C86DD7', // Electric Purple
-  '#FF9F1C', // Bright Orange
-  '#6A0572',  // Deep Magenta
+    '#FF9F1C', // Bright Orange
+    '#6A0572',  // Deep Magenta
 ];

@@ -80,7 +80,6 @@ export async function createTransaction(formData: FormData) {
       date,
       userId: session.user.id,
       category,
-      spendsOn,
       send,
     },
   });
@@ -88,6 +87,7 @@ export async function createTransaction(formData: FormData) {
     return { status: 500, message: "Failed to create transaction" };
   }
 
+    // console.log( send);
   return { status: 200 };
 }
 
