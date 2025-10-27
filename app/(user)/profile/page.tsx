@@ -9,7 +9,7 @@ const Profile = () => {
   const { data: session, status } = useSession()
   return (
     <div className=' w-full min-h-screen overflow-hidden'>
-      <div className="bg-[#1E1E2E]/80 mt-[50px] mx-auto relative backdrop-blur-lg border border-[#313244]/50 rounded-2xl p-8 max-md:p-4 shadow-2xl max-w-md w-[90%] text-center">
+      <div className="card mt-[50px] mx-auto relative backdrop-blur-lg border border-[#313244]/50 rounded-2xl p-8 max-md:p-4 shadow-2xl max-w-md w-[90%] text-center">
         <div className=' absolute right-10 top-5  max-md:right-5 '>
           <button className="w-full border bg-gradient-to-br from-red-500/70 to-rose-500/40 border-red-500/30  cursor-pointer rounded-full font-bold px-5  p-2" onClick={() => signOut()}> <LogOut /> </button>
         </div>

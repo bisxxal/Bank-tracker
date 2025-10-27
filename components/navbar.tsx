@@ -8,7 +8,7 @@ import React from 'react'
 const Navbar = () => {
   const { data: session, status } = useSession()
   return (
-    <div className='z-[100] w-full top-0 border-b bordercolor  left-0 fixed backdrop-blur-xl h-[60px] flex items-center justify-center '>
+    <div className='z-[100] w-full top-0  left-0 fixed backdrop-blur-xl h-[60px] flex items-center justify-center '>
       <div className=' w-full max-md:px-2 px-4 flex items-center justify-between'>
         <Link href={session?.user ? '/transaction' : '/'} className='max-md:text-xl  text-2xl center font-bold'>
           <Image src='/bank.png' alt='logo' width={40} height={40} className='hover:scale-125 drop-shadow-[0_5px_10px_rgba(0,0,0,0.25)] drop-shadow-amber-100  transition-all inline-block ml-2' />

@@ -15,7 +15,7 @@ body {
   align-items: center;
 }
 .base{
-  background-color:#cba6f7;
+  background-color:#8f31ff;
 }
 .base2{
   background-color:#585b70;
@@ -51,7 +51,7 @@ body {
 }
  
 .customclass {
-  background-color: #ffffff0c !important;
+  background-color: #181825c2 !important;
   backdrop-filter: blur(10px) !important;
   border-color: #313244 !important;
   border-radius: 20px !important;
@@ -70,8 +70,12 @@ body {
   background-color: #ffffff00 !important;
   color: #ffffff !important;
 }
-.react-datepicker__day--in-selecting-range:hover, .react-datepicker__day--in-range:hover{
-  background-color: #cba6f7 !important;
+.react-datepicker__day--in-selecting-range:hover, .react-datepicker__day--in-range:hover  {
+  background-color: #8f31ff !important;
+  color: #ffffff !important;
+}
+.react-datepicker__day--keyboard-selected{
+  background-color: #8f31ff !important;
   color: #ffffff !important;
 }
   .react-datepicker__day , .react-datepicker__input-time-container .react-datepicker-time__caption, .react-datepicker__input-time-container .react-datepicker-time__input-container .react-datepicker-time__input {
@@ -79,7 +83,7 @@ body {
 }
 
 .react-datepicker__header {
-  background-color: #ffffff6f !important;
+  background-color: #7d1deaa3 !important;
   backdrop-filter: blur(20px) !important;
   color: #cdd6f4 !important;
   border-color: #313244 !important;
@@ -241,4 +245,16 @@ button:hover , a:hover{
 /* background: linear-gradient(246deg, #a27746e0 0%, #dccfb53b 100%); */
 background: radial-gradient(circle,#b88244e0 0%, #dccfb53b 100%);
 
+}
+
+.shine{
+  animation: shine 5s linear infinite;
+}
+@keyframes shine {
+  0% {
+    background-position: 100%;
+  }
+  100% {
+    background-position: -100%;
+  }
 }

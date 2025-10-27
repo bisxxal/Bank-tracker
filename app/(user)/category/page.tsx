@@ -3,7 +3,7 @@ import { getTransactionsBySelectedMonth } from '@/actions'
 import Download from '@/components/dowload'
 import Loading from '@/components/ui/loading'
 import { TransactionTypeProps } from '@/lib/types'
-import { categories, COLORS, COLORS2 } from '@/lib/utils'
+import { categories, COLORS } from '@/lib/utils'
 import { useQuery } from '@tanstack/react-query'
 import moment from 'moment'
 import React, { useEffect, useState } from 'react'
@@ -66,7 +66,7 @@ const CateGoryPage = () => {
         })
         .sort((a, b) => b.percentage - a.percentage);
     return (
-        <div id='receipt' className='w-full min-h-screen bg-[#181825] flex flex-col px-10 max-md:px-4 pb-20'>
+        <div id='receipt' className='w-full min-h-screen   flex flex-col px-10 max-md:px-4 pb-20'>
             <Download text={`MyBank-${new Date(selectedYear, selectedMonth).toLocaleString('default', { month: 'long', })}_${selectedYear}`} />
 
             <div className="flex  w-[90%] max-md:w-full mx-auto  justify-between items-center p-4">
@@ -179,7 +179,7 @@ const CateGoryPage = () => {
             {sortedCategories.map((category) => (
                 <div
                     key={category.value}
-                    className="bg-[#262538] border bordercolor rounded-2xl my-2 px-4 py-3"
+                    className="card border bordercolor rounded-2xl my-2 px-4 py-3"
                 >
                     <div className="flex justify-between items-center mb-2">
                         <h1 className="text-[white] font-medium">{category.name}</h1>

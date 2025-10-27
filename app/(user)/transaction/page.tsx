@@ -177,18 +177,13 @@ useEffect(() => {
       </h1>
       <div className="flex flex-col gap-4 px-14 max-md:px-2.5 pt-5">
 
-        <div className=' w-full flex '> 
+        <div className=' w-full gap-3 flex items-center max-md:justify-end justify-center pl-2'> 
         <DateButton startDate={startDate} endDate={endDate} setStartDate={setStartDate} setEndDate={setEndDate} />
-
         <div>
          {
           borrow && <button className=' px-4 py-2 rounded-lg ' onClick={() => router.push('/borrow')}>
-            {
-                borrow?.toBePaid > 0 && <span className='center text-red-500 font-semibold  text-sm'> <ArrowDownLeft size={20}/> {borrow.toBePaid.toFixed(2)} </span>
-            }
-            {
-                borrow?.toBeReceived > 0 && <span className='center mt-1 text-green-500 font-semibold text-sm'><ArrowDownRight size={20}/> {borrow.toBeReceived.toFixed(2)} </span>
-            }
+            {borrow?.toBePaid > 0 && <span className='center text-red-600 font-semibold  text-sm'> <ArrowDownRight size={20}/> {borrow.toBePaid.toFixed(2)} </span>}
+            {borrow?.toBeReceived > 0 && <span className='center mt-1 text-green-600 font-semibold text-sm'><ArrowDownLeft size={20}/> {borrow.toBeReceived.toFixed(2)} </span>}
           </button>
          }
         </div>

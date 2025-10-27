@@ -26,9 +26,7 @@ const BankTrackerHero = ({status}) => {
             <div className='max-md:text-xl  text-2xl center font-bold'>
           <Image src='/bank.png' alt='logo' width={40} height={40} className='hover:scale-125 drop-shadow-[0_5px_10px_rgba(0,0,0,0.25)] drop-shadow-amber-100  transition-all inline-block ml-2' />
         </div>
-            <span className="text-xl font-extrabold  bg-gradient-to-r from-purple-500 to-cyan-600 bg-clip-text text-transparent">
-              My Bank
-            </span>
+             
           </div>
           <div className=" flex items-center ">
           { status== false && <Link href={`/login`} className="buttonbg   px-6 max-md:px-4 max-md:text-sm py-2 rounded-full text-white font-medium  ">

@@ -16,10 +16,7 @@ export default async function UserLayout({
   children: React.ReactNode;
 }>) {
 
-  const session = await getCachedSession();
-  if (!session) {
-    redirect("/login");
-  }
+
   return (
     <main>
       <Navbar />

@@ -1,18 +1,31 @@
-
+'use client'
 import BankTrackerHero from '@/components/heropage'
-import { authOptions } from '@/lib/auth' 
-import { getServerSession } from 'next-auth'
-import { redirect } from 'next/navigation'
-import React from 'react'
+import ShinyText from '@/components/ui/Shinetext';
+import { useSession } from 'next-auth/react';
+import { redirect } from 'next/navigation';
 
-const MainHeroPage = async () => {
-  const session =await getServerSession(authOptions)
-  if(session){
+const Home =   () => {
+  const { data, status } = useSession();
+  if (status === 'loading') {
+    return(
+       <div className=' w-full h-screen center '>
+      <ShinyText
+        text="My Bank"
+        disabled={false}
+        speed={1.5}
+        className='font-extrabold  text-5xl'
+        />
+    </div>
+  )
+  }
+
+  if( data?.user || status === 'authenticated'){
     redirect('/transaction')
   }
+
   return (
-    <BankTrackerHero status={session ? true : false}/>
+    <BankTrackerHero status={data ? true : false}/>
   )
 }
 
-export default MainHeroPage
+export default Home

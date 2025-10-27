@@ -90,7 +90,7 @@ const ListBorrow = () => {
     });
  
     return (
-        <div>
+        <div className=' px-2'>
             {showDeleteConfirmation !== null && <div className=' bg-[#00000023] z-[10] top-10 fixed center backdrop-blur-[10px] w-full h-full'>
                 <div className=' bg-[#26253897] w-fit mx-auto mt-20 p-6 rounded-3xl shadow-lg'>
                     <h2> Are you sure want to delete ?</h2>
