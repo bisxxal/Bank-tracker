@@ -1,9 +1,10 @@
 'use client'
 import React, { useState, useEffect } from 'react';
-import { PieChart, Pie, Cell, BarChart, Bar, XAxis, CartesianGrid, Tooltip, ResponsiveContainer, LineChart, Line, AreaChart, Area } from 'recharts';
-import { TrendingUp, PieChartIcon, TrendingDown, Wallet, BarChart3, Mail, Plus, CreditCard, Target, Shield, Zap, Calendar, ChevronLeft, ChevronRight } from 'lucide-react';
+import { PieChart, Pie, Cell, BarChart, Bar, XAxis, CartesianGrid, Tooltip, ResponsiveContainer, AreaChart, Area } from 'recharts';
+import { TrendingUp, PieChartIcon, TrendingDown, BarChart3, Mail, Plus, CreditCard, Target,  Zap, Calendar, ChevronLeft, ChevronRight } from 'lucide-react';
 import Link from 'next/link';
 import { calendarData, currentMonth, daysOfWeek, expenseData, generateCalendarDays, monthlyData, trendData } from "@/lib/dummy";
+import Image from 'next/image';
 
 const BankTrackerHero = ({status}) => {
   // const { status } = useSession()
@@ -15,22 +16,22 @@ const BankTrackerHero = ({status}) => {
     return () => clearInterval(timer);
   }, []);
 
-  
   return (
-    <div className="min-h-screen relative text-white" style={{ backgroundColor: '#181825' }}>
+    <div className="min-h-screen relative text-white"  >
       {/* Header */}
       <header className=" navbaranimation w-full border-b border-[#ffffff29] h-[65px] backdrop-blur-xl z-30 fixed top-0 left-0  px-6 py-4">
         <nav className="flex  items-center justify-between max-w-7xl mx-auto">
           <div className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-gradient-to-br from-purple-500 to-cyan-500 rounded-lg flex items-center justify-center">
-              <Wallet className="w-5 h-5 text-white" />
-            </div>
-            <span className="text-xl font-bold bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">
+            
+            <div className='max-md:text-xl  text-2xl center font-bold'>
+          <Image src='/bank.png' alt='logo' width={40} height={40} className='hover:scale-125 drop-shadow-[0_5px_10px_rgba(0,0,0,0.25)] drop-shadow-amber-100  transition-all inline-block ml-2' />
+        </div>
+            <span className="text-xl font-extrabold  bg-gradient-to-r from-purple-500 to-cyan-600 bg-clip-text text-transparent">
               My Bank
             </span>
           </div>
           <div className=" flex items-center ">
-          { status== false && <Link href={`/login`} className="bg-gradient-to-r from-purple-500 to-cyan-500 px-6 max-md:px-4 max-md:text-sm py-2 rounded-full text-white font-medium hover:shadow-lg hover:shadow-purple-500/25 transition-all duration-300">
+          { status== false && <Link href={`/login`} className="buttonbg   px-6 max-md:px-4 max-md:text-sm py-2 rounded-full text-white font-medium  ">
               Get Started
             </Link>}
           </div>
@@ -56,13 +57,13 @@ const BankTrackerHero = ({status}) => {
 
                 <h1 className="text-4xl lg:text-6xl animate-scale-up delay-700 font-bold leading-tight">
                   Track Your{' '}
-                  <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400 bg-clip-text text-transparent">
+                  <span className="bg-gradient-to-r from-purple-500 via-pink-500 to-cyan-500 bg-clip-text text-transparent">
                     Finances
                   </span>
                   {' '}Like Never Before
                 </h1>
 
-                <p className="text-xl animate-pulse max-md:text-sm text-gray-300 leading-relaxed">
+                <p className="text-lg animate-pulse max-md:text-sm text-gray-300 leading-relaxed">
                   Monitor expenses, track income, and categorize spending with intelligent insights.
                   Get personalized financial reports and take control of your money.
                 </p>
@@ -102,7 +103,7 @@ const BankTrackerHero = ({status}) => {
 
               {/* CTA Buttons */}
               <div className="flex flex-col sm:flex-row gap-4">
-                <Link href={`/login`} className="bg-gradient-to-r from-purple-500 to-cyan-500 px-8 py-4 max-md:py-3  max-md:text-lg   rounded-full text-white font-medium hover:shadow-xl hover:shadow-purple-500/25 transition-all duration-300 transform hover:scale-105">
+                <Link href={`/login`} className="buttonbg px-8 py-4 max-md:py-3  max-md:text-lg   rounded-full text-white font-medium hover:shadow-xl hover:shadow-purple-500/25 transition-all duration-300 transform hover:scale-105">
                   <Plus className="w-5 h-5 inline mr-2" />
                   Start Tracking Now
                 </Link>
@@ -360,7 +361,7 @@ const BankTrackerHero = ({status}) => {
             Join thousands of users who have transformed their financial habits with BankTracker
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href={`/login`} className="bg-gradient-to-r from-purple-500 to-cyan-500 px-8 py-4 rounded-full text-white font-medium hover:shadow-xl hover:shadow-purple-500/25 transition-all duration-300 transform hover:scale-105">
+            <Link href={`/login`} className="buttonbg px-8 py-4 rounded-full text-white font-medium hover:shadow-xl hover:shadow-purple-500/25 transition-all duration-300 transform hover:scale-105">
               Get Started for Free
             </Link>
             <Link href={`/`} className="border border-white/20 px-8 py-4 max-md:py-3 text-base rounded-full text-white font-medium hover:bg-white/5 transition-all duration-300">

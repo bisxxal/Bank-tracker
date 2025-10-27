@@ -30,7 +30,7 @@ body {
   background-color:#89dceb;
 }
 .card{
-  background-color: #1e1e2e;
+  background-color: #181825;
 }
 .bordercolor{
   border-color: #313244;
@@ -117,11 +117,11 @@ button:hover , a:hover{
 }
 
 .creditbg{
-  @apply bg-gradient-to-br   from-[#4dff7f6c] font-medium to-[#00ae03] border border-green-600;
+  @apply bg-gradient-to-t from-[#43434300] to-[#21ec4a38] ;
   box-shadow: inset -12px -3px 20px 2px #00000021, 0 8px 10px -6px rgb(0 0 0 / 0.1) ;
 }
 .debitbg{
-  @apply bg-gradient-to-br   from-[#ff535388] font-medium to-[#ff0000d4] border border-red-600;
+  @apply bg-gradient-to-t from-[#43434300] to-[#ec212138] ;
   box-shadow: inset -12px -3px 20px 2px #00000021, 0 8px 10px -6px rgb(0 0 0 / 0.1) ;
 }
 

@@ -1,7 +1,7 @@
 'use client'
 import { getTransactionsBySelected } from '@/actions';
 import { useQuery } from '@tanstack/react-query';
-import { ArrowDownLeft, ArrowDownRight, TrendingDown, TrendingUp  } from 'lucide-react';
+import {   TrendingDown, TrendingUp  } from 'lucide-react';
 import React, { useEffect, useState } from 'react'
 import { Area, CartesianGrid, Pie, PieChart, Cell, ResponsiveContainer, Tooltip, XAxis, YAxis, Legend, AreaChart, BarChart, Bar } from 'recharts'
 import { startOfMonth, endOfMonth } from "date-fns";
@@ -81,7 +81,6 @@ const TrackerPage = () => {
     return <div className=' h-screen overflow-hidden  p-4'>
       
       <Loading child=' h-[150px] w-[300px] !rounded-3xl ' parent=' !mt-[75px] !flex !justify-evenly !flex-row !w-full !gap-3 !items-center !my-4' boxes={2} />
-
       <Loading child='flex flex-col max-md:w-full w-[420px] h-[320px]  !rounded-3xl items-center justify-center ' parent=' !my-6 !flex-row max-md:flex-col  !flex !justify-evenly !items-center !flex-wrap !gap-4' boxes={2} />
       <Loading child='flex flex-col max-md:w-full w-full h-[400px] rounded-3xl items-center justify-center ' parent=' !my-6 !flex-row max-md:flex-col  !flex !justify-evenly !items-center !flex-wrap !gap-4' boxes={1} />
     </div>;
@@ -124,7 +123,7 @@ const TrackerPage = () => {
               outerRadius={120}
               innerRadius={70}
               paddingAngle={5}
-              fill="#8884d8"
+              fill="#E11D47"
               label={(entry) => `${entry.name} (${(entry).amount})`}
             >
               {typedata.map((_, index) => (
@@ -181,11 +180,11 @@ const TrackerPage = () => {
           </PieChart>
         </div>
       </div>
-      <div className=' w-full h-[400px] border bordercolor rounded-3xl mb-4 card p-2 px-4'>
+      <div className=' w-full h-[400px] border bordercolor rounded-3xl mb-4 card p-2 px-4 max-md:px-1 max-md:tex-xs'>
         <ResponsiveContainer width="100%" height="100%">
           <BarChart width={730} height={250} data={barData}>
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="name" />
+            {/* <CartesianGrid strokeDasharray="0 0 " /> */}
+            <XAxis dataKey="name" fontSize={10} />
             <YAxis />
             <Tooltip
               contentStyle={{
@@ -207,10 +206,9 @@ const TrackerPage = () => {
 
       </div>
 
-      <div className=' w-full h-[400px] border bordercolor rounded-3xl mb-4 card p-2 px-4'>
+      <div className=' w-full h-[400px] border bordercolor rounded-3xl mb-4 card p-2 px-4 max-md:px-1 max-md:tex-xs'>
         <ResponsiveContainer width="100%" height="100%">
-          <AreaChart width={1200} height={400}
-            data={barData} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
+          <AreaChart width={1200} height={400} data={barData} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
             <defs>
              <linearGradient id="colorcredit" x1="0" y1="0" x2="0" y2="1">
                 <stop offset="5%" stopColor="#E11D47" stopOpacity={0.8} />
@@ -225,7 +223,7 @@ const TrackerPage = () => {
             <XAxis dataKey="name" stroke="#ffffff28" />
             <YAxis />
             <Legend align="center" verticalAlign="top" wrapperStyle={{ paddingTop: "20px", paddingBottom: "40px" }} />
-            <CartesianGrid strokeDasharray="1 1" stroke="#ffffff28" />
+            {/* <CartesianGrid strokeDasharray="0 0" stroke="#ffffff28" /> */}
             <Tooltip
               contentStyle={{
                 backgroundColor: '#ffffff20',

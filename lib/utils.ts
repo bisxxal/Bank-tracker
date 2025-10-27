@@ -42,8 +42,8 @@ export const categories = [
 ]
 
 export const COLORS = [
-    '#FF8E72', // Vibrant Coral
-    '#A29BFE', // Soft Purple
+    '#EF1D5C', // Vibrant Coral
+    '#23D824', // Soft Purple
     '#FFD93D', // Vivid Yellow
     '#1A8FE3', // Sky Blue
     '#55EFC4', // Aqua Green

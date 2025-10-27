@@ -154,15 +154,16 @@ const CateGoryPage = () => {
                         <Loading parent='w-full mt-[50px] ' boxes={1} child='w-[260px] h-[260px]  border bordercolor text-sm !rounded-full' />
                         : categoryData.length === 0 && <p>No data found</p>
                 }
-                {!isLoading ? <div className=' w-[260px] '>
+                {!isLoading ? <div className=' w-[260px] max-md:w-full max-md:flex-wrap max-md:flex'>
+
                     {categoryData.map((category, index) => {
                         if (category.total === 0) return null;
                         return (
                             <div
                                 key={index}
-                                className="   w-full flex items-center !text-sm gap-3 rounded-2xl my-1 px-4 max-md:py-0"
+                                className=" w-full max-md:w-1/2 flex items-center !text-sm gap-3 rounded-2xl my-1 px-4 max-md:py-0"
                             >
-                                <div style={{ background: COLORS2[index % COLORS2.length] }} className="flex h-4 w-4 rounded justify-between items-center mb-2"></div>
+                                <div style={{ background: COLORS[index % COLORS.length] }} className="flex h-4 w-4 rounded justify-between items-center mb-2"></div>
                                 <div className="flex justify-between items-center mb-2">
                                     <h1 className="text-[white] center gap-1 w-full font-medium">{category.category}   ₹{category.amount}</h1>
                                 </div>
@@ -171,7 +172,7 @@ const CateGoryPage = () => {
                         )
 
                     })}
-                </div> : <Loading parent='w-full mt-[50px] ' boxes={3} child='w-[250px]  h-[30px] rounded-xl' />}
+                </div> : <Loading parent='w-full mt-[50px] max-md:flex-row ' boxes={3} child='w-[250px] max-md:w-1/2 h-[30px] rounded-xl' />}
             </div>
 
             <h2 className=' mt-5  font-bold text-xl'>Top list</h2>
@@ -189,7 +190,7 @@ const CateGoryPage = () => {
                     <div className="w-full h-3 bg-[#3b3a53] rounded-full">
                         {!isLoading ? (
                             <div
-                                className="h-full bg-gradient-to-r from-[#2b7fff] to-[#ad46ff] rounded-full transition-all duration-300"
+                                className="h-full buttonbg rounded-full transition-all duration-300"
                                 style={{ width: `${category.percentage}%` }}
                             ></div>
                         ) : (

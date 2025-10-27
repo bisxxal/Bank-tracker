@@ -38,6 +38,12 @@ const ListBorrow = () => {
         itemRefs.current[id] = ref;
     };
 
+    useEffect(()=>{
+        if(data?.data){
+            localStorage.setItem('lastBorrowType', JSON.stringify( data?.data) );
+        }
+    },[data])
+
     useEffect(() => {
         const handleClickOutside = (e: MouseEvent | TouchEvent) => {
             if (!openItemId) return;
@@ -82,6 +88,7 @@ const ListBorrow = () => {
         onError: (error) => {
         },
     });
+ 
     return (
         <div>
             {showDeleteConfirmation !== null && <div className=' bg-[#00000023] z-[10] top-10 fixed center backdrop-blur-[10px] w-full h-full'>
@@ -108,7 +115,7 @@ const ListBorrow = () => {
             </div>}
             <div className='flex flex-col gap-4 mt-4'>
                 {isLoading ? (
-                    <Loading boxes={5} child="h-32  w-1/2 max-md:w-full !rounded-none " parent="w-full px-0" />
+                    <Loading boxes={4} child="h-32  w-1/2 max-md:w-full !rounded-none " parent="w-full px-0" />
                 ) : (
                     !isLoading && data && data?.data?.length !== 0 ?
                         <div className=' w-1/2 max-md:w-full mx-auto'>
@@ -124,7 +131,7 @@ const ListBorrow = () => {
                                         onOpen={handleOpen}
                                         setRef={setItemRef}
                                     >
-                                        <div key={item.id} className={` ${item?.type?.toLowerCase() === 'to be paid' ? ' border-green-500 text-green-400' :' border-red-500 text-red-400 ' } rounded-none border p-4 card `}>
+                                        <div key={item.id} className={` ${item?.type?.toLowerCase() === 'to be paid' ? ' border-green-500 text-green-400' : ' border-red-500 text-red-400 '} rounded-none border p-4 card `}>
                                             <h2 className='text-xl font-bold'>{item.type}</h2>
                                             <p>Amount: ₹{item.amount}</p>
                                             <p>Name: {item.name}</p>

@@ -43,16 +43,18 @@ const MailPage = async() => {
             {group.map((msg) => (
               <div className="flex mb-3 max-md:flex-col   bordercolor card justify-between items-center border rounded-2xl p-4" key={msg.id}>
                 <div>
-                  <p><strong>Subject:</strong> {msg.subject}</p>
-                  <p><strong>Body:</strong> {msg.body}</p>
+                  <p ><strong>Subject:</strong> {msg.subject}</p>
+                  <p className=' text-sm'><strong>Body:</strong> {msg.body}</p>
                   <p><strong>id:</strong> {msg.id}</p>
                   <p><strong>Mail Id:</strong> {msg.from}</p>
                   <p><strong>Date:</strong> {moment(msg.date).format('MMMM Do YYYY, h:mm:ss a')}</p>
                 </div>
-                <div className=" flex flex-col justify-between max-md:mt-3  gap-2">
-                  <div className="border max-md:w-full bg-[#262538] h-full rounded-2xl mr-3 p-2 px-4 flex flex-col justify-between">
-                  <strong>Bank:</strong> {extractFromEmail(msg.from)}
+                <div className=" flex flex-col max-md:flex-row center max-md:mt-3  gap-2">
+
+                  <div className="border max-md:w-full bg-[#262538] p-4 h-full rounded-2xl mr-3 p-2 px-4 flex flex-col justify-between">
+                  <div>Bank:</div> {extractFromEmail(msg.from)} 
                 </div>
+
                 <Transations body={msg.body} />
                 </div>
               </div>

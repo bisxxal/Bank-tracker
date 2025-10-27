@@ -86,8 +86,6 @@ export async function createTransaction(formData: FormData) {
   if (!transaction) {
     return { status: 500, message: "Failed to create transaction" };
   }
-
-    // console.log( send);
   return { status: 200 };
 }
 

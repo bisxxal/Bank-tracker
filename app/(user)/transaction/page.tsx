@@ -8,7 +8,7 @@ import { toastError, toastSuccess } from '@/lib/toast';
 import { TransactionTypeProps } from '@/lib/types';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { endOfMonth, startOfMonth } from 'date-fns';
-import { TrendingDown, TrendingUp } from 'lucide-react';
+import { ArrowDownLeft, ArrowDownRight, TrendingDown, TrendingUp } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useRef, useState } from 'react'
 
@@ -19,6 +19,8 @@ const TransactionPage = () => {
   const [startDate, setStartDate] = useState<Date>(startOfMonth(today));
   const [endDate, setEndDate] = useState<Date>(endOfMonth(today));
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState<string | null>(null);
+  const [borrow, setBorrow] = useState([])
+
   const { data, isLoading } = useQuery({
     queryKey: ['trackerData', startDate, endDate],
     queryFn: async () => {
@@ -121,6 +123,30 @@ const TransactionPage = () => {
     setOpenItemId(id);
   };
 
+useEffect(() => {
+  const data = localStorage.getItem('lastBorrowType');
+  if (!data) return;
+
+  let br;
+  try {
+    br = JSON.parse(data);
+  } catch (err) {
+    return;
+  }
+  const totals = br.reduce(
+    (acc: { toBePaid: number; toBeReceived: number }, curr: { type: string; amount: number }) => {
+      if (curr.type === 'To be paid') {
+        acc.toBePaid += curr.amount;
+      } else if (curr.type === 'To be received') {
+        acc.toBeReceived += curr.amount;
+      }
+      return acc;
+    },
+    { toBePaid: 0, toBeReceived: 0 }
+  );
+
+  setBorrow(totals);
+}, []);
 
   return (
     <div className='mt-[100px] relative w-full min-h-screen pb-20'>
@@ -150,7 +176,24 @@ const TransactionPage = () => {
       <h1 className="text-center flex flex-col font-semibold text-lg mt-6 ">Your Total Transactions  {data?.length} 
       </h1>
       <div className="flex flex-col gap-4 px-14 max-md:px-2.5 pt-5">
+
+        <div className=' w-full flex '> 
         <DateButton startDate={startDate} endDate={endDate} setStartDate={setStartDate} setEndDate={setEndDate} />
+
+        <div>
+         {
+          borrow && <button className=' px-4 py-2 rounded-lg ' onClick={() => router.push('/borrow')}>
+            {
+                borrow?.toBePaid > 0 && <span className='center text-red-500 font-semibold  text-sm'> <ArrowDownLeft size={20}/> {borrow.toBePaid.toFixed(2)} </span>
+            }
+            {
+                borrow?.toBeReceived > 0 && <span className='center mt-1 text-green-500 font-semibold text-sm'><ArrowDownRight size={20}/> {borrow.toBeReceived.toFixed(2)} </span>
+            }
+          </button>
+         }
+        </div>
+
+        </div>
         {uniqueBanks && !isLoading ?
           <div className='flex w-full hidescrollbar overflow-x-auto py-2 gap-2'>
             {uniqueBanks.map((i: { bank: string, creditAmount: number, credit: boolean, debit: boolean, debitAmount: number }, index: number) => {

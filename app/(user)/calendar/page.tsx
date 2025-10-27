@@ -133,7 +133,7 @@ const CalendarPage = () => {
           </div>
 
           <div className=' max-md:w-full  flex gap-2 items-center'>
-            <div className='flex flex-col items-center bg-green-600/10 border-green-500/80 border creditbg center max-md:w-[170px] h-[60px] w-[150px] rounded-xl'>
+            <div className='flex flex-col items-center   creditbg center max-md:w-[170px] h-[60px] w-[150px] rounded-xl'>
               <h2 className='max-md:text-sm center gap-2'>Total Credited </h2>
 
               <p className='    max-md:text-lg text-xl font-bold'> ₹{monthData
@@ -141,7 +141,7 @@ const CalendarPage = () => {
                 .reduce((acc, curr) => acc + curr.amount, 0)
                 .toFixed(2)}</p>
             </div>
-            <div className='flex flex-col items-center bg-red-500/10 debitbg border border-red-500 center max-md:w-[170px]  h-[60px] w-[150px] rounded-xl'>
+            <div className='flex flex-col items-center  debitbg   center max-md:w-[170px]  h-[60px] w-[150px] rounded-xl'>
               <h2 className='max-md:text-sm center gap-2'>
                 Total Debited
               </h2>
