@@ -22,22 +22,24 @@ const CateGoryPage = () => {
             return res
         }
     })
-
+ 
     useEffect(() => {
         if (data) {
             const revData = data?.reduce((acc: { name: string, amount: number, category: string, date: Date | string }[], curr: TransactionTypeProps) => {
-                const type = curr?.type || 'Unknown';
+                // Ensure you're only processing "debit" types
+                const type = curr?.type.toLowerCase() === 'debit' ? 'debit' : null;
                 const date = moment(curr.date).format("YYYY-MM-DD");
                 const category = curr.category ?? 'Others'; // Handle null or undefined category
 
-                const existing = acc.find(
-                    (item) => item.name === 'debit' && item.category === category
-                );
+                // Only process debit transactions
+                if (type === 'debit') {
+                    const existing = acc.find(
+                        (item) => item.name === 'debit' && item.category === category
+                    );
 
-                if (existing) {
-                    existing.amount += curr.amount;
-                } else {
-                    if (type === 'debit') {
+                    if (existing) {
+                        existing.amount += curr.amount; // Accumulate amount for the same category
+                    } else {
                         acc.push({ name: type, date, amount: curr.amount, category });
                     }
                 }
@@ -45,8 +47,10 @@ const CateGoryPage = () => {
             }, []);
 
             setCategoryData(revData);
+            console.log("revData", revData);
         }
     }, [data, selectedMonth, selectedYear]);
+
     const totalAmount = categoryData.reduce((acc, curr) => acc + curr.amount, 0);
 
     const sortedCategories = categories
@@ -176,8 +180,10 @@ const CateGoryPage = () => {
             </div>
 
             <h2 className=' mt-5  font-bold text-xl'>Top list</h2>
-            {sortedCategories.map((category) => (
-                <div
+            {sortedCategories.map((category) => {
+                if (category.percentage === 0) return null;
+                return(
+                      <div
                     key={category.value}
                     className="card border bordercolor rounded-2xl my-2 px-4 py-3"
                 >
@@ -202,7 +208,9 @@ const CateGoryPage = () => {
                         )}
                     </div>
                 </div>
-            ))}
+                )
+            }
+            )}
         </div>
     )
 }

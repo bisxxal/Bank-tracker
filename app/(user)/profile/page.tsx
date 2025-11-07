@@ -4,6 +4,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { LogOut } from 'lucide-react'
 import React from 'react'
+import Loading from '@/components/ui/loading'
 
 const Profile = () => {
   const { data: session, status } = useSession()
@@ -36,7 +37,11 @@ const Profile = () => {
       <div className=' w-fit mx-auto mt-20 max-md:mt-32 flex items-center justify-center'>
         <Image src='/bank.png' alt='logo' width={60} height={60} className='hover:scale-125 mx-auto drop-shadow-[0_5px_10px_rgba(0,0,0,0.25)] drop-shadow-amber-100   transition-all inline-block ml-2' />
       </div>
-
+        <Loading
+            parent="w-full h-24"
+            boxes={1}
+            child="w-full h-full !rounded-xl"
+        />
     </div>
   )
 }

@@ -12,7 +12,7 @@ const Home =   () => {
       <ShinyText
         text="My Bank"
         disabled={false}
-        speed={1.5}
+        speed={1.8}
         className='font-extrabold  text-5xl'
         />
     </div>
