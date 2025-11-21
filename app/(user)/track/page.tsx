@@ -10,6 +10,7 @@ import moment from 'moment';
 import Loading from '@/components/ui/loading';
 import { COLORS, COLORS2 } from '@/lib/utils';
 import { TransactionTypeProps } from '@/lib/types';
+import { useGetAllPaymemts } from '@/hooks/payments';
 const TrackerPage = () => {
   const today = new Date();
   const [startDate, setStartDate] = useState<Date>(startOfMonth(today));
@@ -19,13 +20,15 @@ const TrackerPage = () => {
   const [bankData, setBankData] = useState<any[]>([]);
   const [barData, setBarData] = useState<any[]>([]);
 
-  const { data, isLoading } = useQuery({
-    queryKey: ['trackerData', startDate, endDate],
-    queryFn: async () => {
-      const res = await getTransactionsBySelected(startDate, endDate)
-      return res
-    }
-  })
+  // const { data, isLoading } = useQuery({
+  //   queryKey: ['trackerData', startDate, endDate],
+  //   queryFn: async () => {
+  //     const res = await getTransactionsBySelected(startDate, endDate)
+  //     return res
+  //   }
+  // })
+
+    const { data, isLoading ,refetch } = useGetAllPaymemts(startDate, endDate);
 
   useEffect(() => {
     if (data) {
@@ -265,3 +268,5 @@ const TrackerPage = () => {
 }
 
 export default TrackerPage
+
+//23

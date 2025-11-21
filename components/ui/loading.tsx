@@ -4,7 +4,7 @@ const Loading = ({ boxes, child, parent }: { boxes: number, child?: string, pare
     <div className={`!${parent} w-full items-center justify-center flex flex-col   gap-4 `}>
       {Array.from({ length: boxes }).map((_, index) => (
         <div key={index} className={`${child} h-14   backdrop-blur-[10px] relative overflow-hidden`}>
-          <div  className={` w-full h-full absolute top-0 left-0 bg-gradient-to-r from-[#27273c00] via-[#171C39] backdrop-saturate-[180%] animate-[pulseShimmer_10s_infinite_linear]`}></div>
+          <div  className={` w-full h-full absolute top-0 left-0 bg-gradient-to-r from-[#27273c00] via-[#1c1c2c] animate-[pulseShimmer_10s_infinite_linear]`}></div>
         </div>
       ))}
     </div>

@@ -3,12 +3,13 @@ import { deleteTransaction, getTransactionsBySelected } from '@/actions';
 import DateButton from '@/components/dateButton';
 import Loading from '@/components/ui/loading';
 import SwipeRevealActions from '@/components/ui/swipeToDelete';
+import { useGetAllPaymemts } from '@/hooks/payments';
 import { getLabelForDate } from '@/lib/dateformat';
 import { toastError, toastSuccess } from '@/lib/toast';
 import { TransactionTypeProps } from '@/lib/types';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { endOfMonth, startOfMonth } from 'date-fns';
-import { ArrowDownLeft, ArrowDownRight, TrendingDown, TrendingUp } from 'lucide-react';
+import { ArrowDownLeft, ArrowDownRight, RefreshCcw, TrendingDown, TrendingUp } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useRef, useState } from 'react'
 
@@ -21,13 +22,8 @@ const TransactionPage = () => {
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState<string | null>(null);
   const [borrow, setBorrow] = useState([])
 
-  const { data, isLoading } = useQuery({
-    queryKey: ['trackerData', startDate, endDate],
-    queryFn: async () => {
-      const res = await getTransactionsBySelected(startDate, endDate)
-      return res
-    }
-  })
+   
+  const { data, isLoading ,refetch } = useGetAllPaymemts(startDate, endDate);
 
   const groupedMessages = data?.reduce((acc: Record<string, typeof data>, msg: TransactionTypeProps) => {
     const label = getLabelForDate(String(msg?.date ?? ''));
@@ -186,6 +182,11 @@ useEffect(() => {
             {borrow?.toBeReceived > 0 && <span className='center mt-1 text-green-600 font-semibold text-sm'><ArrowDownLeft size={20}/> {borrow.toBeReceived.toFixed(2)} </span>}
           </button>
          }
+         <div>
+          <button onClick={()=>refetch()} className=' buttonbg p-2 rounded-3xl px-5 '>
+         <RefreshCcw />
+          </button>
+         </div>
         </div>
 
         </div>

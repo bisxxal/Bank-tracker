@@ -1,7 +1,8 @@
 'use client'
-import { getTransactionsBySelectedMonth } from '@/actions'
+
 import Download from '@/components/dowload'
 import Loading from '@/components/ui/loading'
+import { useGetAllPaymemts } from '@/hooks/payments'
 import { TransactionTypeProps } from '@/lib/types'
 import { categories, COLORS } from '@/lib/utils'
 import { useQuery } from '@tanstack/react-query'
@@ -15,13 +16,10 @@ const CateGoryPage = () => {
     const [selectedYear, setSelectedYear] = useState(now.getFullYear())
     const [categoryData, setCategoryData] = useState<any[]>([])
 
-    const { data, isLoading } = useQuery({
-        queryKey: ['trackerDataMonth', selectedMonth, selectedYear],
-        queryFn: async () => {
-            const res = await getTransactionsBySelectedMonth(selectedMonth, selectedYear)
-            return res
-        }
-    })
+    const startDate = new Date(selectedYear, selectedMonth, 1);
+    const endDate = new Date(selectedYear, selectedMonth + 1, 0, 23, 59, 59, 999); 
+    const { data, isLoading  } = useGetAllPaymemts(startDate, endDate);
+    
  
     useEffect(() => {
         if (data) {
@@ -47,7 +45,6 @@ const CateGoryPage = () => {
             }, []);
 
             setCategoryData(revData);
-            console.log("revData", revData);
         }
     }, [data, selectedMonth, selectedYear]);
 

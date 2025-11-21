@@ -6,7 +6,7 @@ import DatePicker from 'react-datepicker';
 const DateButton = ({ startDate, endDate, setEndDate, setStartDate }:
     { startDate: Date, endDate: Date, setEndDate: React.Dispatch<React.SetStateAction<Date>>, setStartDate: React.Dispatch<React.SetStateAction<Date>> }) => {
     return (
-        <div className="flex center !z-[2] flex-warp gap-4 max-md:gap-2 px-4 max-md:px-0 pt-2">
+        <div className="flex center !z-[2] flex-warp gap-4 max-md:gap-2 px-4 max-md:px-0 ">
             <div className=' max-md:w-[120px]  '>
                 <label className="text-white text-sm mr-2">Start Date</label>
                 <DatePicker

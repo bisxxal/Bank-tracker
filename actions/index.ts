@@ -1,10 +1,10 @@
 'use server'
-
 import { authOptions } from "@/lib/auth";
 import prisma from "@/lib/prisma";
 import { getServerSession } from "next-auth";
  
 export async function getTransactionsBySelected(startDate: Date, endDate: Date) {
+
   const session = await getServerSession(authOptions);
   if (!session) {
     return { status: 400, message: "User not authenticated" };

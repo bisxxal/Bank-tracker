@@ -39,6 +39,7 @@ const EditPage = () => {
       return await updateTransaction(fromData, id);
     },
     onSuccess: (data) => {
+      localStorage.removeItem('paymentsData');
       if (data.status === 200) {
         toastSuccess('Transaction Updated successfully');
         queryClient.invalidateQueries({ queryKey: ['fetchTransaction'] });
