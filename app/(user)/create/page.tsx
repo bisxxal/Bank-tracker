@@ -27,7 +27,6 @@ const CreateTransaction = () => {
       localStorage.removeItem('paymentsData');
       if (data.status === 200) {
         toastSuccess('Transaction created successfully');
-        queryClient.invalidateQueries({ queryKey: ['trackerData'] });
       }
     },
     onError: (error) => {

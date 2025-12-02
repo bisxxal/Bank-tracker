@@ -5,6 +5,7 @@ import { getServerSession } from "next-auth";
  
 export async function getTransactionsBySelected(startDate: Date, endDate: Date) {
 
+  console.log("request comming")
   const session = await getServerSession(authOptions);
   if (!session) {
     return { status: 400, message: "User not authenticated" };
@@ -34,6 +35,7 @@ export async function getTransactionsBySelected(startDate: Date, endDate: Date) 
     orderBy: { date: "desc" },
   });
 
+  console.log("total data 🤖" , transactions.length)
   return transactions;
 }
 

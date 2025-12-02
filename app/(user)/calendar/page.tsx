@@ -1,5 +1,4 @@
 'use client'
-
 import { useGetAllPaymemts } from '@/hooks/payments'
 import { TransactionTypeProps } from '@/lib/types'
 import { ArrowDownLeft, ArrowDownRight } from 'lucide-react'
@@ -12,10 +11,25 @@ const CalendarPage = () => {
   const [selectedYear, setSelectedYear] = useState(now.getFullYear())
   const [monthData, setMonthData] = useState<any[]>([])
 
-    const startDate = new Date(selectedYear, selectedMonth, 1);
-    const endDate = new Date(selectedYear, selectedMonth + 1, 0, 23, 59, 59, 999); 
-    const { data,   } = useGetAllPaymemts(startDate, endDate);
-      
+  const startDate = new Date(selectedYear, selectedMonth, 1);
+  const endDate = new Date(selectedYear, selectedMonth + 1, 0, 23, 59, 59, 999);
+  const { data,refetch } = useGetAllPaymemts(startDate, endDate);
+
+  // useEffect(()=>{
+  //   const res = ()=>{
+  //     console.log("changing");
+  //     // refetch();
+  //     localStorage.removeItem('paymentsData');
+  //     return ;
+  //   }
+  //   res();
+  // },[startDate, endDate])
+
+
+//   useEffect(() => {
+//   refetch();
+// }, [startDate, endDate]);
+
 
   useEffect(() => {
     if (data) {
